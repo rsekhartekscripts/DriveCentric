@@ -1,0 +1,50 @@
+{
+  "todaySales": {
+    "type": "Sales",
+    "date": "Today",
+    "time": "",
+    "notes": "This is a test",
+    "confirmed": false,
+    "show": ""
+  },
+  "todayDelivery": {
+    "type": "Delivery",
+    "date": "Today",
+    "time": "",
+    "notes": "",
+    "confirmed": true,
+    "show": ""
+  },
+  "todayService": {
+    "type": "Service",
+    "date": "Today",
+    "time": "",
+    "notes": "",
+    "confirmed": false,
+    "show": ""
+  },
+  "todayGeneral": {
+    "type": "General",
+    "date": "Today",
+    "time": "",
+    "notes": "",
+    "confirmed": false,
+    "show": ""
+  },
+  "tomorrowSales": {
+    "type": "Sales",
+    "date": "Tomorrow",
+    "time": "",
+    "notes": "",
+    "confirmed": false,
+    "show": ""
+  },
+  "yesterdaySales": {
+    "type": "Sales",
+    "date": "Yesterday",
+    "time": "",
+    "notes": "",
+    "confirmed": false,
+    "show": ""
+  }
+}

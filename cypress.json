@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://dev.drivecentric.com/",
+  "defaultCommandTimeout": 30000,
+  "env": {
+    "authCookie": ".ASPXAUTH"
+  },
+  "ignoreTestFiles": "*.ignore.*"
+}
