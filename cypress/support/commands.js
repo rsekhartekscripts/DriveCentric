@@ -46,6 +46,11 @@ Cypress.Commands.add('getUsers', () => {
   return cy.fixture('users.json')
 })
 
+Cypress.Commands.add('getAllCustomers', () => {
+  return cy.fixture('customers.json')
+})
+
+
 Cypress.Commands.add('loginUI', (userType) => {
   cy.visit(loginPath)
   return cy.loginUser(userType);
@@ -68,6 +73,7 @@ Cypress.Commands.add('login', (userType) => {
     })
   })
 })
+
 
 Cypress.Commands.add('createAppointment', (appointmentType, customerType, storeType, userType) => {
   cy.getAppointments().then(appointments => {

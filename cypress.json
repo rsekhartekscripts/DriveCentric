@@ -1,6 +1,7 @@
 {
-  "baseUrl": "https://dev.drivecentric.com/",
+  "baseUrl": "https://staging1.drivecentric.com/",
   "defaultCommandTimeout": 30000,
+  "pageLoadTimeout": 600000, 
   "env": {
     "authCookie": ".ASPXAUTH"
   },

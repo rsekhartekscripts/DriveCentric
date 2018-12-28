@@ -1,13 +1,13 @@
-import HTMLELementSelectors from './../../HTMLELementSelectors';
+import HTMLElementSelectors from './../../HTMLElementSelectors';
 
 function verifyErrorMessage() {
-  cy.get(HTMLELementSelectors.login.texts.errorMessage)
+  cy.get(HTMLElementSelectors.login.texts.errorMessage)
     .contains('The email/password combination is not correct.')
     .should('be.visible')
 }
 
 function verifyRedirectToHomepage() {
-  cy.hash().should('eq', HTMLELementSelectors.urlPaths.salesHome)
+  cy.hash().should('eq', HTMLElementSelectors.urlPaths.salesHome)
 }
 
 function verifyUserSession() {
@@ -17,21 +17,21 @@ function verifyUserSession() {
 context('Login', () => {
 
   beforeEach(() => {
-    cy.visit(HTMLELementSelectors.urlPaths.login)
+    cy.visit(HTMLElementSelectors.urlPaths.login)
   })
 
   describe('Navigation', () => {
 
     it('Test 1 - Login Page Learn More link', () => {
-      cy.get(HTMLELementSelectors.login.buttons.learnMore)
+      cy.get(HTMLElementSelectors.login.buttons.learnMore)
         .should('be.visible')
     })
 
     it('Test 2 - Login Page Privacy Policy link', () => {
-      cy.get(HTMLELementSelectors.login.links.privacyPolicy)
+      cy.get(HTMLElementSelectors.login.links.privacyPolicy)
         .should('have.attr', 'href')
         .and('eq', 'http://www.drivecentric.com/privacy/')
-        .get(HTMLELementSelectors.login.links.privacyPolicy)
+        .get(HTMLElementSelectors.login.links.privacyPolicy)
         .should('have.attr', 'target')
         .and('eq', '_blank')
       })
@@ -44,17 +44,17 @@ context('Login', () => {
       verifyErrorMessage()
     })
 
-    it('Test 4 - Form validation empty password', () => {
+    it('Test 4 - Form validation empty username', () => {
       cy.getUsers().then(users => {
-        cy.inputUsername(users.generic)
+        cy.inputUsername(users.invalidUsername)
       })
       cy.clickLoginButton()
       verifyErrorMessage()
     })
 
-    it('Test 5 - Form validation empty email', () => {
+    it('Test 5 - Form validation empty password', () => {
       cy.getUsers().then(users => {
-        cy.inputPassword(users.generic)
+        cy.inputPassword(users.invalidUsername)
       })
       cy.clickLoginButton()
       verifyErrorMessage()
@@ -73,36 +73,15 @@ context('Login', () => {
         verifyErrorMessage()
     })
 
-    it('Test 8 - Inactive User', () => {
-        cy.loginUser('inactive')
-        verifyErrorMessage()
-    })
   })
 
   describe('Successful Login', () => {
 
-    it ('Test 9 - Generic User', () => {
-        cy.loginUser('generic')
-        verifyRedirectToHomepage()
-        verifyUserSession()
-    })
-
-    it ('Test 10 - Enterprise User', () => {
+    it ('Test 8 - Enterprise User', () => {
         cy.loginUser('enterprise')
         verifyRedirectToHomepage()
         verifyUserSession()
     })
 
-    it ('Test 11 - Power User', () => {
-        cy.loginUser('power')
-        verifyRedirectToHomepage()
-        verifyUserSession()
-    })
-
-    it ('Test 12 - Impersonate User', () => {
-        cy.loginUser('impersonate')
-        verifyRedirectToHomepage()
-        verifyUserSession()
-    })
   })
 })
