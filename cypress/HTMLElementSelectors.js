@@ -34,7 +34,8 @@ export default {
 			'lastName': '#newLastName',
 			'company': '[placeholder=Company]',
 			'phone': '#newPhone',
-			'email': '[placeholder=Email]'
+			'email': '[placeholder=Email]',
+			'store': '.driveNewCustomerSearch select'
 		},
 		'buttons': {
 			'addCustomerButton': 'Add Customer',
@@ -48,7 +49,25 @@ export default {
 			'lastName' :'.lastname input',
 			'companyName' :'.companyname input',
 			'email' :'.email input',
-			'phone' :'.cell input'
+			'phone' :'.cell input',
+			'homePhone' :'.cell input',
+			'homePhone' :'.home input',
+			'address' :'.address input',
+			'city' :'.city input',
+			'state' :'.state input',
+			'zip' :'.zip input',
+			'store' :'.sourceDescription input',
+			'sourceType' :'.sourceType select',
+			'sourceDescription' :'.sourceDescription select'
+		},
+		'divs':{
+			'salesPeople': '[new-customer-salespeople]',
+			'bdc': '[new-customer-bdc]',
+			'interestedVehicles': '.driveNewCustomerVehicleInterested',
+			'tradeIn': '.driveNewCustomerVehicleTrade'
+		},
+		'buttons': {
+			'cancel': 'Cancel'
 		}
 	}
 }
