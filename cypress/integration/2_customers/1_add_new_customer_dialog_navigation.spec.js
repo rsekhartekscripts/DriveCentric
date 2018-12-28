@@ -68,7 +68,7 @@ context('Customer', () => {
   describe('All Perms User - Add New Customer Dialog Navigation', () => {
 
     beforeEach(() => {
-      cy.loginUI('allPerms')
+      cy.loginUI('enterprise')
     })
 
     it('Test 1 - Required Fields Check', () => {
