@@ -30,6 +30,7 @@ const password = Cypress.config('password');
 	
 	//Enter Email
 	cy.get('[placeholder=Email]').clear().type('illonetruly@gmail.com').should('have.value', 'illonetruly@gmail.com')
+	cy.wait(10000)
 	
 	//cy.get('span span[ng-if="result.CustomerFirstName != \'\'"]').contains('Roger')
 	//Assert for First, Last Name, Phone Number and Email Verification

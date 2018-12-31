@@ -27,6 +27,7 @@ const password = Cypress.config('password');
 	
 	//Enter Phone Number
 	cy.get('#newPhone').clear().type('(314) 600-0681').should('have.value', '(314) 600-0681')
+	cy.wait(5000)
 	
 	//cy.get('span span[ng-if="result.CustomerFirstName != \'\'"]').contains('Roger')
 	//Assert for First, Last Name and Phone Number Verification

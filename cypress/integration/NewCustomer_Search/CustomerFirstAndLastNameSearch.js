@@ -24,6 +24,7 @@ const password = Cypress.config('password');
 	
 	//Enter Last Name
 	cy.get('#newLastName').clear().type('Schwartz').should('have.value', 'Schwartz')
+	cy.wait(4000)
 	
 	//cy.get('span span[ng-if="result.CustomerFirstName != \'\'"]').contains('Roger')
 	//Assert for First and Last Name Verification
