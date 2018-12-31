@@ -179,21 +179,33 @@ Cypress.Commands.add('clockOutUser', (storeType, userType) => {
   })
 })
 Cypress.Commands.add("login", (email, password) => {
+	//Open DriveCentri URL
     cy.visit('https://staging1.drivecentric.com')
+	
+	//Verify login page URL and Page Title
 	cy.url().should('include', '/login.aspx')
 	cy.title().should('contain', 'Login / DriveCentric');
+	
+	//Enter Username and Password
 	cy.get('[name=inputEmail]').type(email).should('have.value', email)
 	cy.get('[name=inputPassword]').type(password).should('have.value', password)
-	cy.contains('Login').should('be.visible').click()
+	
+	//Click on Login Button
+	cy.contains('Login').click()
 	cy.wait(10000)
+	
+	//Verification for Home Url and Page Title
 	cy.hash().should('eq','#/salesHome')
 	cy.title().should('contain', 'Home / DriveCentric');
 })
 
 Cypress.Commands.add("logout", () => {
+	//Click on Logout link
 	cy.contains('EO').should('be.visible').click()
 	cy.contains('Logout').should('be.visible').click()
 	cy.wait(10000)
+	
+	//Verify Login page login button
 	//cy.url().should('contains','Logout.aspx')
 	cy.contains('Login').should('be.visible')
 })
