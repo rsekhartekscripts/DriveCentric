@@ -24,20 +24,15 @@ const password = Cypress.config('password');
 	
 	//Enter Last Name
 	cy.get('#newLastName').clear().type('Schwartz').should('have.value', 'Schwartz')
-	cy.wait(5000)
-	
-	//Enter Phone Number
-	cy.get('#newPhone').clear().type('(314) 600-0681').should('have.value', '(314) 600-0681')
 	
 	//cy.get('span span[ng-if="result.CustomerFirstName != \'\'"]').contains('Roger')
 	//Assert for First and Last Name Verification
 	cy.get('[ng-if*="result.CustomerFirstName"]').invoke('text').then((text) => {
     expect('Roger').equal(text.trim())
+	})
 	cy.get('[ng-if*="result.CustomerLastName"]').invoke('text').then((text) => {
     expect('Schwartz').equal(text.trim())
-	cy.get('[ng-class*="result.CellPhone"]').invoke('text').then((text) => {
-    expect('(314) 600-0681').equal(text.trim())
-})
+	})
   })
   
  
