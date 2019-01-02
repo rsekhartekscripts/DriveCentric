@@ -1,29 +1,38 @@
 const email = Cypress.config('email');
 const password = Cypress.config('password');
 
+const addNewCustomerButton = '[data-test=header-li-newcustomer]'
+const company_textbox = '[placeholder=Company]'
+const company_result = '[ng-if*="result.CustomerCompanyName"]'
 	
-  before(function () {
-	  //Load the custom details search data
-	cy.fixture('customer_details.json').as('customerSearch')
+ before(function () {
+	//Login to the application
     cy.login(email, password)
-	//Click on the add customer
-	cy.get('[data-test=header-li-newcustomer]').should('be.visible').click()
+	
+	//Click on the add new customer button
+	cy.get(addNewCustomer_button).should('be.visible').click()
 	cy.wait(4000)
   })
     
   after(function () {
-	//cy.get('[class=driveDialogClose]').should('be.visible').click()
-	cy.get('#newFirstName').focus().type('{esc}')
+	//Close the New Customer Window With Escape button
+	cy.get(company_textbox).focus().type('{esc}')
+	
+	//Logout from application
 	cy.wait(3000)
     cy.logout()
   })
   
+  
 
   it('Customer First Name Search ', function() {
-	cy.get('[placeholder=Company]').clear().type('VOLKSWAGEN').should('have.value', 'VOLKSWAGEN')
+	//Enter Company Name
+	cy.get(company_textbox).clear().type('VOLKSWAGEN').should('have.value', 'VOLKSWAGEN')
 	cy.wait(5000)
+	
+	//Assert Company Name
 	//cy.get('span span[ng-if="result.CustomerFirstName != \'\'"]').should('have.text', 'Roger')
-	cy.get('[ng-if*="result.CustomerCompanyName"]').invoke('text').then((text) => {
+	cy.get(company_result).invoke('text').then((text) => {
     expect('VOLKSWAGEN').equal(text.trim())
 })
   })
