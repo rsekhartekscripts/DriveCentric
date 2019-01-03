@@ -8,21 +8,17 @@ const customer = {
     "companyName": "Test Company"
   }
 
-
-
 const individualType = "Individual";
 const companyType = "Company";
 
-const alertDialog = '[data-test=dialog-alert-div]'
-const alertDialogDone = '[data-test=dialog-alert-button-done]';
 const sourceTypeRequiredText = 'Please select a source type'
 const sourceDestRequiredText = 'Please select a source description'
 
-const confirmationDialogClass = '.driveDialogAlert';
 const noVehicleSelectedConfirmationText = 'No interested vehicle has been selected'
 const confirmDialogCancelText = "NO"
 
 
+const confirmationDialogClass = '.driveDialogAlert';
 const customerInterestedInventoryAddDiv = '.driveNewCustomerVehicleInterested .add'
 
 const interestedVehicleOption = '.driveNewCustomerVehicleInterested .srNewContent'
@@ -30,6 +26,7 @@ const interestedVehicleOption = '.driveNewCustomerVehicleInterested .srNewConten
 const closeInterestedVehicleOptionsButton = '.srContentCustomerClose'
 const addInventoryButton = 'Add Inventory'
 const addCustomeInventoryButton = 'Add Custom'
+
 
 
 function navigateToSalesHomePage() {
@@ -63,7 +60,7 @@ context('Customer', () => {
       })
     })
 
-    it('Test 2 - Form Elements Existance', () => {
+    it('Test 2 - Verify Add New Customer form fields', () => {
 
         cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.customerType).should('be.visible')
         cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.customerType).select(individualType)
@@ -92,8 +89,25 @@ context('Customer', () => {
 
     })
 
+    it('Test 3 - Verify Type dropdown field', () => {
+      cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.customerType).within(()=>{
+        cy.contains("Individual")
+        cy.contains("Company")
+      });
+    })
 
-    it('Test 3 - Check Add Customer Dialog Type Individual', () => {
+    it('Test 4 - Validate Type field selected as Individual', () => {
+
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.customerType).should('be.visible')
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.customerType).select(individualType)
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.firstName).should('be.visible')
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.lastName).should('be.visible')
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.companyName).should('not.be.visible')
+
+    })
+
+
+    it('Test 5 - Verify Type field value, if user enters first name and last name in Add new customer serch window.', () => {
       cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
         cy.contains(HTMLElementSelectors.addNewCustomerDialog.buttons.cancel).click()
       })
@@ -105,7 +119,7 @@ context('Customer', () => {
       })
     })
 
-    it('Test 4 - Check Add Customer Dialog Type Company', () => {
+    it('Test 6 - Verify Type field value, if user enters Company Name in Add new customer serch window.', () => {
       cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
         cy.contains(HTMLElementSelectors.addNewCustomerDialog.buttons.cancel).click()
       })
@@ -118,19 +132,192 @@ context('Customer', () => {
       })
     })
 
-    it('Test 5 - Customer Type Values Check', () => {
-      cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.customerType).within(()=>{
-        cy.contains("Individual")
-        cy.contains("Company")
-      });
+    it('Test 7 - Validate Type field selected as Company', () => {
+
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.customerType).should('be.visible')
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.customerType).select(companyType)
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.firstName).should('not.be.visible')
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.lastName).should('not.be.visible')
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.companyName).should('be.visible')
+
     })
 
-    it('Test 6 - Source Type Values Check', () => {
+    it('Test 8 - Verify Source dropdown field', () => {
       cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.sourceType).within(()=>{
         cy.contains("Showroom")
         cy.contains("Phone")
         // cy.contains("Campaign")
       });
+    })
+
+    it('Test 9 - Verify Cancel and Add Customer Buttons in Add New Customer form', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.contains(HTMLElementSelectors.addNewCustomerDialog.buttons.cancel)
+        cy.contains(HTMLElementSelectors.addNewCustomerDialog.buttons.addNewCustomer)
+      })
+    })
+
+    it('Test 10 - Validate default Salespeople assign to the Customer', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeople).within(()=>{
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleList).first().within(() => {
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleProfile).should('be.visible')
+            })
+          })
+      })
+    })
+
+    it('Test 11 - Remove salespeople which assigned', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeople).within(()=>{
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleList).first().within(() => {
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleProfile).click()
+            })
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleList).first().children().last().within(() => {
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.buttons.salesPersonRemoveButton).click()
+            })
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleList).first().within(() => {
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleProfile).should('not.be.visible')
+            })
+          })
+      })
+    })
+
+
+    it('Test 12 - Add salespeople to the Customer', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeople).within(()=>{
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleAddNewList)
+            .each(($el, index, $list) => {
+                cy.wrap($el).click()
+                cy.wrap($el).within(() => {
+                    cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addSalesPersonInput).should('be.visible')
+                    cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addSalesPersonInput).type('big')
+                    // To be replaced with respective api call
+                    // cy.wait(2000)
+                    cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.addSalesPersonsListLi).first().click()
+                })
+              })
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleList)
+                .each(($el, index, $list) => {
+                cy.wrap($el).should('not.have.class', 'addNew')
+              })
+
+
+            //Remove assigned sales poeople
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleList)
+            .each(($el, index, $list) => {
+                cy.wrap($el).click()
+                cy.wrap($el).children().last().within(() => {
+                    cy.get(HTMLElementSelectors.addNewCustomerDialog.buttons.salesPersonRemoveButton).click()
+                })
+              })
+          })
+      })
+    })
+
+
+    it('Test 13 - Search Existing salespeople in that store', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeople).within(()=>{
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleAddNewList).first().click()
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleAddNewList).first().within(() => {
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addSalesPersonInput).should('be.visible')
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addSalesPersonInput).type('big')
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.addSalesPersonsListLi).first().contains('Big Daddy')
+            })
+          })
+      })
+    })
+
+    it('Test 14 - Search NOT Existing salespeople in that store', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeople).within(()=>{
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleAddNewList).first().click()
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.salesPeopleAddNewList).first().within(() => {
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addSalesPersonInput).should('be.visible')
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addSalesPersonInput).type('abcdefgh')
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.addSalesPersonsListLi).contains('No Results Found')
+            })
+          })
+      })
+    })
+
+
+    it('Test 15 - Search Existing BDC in that store', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdc).within(()=>{
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdcAddNewList).first().click()
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdcAddNewList).first().within(() => {
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addBDCInput).should('be.visible')
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addBDCInput).type('big')
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.addBDCListLi).first().contains('Big Daddy')
+            })
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdcAddNewList).first().within(() => {
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.buttons.bdcCloseButton).first().click()
+            })
+          })
+      })
+    })
+
+    it('Test 14 - Search NOT Existing BDC in that store', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdc).within(()=>{
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdcAddNewList).first().click()
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdcAddNewList).first().within(() => {
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addBDCInput).should('be.visible')
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addBDCInput).type('abcdefgh')
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.addBDCListLi).first().contains('No Results Found')
+                cy.get(HTMLElementSelectors.addNewCustomerDialog.buttons.bdcCloseButton).first().click()
+            })
+          })
+      })
+    })
+
+
+    it('Test 15 - Add BDC to the Customer', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdc).within(()=>{
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdcAddNewList)
+            .each(($el, index, $list) => {
+                cy.wrap($el).click()
+                cy.wrap($el).within(() => {
+                    cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addBDCInput).should('be.visible')
+                    cy.get(HTMLElementSelectors.addNewCustomerDialog.inputs.addBDCInput).type('big')
+                    // To be replaced with respective api call
+                    // cy.wait(2000)
+                    cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.addBDCListLi).first().click()
+                })
+              })
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdcList)
+                .each(($el, index, $list) => {
+                if($el.is(':visible')){
+                    cy.wrap($el).should('not.have.class', 'addNew')
+                }
+              })
+          })
+      })
+    })
+
+
+    it('Test 16 - Remove BDC which assigned to Customer', () => {
+      cy.get(HTMLElementSelectors.salesHome.divs.addNewCustomerDialog).within(()=>{
+        cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdc).within(()=>{
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdcList)
+            .each(($el, index, $list) => {
+                cy.wrap($el).click()
+                cy.wrap($el).children().last().within(() => {
+                    cy.get(HTMLElementSelectors.addNewCustomerDialog.buttons.bdcRemoveButton).click()
+                })
+              })
+            cy.get(HTMLElementSelectors.addNewCustomerDialog.divs.bdcList)
+                .each(($el, index, $list) => {
+                if($el.is(':visible')){
+                    cy.wrap($el).should('have.class', 'addNew')
+                }
+              })
+          })
+      })
     })
 
 

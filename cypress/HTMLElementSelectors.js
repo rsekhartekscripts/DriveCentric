@@ -1,6 +1,6 @@
 export default {
 	'urlPaths': {
-		'login':'Login.aspx',
+		'login':'login.aspx',
 		'salesHome':'#/salesHome'
 	},
 	'login': {
@@ -58,16 +58,35 @@ export default {
 			'zip' :'.zip input',
 			'store' :'.sourceDescription input',
 			'sourceType' :'.sourceType select',
-			'sourceDescription' :'.sourceDescription select'
+			'sourceDescription' :'.sourceDescription select',
+			'addSalesPersonInput': '.srNewContentAdd input',
+			'addBDCInput': '.srNewContentAdd input'
 		},
 		'divs':{
 			'salesPeople': '[new-customer-salespeople]',
 			'bdc': '[new-customer-bdc]',
 			'interestedVehicles': '.driveNewCustomerVehicleInterested',
-			'tradeIn': '.driveNewCustomerVehicleTrade'
+			'tradeIn': '.driveNewCustomerVehicleTrade',
+			'alertDialog': '[data-test=dialog-alert-div]',
+			'salesPeopleList': 'ul li',
+			'salesPeopleAddNewList': 'ul li.addNew',
+			'salesPeopleProfile': '.miniSquareProfile',
+			'addSalesPersonsListLi': '.srNewContentAddList ul li',
+			'bdcList': 'ul li',
+			'bdcAddNewList': 'ul li.addNew',
+			'addBDCListLi': '.srNewContentAddList ul li'
 		},
 		'buttons': {
-			'cancel': 'Cancel'
+			'cancel': 'Cancel',
+			'addNewCustomer': 'ADD CUSTOMER',
+			'salesPersonRemoveButton': '.srContentCustomerRemove',
+			'bdcRemoveButton': '.srContentCustomerRemove',
+			'bdcCloseButton': '.srContentCustomerClose'
+		}
+	},
+	'addNewCustomerAlertDialog': {
+		'buttons': {
+			'done': '[data-test=dialog-alert-button-done]'
 		}
 	}
 }
