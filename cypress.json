@@ -5,5 +5,6 @@
   "env": {
     "authCookie": ".ASPXAUTH"
   },
-  "ignoreTestFiles": "*.ignore.*"
+  "ignoreTestFiles": "*.ignore.*",
+  "numTestsKeptInMemory": 2
 }

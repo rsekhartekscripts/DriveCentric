@@ -1,0 +1,10 @@
+{
+	"firstNameInput": "#newFirstName",
+	"lastNameInput": "#newLastName",
+	"companyInput": "[placeholder=Company]",
+	"phoneInput": "#newPhone",
+	"emailInput": "[placeholder=Email]",
+	"storeInput": ".driveNewCustomerSearch select",
+	"addCustomerButton": "Add Customer",
+	"closeDialogButton": ".driveDialogClose"
+}
