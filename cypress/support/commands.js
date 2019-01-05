@@ -17,6 +17,11 @@ Cypress.Commands.add('inputPassword', (user) => {
   cy.get(passwordInput).type(user.password)
 })
 
+Cypress.Commands.add('getMaskedPhone', (phoneNumber) => {
+  const localPhone = phoneNumber.replace( /\D+/g, '').match(/(\d{3})(\d{3})(\d{4})/)
+  return '(' + localPhone[1] + ') ' + localPhone[2] + '-' + localPhone[3]
+})
+
 Cypress.Commands.add('clickLoginButton', () => {
   cy.get(loginButton).click()
 })

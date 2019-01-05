@@ -28,9 +28,12 @@
 	"bdcListDiv": "ul li",
 	"bdcAddNewListDiv": "ul li.addNew",
 	"addBDCListLiDiv": ".srNewContentAddList ul li",
+	"newVehicleAddButton": ".unselectable.add",
+	"newVehicleButtonsList": ".srNewContentAddList button",
 	"cancelButton": "Cancel",
 	"addNewCustomerButton": "Add Customer",
 	"salesPersonRemoveButton": ".srContentCustomerRemove",
 	"bdcRemoveButton": ".srContentCustomerRemove",
-	"bdcCloseButton": ".srContentCustomerClose"
+	"bdcCloseButton": ".srContentCustomerClose",
+	"addNewVehicleInventoryDialog": ".driveDialog .driveInventory"
 }
