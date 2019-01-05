@@ -1,0 +1,5 @@
+{
+	"addNewCustomerButton": "[data-test=header-li-newcustomer]",
+	"customerSearchDialog": "[data-test=dialog-newCustomer-div-container]",
+	"addNewCustomerDialog": ".driveNewCustomerDialog"
+}

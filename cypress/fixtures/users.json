@@ -2,5 +2,9 @@
   "enterprise": {
     "email": "enterprise1@drivecentric.com",
     "password": "enterprise1"
+  },
+  "invalidUsername": {
+  	"email": "testEmailInvalid@test.com",
+  	"password": "invalidPasswordForTest"
   }
 }

@@ -69,7 +69,7 @@ context('Login', () => {
     })
 
     it('Test 7 - Invalid Password', () => {
-        cy.loginUser('invalidPassword')
+        cy.loginUser('invalidUsername')
         verifyErrorMessage()
     })
 
