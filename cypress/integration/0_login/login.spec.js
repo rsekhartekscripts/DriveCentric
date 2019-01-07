@@ -1,13 +1,15 @@
-import HTMLElementSelectors from './../../HTMLElementSelectors';
+import * as AppUrlPaths from './../../HTMLElementSelectors/AppUrlPaths.json';
+
+import * as LoginLogout from './../../HTMLElementSelectors/LoginLogout.json';
 
 function verifyErrorMessage() {
-  cy.get(HTMLElementSelectors.login.texts.errorMessage)
+  cy.get(LoginLogout.error_message_text)
     .contains('The email/password combination is not correct.')
     .should('be.visible')
 }
 
 function verifyRedirectToHomepage() {
-  cy.hash().should('eq', HTMLElementSelectors.urlPaths.salesHome)
+  cy.hash().should('eq', AppUrlPaths.sales_home)
 }
 
 function verifyUserSession() {
@@ -17,21 +19,21 @@ function verifyUserSession() {
 context('Login', () => {
 
   beforeEach(() => {
-    cy.visit(HTMLElementSelectors.urlPaths.login)
+    cy.visit(AppUrlPaths.login)
   })
 
   describe('Navigation', () => {
 
     it('Test 1 - Login Page Learn More link', () => {
-      cy.get(HTMLElementSelectors.login.buttons.learnMore)
+      cy.get(LoginLogout.learnMore_link)
         .should('be.visible')
     })
 
     it('Test 2 - Login Page Privacy Policy link', () => {
-      cy.get(HTMLElementSelectors.login.links.privacyPolicy)
+      cy.get(LoginLogout.privacy_policy_link)
         .should('have.attr', 'href')
         .and('eq', 'http://www.drivecentric.com/privacy/')
-        .get(HTMLElementSelectors.login.links.privacyPolicy)
+        .get(LoginLogout.privacy_policy_link)
         .should('have.attr', 'target')
         .and('eq', '_blank')
       })

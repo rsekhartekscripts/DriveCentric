@@ -1,20 +1,20 @@
 const powerUserId = 'ECE1D8E2-1903-4756-8318-129BDD06D092'
 const webIdentifier = '1+2+3'
-const loginPath = 'login.aspx'
-const usernameInput = '[data-test=login-textinput-username]'
-const passwordInput = '[data-test=login-textinput-password]'
-const loginButton = '[data-test=login-button-login]'
+
+import * as AppUrlPaths from './../HTMLElementSelectors/AppUrlPaths.json';
+import * as LoginLogout from './../HTMLElementSelectors/LoginLogout.json';
+
 
 function addEscapeChars(str) {
     return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
 
 Cypress.Commands.add('inputUsername', (user) => {
-    cy.get(usernameInput).type(user.email)
+    cy.get(LoginLogout.username_textbox).type(user.email)
 })
 
 Cypress.Commands.add('inputPassword', (user) => {
-  cy.get(passwordInput).type(user.password)
+  cy.get(LoginLogout.password_textbox).type(user.password)
 })
 
 Cypress.Commands.add('getMaskedPhone', (phoneNumber) => {
@@ -23,7 +23,7 @@ Cypress.Commands.add('getMaskedPhone', (phoneNumber) => {
 })
 
 Cypress.Commands.add('clickLoginButton', () => {
-  cy.get(loginButton).click()
+  cy.get(LoginLogout.login_button).click()
 })
 
 Cypress.Commands.add('loginUser', (userType) => {
@@ -57,7 +57,7 @@ Cypress.Commands.add('getAllCustomers', () => {
 
 
 Cypress.Commands.add('loginUI', (userType) => {
-  cy.visit(loginPath)
+  cy.visit(AppUrlPaths.login)
   return cy.loginUser(userType);
 })
 

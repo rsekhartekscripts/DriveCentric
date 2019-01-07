@@ -1,5 +1,5 @@
 {
-	"addNewCustomerButton": "[data-test=header-li-newcustomer]",
-	"customerSearchDialog": "[data-test=dialog-newCustomer-div-container]",
-	"addNewCustomerDialog": ".driveNewCustomerDialog"
+	"add_new_customer_button": "[data-test=header-li-newcustomer]",
+	"customer_search_dialog": "[data-test=dialog-newCustomer-div-container]",
+	"add_new_customer_dialog": ".driveNewCustomerDialog"
 }

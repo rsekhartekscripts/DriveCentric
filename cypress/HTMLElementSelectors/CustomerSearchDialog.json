@@ -1,10 +1,10 @@
 {
-	"firstNameInput": "#newFirstName",
-	"lastNameInput": "#newLastName",
-	"companyInput": "[placeholder=Company]",
-	"phoneInput": "#newPhone",
-	"emailInput": "[placeholder=Email]",
-	"storeInput": ".driveNewCustomerSearch select",
-	"addCustomerButton": "Add Customer",
-	"closeDialogButton": ".driveDialogClose"
+	"first_name_input": "#newFirstName",
+	"last_name_input": "#newLastName",
+	"company_input": "[placeholder=Company]",
+	"phone_input": "#newPhone",
+	"email_input": "[placeholder=Email]",
+	"store_input": ".driveNewCustomerSearch select",
+	"add_customer_button": "Add Customer",
+	"close_dialog_button": ".driveDialogClose"
 }

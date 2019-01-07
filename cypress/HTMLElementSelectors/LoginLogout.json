@@ -1,11 +1,13 @@
 {
-"username_textbox" : "[name=inputEmail]",
-"password_textbox" : "[name=inputPassword]",
-"login_button" : "Login",
-"eo_menu" : "EO",
-"logout_button" : "Logout",
-"drivecetric_logo" : ".driveLogo h2 img",
-"login_error_msg" : "p",
-"learnMore_link" : "[data-test=login-link-learn-more]",
-"learnMorePage_logo_link" : ".custom-logo-link"
+	"username_textbox" : "[name=inputEmail]",
+	"password_textbox" : "[name=inputPassword]",
+	"login_button" : "Login",
+	"eo_menu" : "EO",
+	"logout_button" : "Logout",
+	"drivecetric_logo" : ".driveLogo h2 img",
+	"login_error_msg" : "p",
+	"learnMore_link" : "[data-test=login-link-learn-more]",
+	"learnMorePage_logo_link" : ".custom-logo-link",
+	"error_message_text":"[data-test=login-text-error-message]",
+	"privacy_policy_link":"[data-test=login-link-privacy-policy]"
 }
