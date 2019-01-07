@@ -1,0 +1,13 @@
+{
+"addNewCustomer_button" : "[data-test=header-li-newcustomer]",
+"firstName_textbox" : "#newFirstName",
+"lastName_textbox" : "#newLastName",
+"phone_textbox" : "#newPhone",
+"company_textbox" : "[placeholder=Company]",
+"email_textbox" : "[placeholder=Email]",
+"firstName_result" : "[ng-if*='result.CustomerFirstName']",
+"lastName_result" : "[ng-if*='result.CustomerLastName']",
+"phone_result" : "[ng-class*='result.CellPhone']",
+"company_result" : "[ng-if*='result.Company']",
+"email_result" : "[ng-if*='result.Email']"
+}
