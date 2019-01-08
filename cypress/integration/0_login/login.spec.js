@@ -63,27 +63,27 @@ context('Login', () => {
     })
   })
 
-  describe('Invalid Login', () => {
+  // describe('Invalid Login', () => {
 
-    it('Test 6 - Invalid Username', () => {
-        cy.loginUser('invalidUsername')
-        verifyErrorMessage()
-    })
+  //   it('Test 6 - Invalid Username', () => {
+  //       cy.loginUser('invalidUsername')
+  //       verifyErrorMessage()
+  //   })
 
-    it('Test 7 - Invalid Password', () => {
-        cy.loginUser('invalidUsername')
-        verifyErrorMessage()
-    })
+  //   it('Test 7 - Invalid Password', () => {
+  //       cy.loginUser('invalidUsername')
+  //       verifyErrorMessage()
+  //   })
 
-  })
+  // })
 
-  describe('Successful Login', () => {
+  // describe('Successful Login', () => {
 
-    it ('Test 8 - Enterprise User', () => {
-        cy.loginUser('enterprise')
-        verifyRedirectToHomepage()
-        verifyUserSession()
-    })
+  //   it ('Test 8 - Enterprise User', () => {
+  //       cy.loginUser('enterprise')
+  //       verifyRedirectToHomepage()
+  //       verifyUserSession()
+  //   })
 
-  })
+  // })
 })

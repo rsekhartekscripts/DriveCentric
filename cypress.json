@@ -7,9 +7,12 @@
   },
   "ignoreTestFiles": "*.ignore.*",
   "projectId": "ui55kp",
-  "reporter": "mochawesome",
   "watchForFileChanges": false,
   "requestTimeout": 15000,
   "responseTimeout": 60000,
-  "numTestsKeptInMemory": 5
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "reports",
+    "overwrite": false
+  }
 }
