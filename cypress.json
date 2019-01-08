@@ -1,10 +1,18 @@
 {
   "baseUrl": "https://staging1.drivecentric.com/",
   "defaultCommandTimeout": 30000,
-  "pageLoadTimeout": 600000, 
+  "pageLoadTimeout": 600000,
   "env": {
     "authCookie": ".ASPXAUTH"
   },
   "ignoreTestFiles": "*.ignore.*",
-  "numTestsKeptInMemory": 2
+  "projectId": "ui55kp",
+  "watchForFileChanges": false,
+  "requestTimeout": 15000,
+  "responseTimeout": 60000,
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "reports",
+    "overwrite": false
+  }
 }

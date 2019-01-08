@@ -1,0 +1,4 @@
+{
+	"main_div": "[data-test=customerCard-parent-div]",
+	"contact_card_button": ".customer-summary-trigger"
+}

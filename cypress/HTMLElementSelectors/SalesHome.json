@@ -1,5 +1,9 @@
 {
-	"addNewCustomerButton": "[data-test=header-li-newcustomer]",
-	"customerSearchDialog": "[data-test=dialog-newCustomer-div-container]",
-	"addNewCustomerDialog": ".driveNewCustomerDialog"
+	"add_new_customer_button": "[data-test=header-li-newcustomer]",
+	"recent_customers_button": "[data-test=header-li-recentcustomers]",
+	"customer_search_dialog": "[data-test=dialog-newCustomer-div-container]",
+	"add_new_customer_dialog": ".driveNewCustomerDialog",
+	"recent_customers_result_div": "[data-test=recentCustomer-div-container]",
+	"recent_customers_result_div_loading": "[data-test=recentCustomer-div-container] .list-loading",
+	"recent_customers_result_div_list": "[data-test=recentCustomer-div-container] ul li"
 }
