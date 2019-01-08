@@ -1,10 +1,15 @@
 {
   "baseUrl": "https://staging1.drivecentric.com/",
   "defaultCommandTimeout": 30000,
-  "pageLoadTimeout": 600000, 
+  "pageLoadTimeout": 600000,
   "env": {
     "authCookie": ".ASPXAUTH"
   },
   "ignoreTestFiles": "*.ignore.*",
-  "numTestsKeptInMemory": 2
+  "projectId": "ui55kp",
+  "reporter": "mochawesome",
+  "watchForFileChanges": false,
+  "requestTimeout": 15000,
+  "responseTimeout": 60000,
+  "numTestsKeptInMemory": 5
 }

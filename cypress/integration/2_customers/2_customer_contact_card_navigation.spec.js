@@ -24,6 +24,18 @@ context('Customer Contact Card', () => {
         method: 'POST',
         url: '/api/legacy',
       }).as('legacy')
+      cy.route({
+        method: 'GET',
+        url: '/api/deals/*/vehicles/trades',
+      }).as('trades')
+      cy.route({
+        method: 'POST',
+        url: '/api/deals/*/vehicles/interested',
+      }).as('interested')
+      cy.route({
+        method: 'POST',
+        url: '/api/users/current',
+      }).as('currentUser')
     })
 
     it('Test 1 - Verify customer contact window', () => {
@@ -36,26 +48,15 @@ context('Customer Contact Card', () => {
           if($list.length > 0){
             cy.wrap($list).first().click()
             cy.get(CustomerCardElements.main_div).should('be.visible')
+            cy.get(CustomerCardElements.contact_card_button).should('be.visible')
+            cy.get(CustomerCardElements.contact_card_button).click()
+            cy.wait(['@trades', '@interested', '@currentUser']).then((xhr) => {
+              cy.get(CustomerContactCardElements.main_div).should('be.visible')
+            });
           }
         })
       })
     })
-
-    it('Test 1 - Verify customer contact window focused on Contact tab by default', () => {
-      cy.get(SalesHomeElements.recent_customers_button).click()
-      cy.wait('@legacy').then((xhr) => {
-        cy.contains("Recent Customers")
-        cy.get(SalesHomeElements.recent_customers_result_div).should('be.visible')
-        cy.get(SalesHomeElements.recent_customers_result_div_loading).should('not.be.visible')
-        cy.get(SalesHomeElements.recent_customers_result_div_list).then(($list) => {
-          if($list.length > 0){
-            cy.wrap($list).first().click()
-            cy.get(CustomerCardElements.main_div).should('be.visible')
-          }
-        })
-      })
-    })
-
 
   })
 

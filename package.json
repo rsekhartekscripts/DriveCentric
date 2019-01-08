@@ -8,7 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "cypress:record": "cypress run --record --key 0523c4a4-b14f-4173-99a6-e6531e4423b2",
+    "cypress:mochawesome": "cypress run --reporter mochawesome"
   },
   "private": true,
   "dependencies": {

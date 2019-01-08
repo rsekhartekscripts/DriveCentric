@@ -23,7 +23,7 @@ const companyType = "Company";
 
 
 
-context('Customer', () => {
+context('Add New Customer', () => {
 
   describe('All Perms User - Add New Customer Dialog Navigation', () => {
 
@@ -153,6 +153,10 @@ context('Customer', () => {
       //Need to remove .wait
       cy.wait(4000)
       cy.get(CustomerSearchDialogElements.first_name_input).clear()
+      cy.get(CustomerSearchDialogElements.last_name_input).clear()
+      cy.get(CustomerSearchDialogElements.company_input).clear()
+      cy.get(CustomerSearchDialogElements.phone_input).clear()
+      cy.get(CustomerSearchDialogElements.email_input).clear()
       cy.get(CustomerSearchDialogElements.first_name_input).type(customer.firstName)
       cy.wait('@legacy').then((xhr) => {
         cy.contains(CustomerSearchDialogElements.add_customer_button).click()
@@ -166,7 +170,10 @@ context('Customer', () => {
         cy.contains(AddNewCustomerDialogElements.cancel_button).click()
       })
       cy.get(CustomerSearchDialogElements.first_name_input).clear()
+      cy.get(CustomerSearchDialogElements.last_name_input).clear()
       cy.get(CustomerSearchDialogElements.company_input).clear()
+      cy.get(CustomerSearchDialogElements.phone_input).clear()
+      cy.get(CustomerSearchDialogElements.email_input).clear()
       cy.get(CustomerSearchDialogElements.company_input).type(customer.companyName)
       cy.wait('@legacy').then((xhr) => {
         cy.contains(CustomerSearchDialogElements.add_customer_button).click()

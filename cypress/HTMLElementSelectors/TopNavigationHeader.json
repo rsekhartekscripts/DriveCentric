@@ -1,4 +1,4 @@
 {
 	"global_search_textbox" : "input[placeholder=\"Search customers\"]",
-	"displayed_result": "span[class=\"name\"] > span[class=\"highlightsearch\"]"
+	"displayed_result": ".driveMiniSearch span[class=\"name\"] > span[class=\"highlightsearch\"]"
 }

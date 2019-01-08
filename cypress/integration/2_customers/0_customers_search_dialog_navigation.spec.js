@@ -14,8 +14,16 @@ context('Customer', () => {
 
   describe('All Perms User - Customer Search Dialog Navigation', () => {
 
-    beforeEach(() => {
+    before(function () {
       cy.loginUI('enterprise')
+    })
+
+    beforeEach(() => {
+      cy.server()
+      cy.route({
+        method: 'POST',
+        url: '/api/legacy',
+      }).as('legacy')
     })
 
     it('Test 1 - Navigate to Search New Customer Dialog', () => {
@@ -24,67 +32,42 @@ context('Customer', () => {
     })
 
     it('Test 2 - Check FirstName Search Results', () => {
-      cy.get(SalesHomeElements.add_new_customer_button).click()
-      cy.server()
-      cy.route({
-        method: 'POST',
-        url: '/api/legacy',
-      }).as('legacy')
-      cy.get(CustomerSearchDialogElements.first_name_input).type(customer.firstName)
+      cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName)
       cy.wait('@legacy').then((xhr) => {
-        cy.contains(CustomerSearchDialogElements.buttons.add_customer_button)
+        cy.contains(CustomerSearchDialogElements.add_customer_button)
+        cy.get(CustomerSearchDialogElements.first_name_input).clear()
       })
     })
 
     it('Test 3 - Check LastName Search Results', () => {
-      cy.get(SalesHomeElements.add_new_customer_button).click()
-      cy.server()
-      cy.route({
-        method: 'POST',
-        url: '/api/legacy',
-      }).as('legacy')
-      cy.get(CustomerSearchDialogElements.last_name_input).type(customer.lastName)
+      cy.get(CustomerSearchDialogElements.last_name_input).clear().type(customer.lastName)
       cy.wait('@legacy').then((xhr) => {
-        cy.contains(CustomerSearchDialogElements.buttons.add_customer_button)
+        cy.contains(CustomerSearchDialogElements.add_customer_button)
+        cy.get(CustomerSearchDialogElements.last_name_input).clear()
       })
     })
 
     it('Test 4 - Check Company Search Results', () => {
-      cy.get(SalesHomeElements.add_new_customer_button).click()
-      cy.server()
-      cy.route({
-        method: 'POST',
-        url: '/api/legacy',
-      }).as('legacy')
-      cy.get(CustomerSearchDialogElements.company_input).type(customer.companyName)
+      cy.get(CustomerSearchDialogElements.company_input).clear().type(customer.companyName)
       cy.wait('@legacy').then((xhr) => {
-        cy.contains(CustomerSearchDialogElements.buttons.add_customer_button)
+        cy.contains(CustomerSearchDialogElements.add_customer_button)
+        cy.get(CustomerSearchDialogElements.company_input).clear()
       })
     })
 
     it('Test 5 - Check PhoneNumber Search Results', () => {
-      cy.get(SalesHomeElements.add_new_customer_button).click()
-      cy.server()
-      cy.route({
-        method: 'POST',
-        url: '/api/legacy',
-      }).as('legacy')
-      cy.get(CustomerSearchDialogElements.phone_input).type(customer.phone)
+      cy.get(CustomerSearchDialogElements.phone_input).clear().type(customer.phone)
       cy.wait('@legacy').then((xhr) => {
-        cy.contains(CustomerSearchDialogElements.buttons.add_customer_button)
+        cy.contains(CustomerSearchDialogElements.add_customer_button)
+        cy.get(CustomerSearchDialogElements.phone_input).clear()
       })
     })
 
     it('Test 6 - Check Email Search Results', () => {
-      cy.get(SalesHomeElements.add_new_customer_button).click()
-      cy.server()
-      cy.route({
-        method: 'POST',
-        url: '/api/legacy',
-      }).as('legacy')
-      cy.get(CustomerSearchDialogElements.email_input).type(customer.email)
+      cy.get(CustomerSearchDialogElements.email_input).clear().type(customer.email)
       cy.wait('@legacy').then((xhr) => {
-        cy.contains(CustomerSearchDialogElements.buttons.add_customer_button)
+        cy.contains(CustomerSearchDialogElements.add_customer_button)
+        cy.get(CustomerSearchDialogElements.email_input).clear()
       })
     })
 
