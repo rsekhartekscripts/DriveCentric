@@ -8,6 +8,7 @@ import Utils from './../../Utils';
 import * as SalesHomeElements from './../../HTMLElementSelectors/SalesHome.json';
 import * as CustomerCardElements from './../../HTMLElementSelectors/CustomerCard.json';
 import * as CustomerContactCardElements from './../../HTMLElementSelectors/CustomerContactCard.json';
+import * as EditCustomerDialogElements from './../../HTMLElementSelectors/EditCustomerDialog.json';
 
 
 context('Customer Contact Card', () => {
@@ -50,12 +51,38 @@ context('Customer Contact Card', () => {
             cy.get(CustomerCardElements.main_div).should('be.visible')
             cy.get(CustomerCardElements.contact_card_button).should('be.visible')
             cy.get(CustomerCardElements.contact_card_button).click()
-            cy.wait(['@trades', '@interested', '@currentUser']).then((xhr) => {
-              cy.get(CustomerContactCardElements.main_div).should('be.visible')
-            });
+            cy.get(CustomerContactCardElements.main_div).should('be.visible')
           }
         })
       })
+    })
+
+    it('Test 2 - Verify customer contact window focused on Contact tab by default', () => {
+      cy.get(CustomerContactCardElements.main_active_tab).contains("Contact")
+    })
+
+    it('Test 3 - Verify Best method under contact tab', () => {
+      cy.get(CustomerContactCardElements.graph_bars)
+        .each(($el, index, $list) => {
+          cy.wrap($el).should('have.attr', 'fill').and('match',/rgb\(65, 130, 215\)|rgb\(25, 180, 255\)|rgb\(45, 205, 115\)/)
+        })
+    })
+
+    it('Test 4 - Validate customer phone number under contact details in Contact tab.', () => {
+      cy.get(CustomerContactCardElements.contact_details_div).should("be.visible")
+    })
+
+    it('Test 5 - Navigate to Edit customer window from customer contact card', () => {
+      cy.get(CustomerContactCardElements.contact_details_edit_button).should("be.visible")
+      cy.get(CustomerContactCardElements.contact_details_edit_button).click()
+      cy.get(EditCustomerDialogElements.main_div).should("be.visible")
+      cy.get(EditCustomerDialogElements.main_div).contains("Edit Customer")
+      cy.get(EditCustomerDialogElements.close_dialog).click()
+    })
+
+    it('Test 6 - Navigate to Customer Notes tab in customer contact window', () => {
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Cust. Notes").click()
+      cy.get(CustomerContactCardElements.customer_notes_textarea).should("be.visible")
     })
 
   })

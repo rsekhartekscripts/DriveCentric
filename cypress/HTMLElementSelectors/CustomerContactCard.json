@@ -1,3 +1,11 @@
 {
-	"main_div": "drc-customer-summary"
+	"main_div": "drc-customer-summary",
+	"main_tabs_parent_div": "drc-customer-summary .customer-summary-tab-selector ul",
+	"main_tabs": "drc-customer-summary .customer-summary-tab-selector ul li",
+	"main_active_tab": "drc-customer-summary .customer-summary-tab-selector ul li.is-active",
+	"best_method_div": ".customer-summary-contact drc-customer-summary-best-method",
+	"graph_bars": ".customer-summary-contact .highcharts-series-group .highcharts-point",
+	"contact_details_div": ".customer-summary-contact .cnv-cnt-crd-blck.ng-star-inserted",
+	"contact_details_edit_button": ".customer-summary-contact .cnv-cnt-crd-blck.ng-star-inserted .editAction",
+	"customer_notes_textarea": ".customer-summary-tab-container .note textarea"
 }
