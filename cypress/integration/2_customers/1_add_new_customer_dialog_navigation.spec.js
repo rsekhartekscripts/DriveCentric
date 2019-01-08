@@ -20,21 +20,6 @@ const customer = {
 const individualType = "Individual";
 const companyType = "Company";
 
-const sourceTypeRequiredText = 'Please select a source type'
-const sourceDestRequiredText = 'Please select a source description'
-
-const noVehicleSelectedConfirmationText = 'No interested vehicle has been selected'
-const confirmDialogCancelText = "NO"
-
-
-const confirmationDialogClass = '.driveDialogAlert';
-const customerInterestedInventoryAddDiv = '.driveNewCustomerVehicleInterested .add'
-
-const interestedVehicleOption = '.driveNewCustomerVehicleInterested .srNewContent'
-
-const closeInterestedVehicleOptionsButton = '.srContentCustomerClose'
-const addInventoryButton = 'Add Inventory'
-const addCustomeInventoryButton = 'Add Custom'
 
 
 

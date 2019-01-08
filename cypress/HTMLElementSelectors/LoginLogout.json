@@ -1,7 +1,7 @@
 {
 	"username_textbox" : "[name=inputEmail]",
 	"password_textbox" : "[name=inputPassword]",
-	"login_button" : "Login",
+	"login_button" : "[data-test=login-button-login]",
 	"eo_menu" : "EO",
 	"logout_button" : "Logout",
 	"drivecetric_logo" : ".driveLogo h2 img",
