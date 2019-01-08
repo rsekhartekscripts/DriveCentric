@@ -1,0 +1,4 @@
+{
+	"main_div": ".dsPersonalInfoColumnsCard",
+	"close_dialog": ".dsPersonalInfoColumnsDialog .driveDialogClose"
+}
