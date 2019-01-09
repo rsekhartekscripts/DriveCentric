@@ -226,7 +226,7 @@ context('Add New Customer Dialog', () => {
     })
 
 
-    it('Test 13 - Add BDC to the Customer', () => {
+    it('Test 13 - Add And Remove BDC to the Customer', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.bdc_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.bdc_add_new_list_div)
@@ -247,14 +247,6 @@ context('Add New Customer Dialog', () => {
                     cy.wrap($el).should('not.have.class', 'addNew')
                 }
               })
-          })
-      })
-    })
-
-
-    it('Test 14 - Remove BDC which assigned to Customer', () => {
-      cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
-        cy.get(AddNewCustomerDialogElements.bdc_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.bdc_list_div)
             .each(($el, index, $list) => {
                 cy.wrap($el).click()
@@ -272,7 +264,9 @@ context('Add New Customer Dialog', () => {
       })
     })
 
-    it('Test 15 - Add Interested Vehicle by Inventory', () => {
+
+
+    it('Test 14 - Add Interested Vehicle by Inventory', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
         cy.get(AddNewCustomerDialogElements.new_vehicle_buttons_list).first().click()
