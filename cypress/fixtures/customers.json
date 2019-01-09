@@ -1,9 +1,9 @@
-{
-  "one": {
-    "firstName": "Appointment",
-    "lastName": "One",
+[
+  {
+    "firstName": "Drivecentric",
+    "lastName": "Test",
     "email": "testEmail@test.com",
     "phone": "9999999999",
     "companyName": "Test Company"
   }
-}
+]

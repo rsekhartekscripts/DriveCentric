@@ -13,7 +13,7 @@ import * as EditCustomerDialogElements from './../../HTMLElementSelectors/EditCu
 
 context('Customer Contact Card', () => {
 
-  describe('All Perms User - Customer Contact Card Navigation', () => {
+  describe('Enterprise User - Customer Contact Card Navigation', () => {
 
     before(() => {
       cy.loginUI('enterprise')
@@ -37,9 +37,6 @@ context('Customer Contact Card', () => {
         method: 'POST',
         url: '/api/users/current',
       }).as('currentUser')
-    })
-
-    it('Test 1 - Verify customer contact window', () => {
       cy.get(SalesHomeElements.recent_customers_button).click()
       cy.wait('@legacy').then((xhr) => {
         cy.contains("Recent Customers")
@@ -51,10 +48,18 @@ context('Customer Contact Card', () => {
             cy.get(CustomerCardElements.main_div).should('be.visible')
             cy.get(CustomerCardElements.contact_card_button).should('be.visible')
             cy.get(CustomerCardElements.contact_card_button).click()
-            cy.get(CustomerContactCardElements.main_div).should('be.visible')
           }
         })
       })
+    })
+
+    afterEach(() => {
+      cy.get(CustomerCardElements.contact_card_button).click()
+      cy.get(CustomerCardElements.close_div).click()
+    })
+
+    it('Test 1 - Verify customer contact window', () => {
+      cy.get(CustomerContactCardElements.main_div).should('be.visible')
     })
 
     it('Test 2 - Verify customer contact window focused on Contact tab by default', () => {
@@ -84,6 +89,11 @@ context('Customer Contact Card', () => {
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Cust. Notes").click()
       cy.get(CustomerContactCardElements.customer_notes_textarea).should("be.visible")
     })
+
+    // it('Test 7 - Save the Notes in the customer notes ', () => {
+    //   let notes = "Test Customer Notes "+(new Date()).getTime()
+    //   cy.get(CustomerContactCardElements.customer_notes_textarea).type(notes)
+    // })
 
   })
 

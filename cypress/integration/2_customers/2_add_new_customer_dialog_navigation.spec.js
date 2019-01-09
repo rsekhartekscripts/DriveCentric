@@ -9,13 +9,8 @@ import * as AddNewCustomerDialogElements from './../../HTMLElementSelectors/AddN
 import * as SalesHomeElements from './../../HTMLElementSelectors/SalesHome.json';
 import * as CustomerSearchDialogElements from './../../HTMLElementSelectors/CustomerSearchDialog.json';
 
-const customer = {
-    "firstName": "Appointment",
-    "lastName": "One",
-    "email": "testEmail@test.com",
-    "phone": "9999999999",
-    "companyName": "Test Company"
-  }
+import * as customersList from './../../fixtures/customers.json';
+const customer = customersList[0];
 
 const individualType = "Individual";
 const companyType = "Company";
@@ -23,9 +18,9 @@ const companyType = "Company";
 
 
 
-context('Add New Customer', () => {
+context('Add New Customer Dialog', () => {
 
-  describe('All Perms User - Add New Customer Dialog Navigation', () => {
+  describe('Enterprise User - Add New Customer Dialog Validations', () => {
 
     before(() => {
       cy.loginUI('enterprise')
@@ -37,54 +32,7 @@ context('Add New Customer', () => {
         method: 'POST',
         url: '/api/legacy',
       }).as('legacy')
-    })
-
-
-
-    it('Test 1 - Check Add Customer Dialog Visibility', () => {
       cy.get(SalesHomeElements.add_new_customer_button).click()
-      cy.get(CustomerSearchDialogElements.first_name_input).clear()
-      cy.get(CustomerSearchDialogElements.first_name_input).type(customer.firstName)
-      cy.wait('@legacy').then((xhr) => {
-        cy.contains(CustomerSearchDialogElements.add_customer_button).click()
-        cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
-      })
-    })
-
-    it('Test 2 - Verify Add New Customer form fields', () => {
-
-        cy.get(AddNewCustomerDialogElements.customer_type_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.customer_type_input).select(individualType)
-        cy.get(AddNewCustomerDialogElements.first_name_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.last_name_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.company_name_input).should('not.be.visible')
-        cy.get(AddNewCustomerDialogElements.email_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.phone_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.home_phone_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.address_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.city_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.state_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.zip_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.store_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.source_type_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.source_description_input).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.sales_people_div).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.bdc_div).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.interested_vehicle_div).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.trade_in_div).should('be.visible')
-
-        cy.get(AddNewCustomerDialogElements.customer_type_input).select(companyType)
-        cy.get(AddNewCustomerDialogElements.first_name_input).should('not.be.visible')
-        cy.get(AddNewCustomerDialogElements.last_name_input).should('not.be.visible')
-        cy.get(AddNewCustomerDialogElements.company_name_input).should('be.visible')
-
-    })
-
-    it('Test 3 - Check Individual Values entered in search dialog with Add New Customer dialog', () => {
-      cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
-        cy.contains(AddNewCustomerDialogElements.cancel_button).click()
-      })
-      cy.wait(4000)
       cy.get(CustomerSearchDialogElements.company_input).clear()
       cy.get(CustomerSearchDialogElements.first_name_input).clear()
       cy.get(CustomerSearchDialogElements.first_name_input).type(customer.firstName)
@@ -97,102 +45,43 @@ context('Add New Customer', () => {
       cy.wait('@legacy').then((xhr) => {
         cy.contains(CustomerSearchDialogElements.add_customer_button).click()
         cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.customer_type_input).find(':selected').contains(individualType)
-        cy.get(AddNewCustomerDialogElements.first_name_input).should('have.value', customer.firstName)
-        cy.get(AddNewCustomerDialogElements.last_name_input).should('have.value', customer.lastName)
-        cy.get(AddNewCustomerDialogElements.email_input).should('have.value', customer.email)
-        cy.get(AddNewCustomerDialogElements.phone_input).should('have.value', Utils.getMaskedPhone(customer.phone))
       })
     })
 
-    it('Test 4 - Check Individual Values entered in search dialog with Add New Customer dialog', () => {
+    afterEach(() => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.contains(AddNewCustomerDialogElements.cancel_button).click()
       })
-      cy.wait(4000)
-      cy.get(CustomerSearchDialogElements.first_name_input).clear()
-      cy.get(CustomerSearchDialogElements.last_name_input).clear()
-      cy.get(CustomerSearchDialogElements.company_input).clear()
-      cy.get(CustomerSearchDialogElements.company_input).type(customer.companyName)
-      cy.get(CustomerSearchDialogElements.phone_input).clear()
-      cy.get(CustomerSearchDialogElements.phone_input).type(customer.phone)
-      cy.get(CustomerSearchDialogElements.email_input).clear()
-      cy.get(CustomerSearchDialogElements.email_input).type(customer.email)
-      cy.wait('@legacy').then((xhr) => {
-        cy.contains(CustomerSearchDialogElements.add_customer_button).click()
-        cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.customer_type_input).find(':selected').contains(companyType)
-        cy.get(AddNewCustomerDialogElements.company_name_input).should('have.value', customer.companyName)
-        cy.get(AddNewCustomerDialogElements.email_input).should('have.value', customer.email)
-        cy.get(AddNewCustomerDialogElements.phone_input).should('have.value', Utils.getMaskedPhone(customer.phone))
-      })
+      cy.wait(2000)
+      cy.get(CustomerSearchDialogElements.close_dialog_button).click()
     })
 
-    it('Test 5 - Verify Type dropdown field', () => {
+
+
+    it('Test 1 - Verify Type dropdown field', () => {
       cy.get(AddNewCustomerDialogElements.customer_type_input).within(()=>{
         cy.contains("Individual")
         cy.contains("Company")
       });
     })
 
-    it('Test 6 - Validate Type field selected as Individual', () => {
-
+    it('Test 2 - Validate Type field selected as Individual', () => {
         cy.get(AddNewCustomerDialogElements.customer_type_input).should('be.visible')
         cy.get(AddNewCustomerDialogElements.customer_type_input).select(individualType)
         cy.get(AddNewCustomerDialogElements.first_name_input).should('be.visible')
         cy.get(AddNewCustomerDialogElements.last_name_input).should('be.visible')
         cy.get(AddNewCustomerDialogElements.company_name_input).should('not.be.visible')
-
     })
 
-
-    it('Test 7 - Verify Type field value, if user enters first name and last name in Add new customer search window.', () => {
-      cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
-        cy.contains(AddNewCustomerDialogElements.cancel_button).click()
-      })
-      //Need to remove .wait
-      cy.wait(4000)
-      cy.get(CustomerSearchDialogElements.first_name_input).clear()
-      cy.get(CustomerSearchDialogElements.last_name_input).clear()
-      cy.get(CustomerSearchDialogElements.company_input).clear()
-      cy.get(CustomerSearchDialogElements.phone_input).clear()
-      cy.get(CustomerSearchDialogElements.email_input).clear()
-      cy.get(CustomerSearchDialogElements.first_name_input).type(customer.firstName)
-      cy.wait('@legacy').then((xhr) => {
-        cy.contains(CustomerSearchDialogElements.add_customer_button).click()
-        cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.customer_type_input).find(':selected').contains(individualType)
-      })
-    })
-
-    it('Test 8 - Verify Type field value, if user enters Company Name in Add new customer search window.', () => {
-      cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
-        cy.contains(AddNewCustomerDialogElements.cancel_button).click()
-      })
-      cy.get(CustomerSearchDialogElements.first_name_input).clear()
-      cy.get(CustomerSearchDialogElements.last_name_input).clear()
-      cy.get(CustomerSearchDialogElements.company_input).clear()
-      cy.get(CustomerSearchDialogElements.phone_input).clear()
-      cy.get(CustomerSearchDialogElements.email_input).clear()
-      cy.get(CustomerSearchDialogElements.company_input).type(customer.companyName)
-      cy.wait('@legacy').then((xhr) => {
-        cy.contains(CustomerSearchDialogElements.add_customer_button).click()
-        cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.customer_type_input).find(':selected').contains(companyType)
-      })
-    })
-
-    it('Test 9 - Validate Type field selected as Company', () => {
-
+    it('Test 3 - Validate Type field selected as Company', () => {
         cy.get(AddNewCustomerDialogElements.customer_type_input).should('be.visible')
         cy.get(AddNewCustomerDialogElements.customer_type_input).select(companyType)
         cy.get(AddNewCustomerDialogElements.first_name_input).should('not.be.visible')
         cy.get(AddNewCustomerDialogElements.last_name_input).should('not.be.visible')
         cy.get(AddNewCustomerDialogElements.company_name_input).should('be.visible')
-
     })
 
-    it('Test 10 - Verify Source dropdown field', () => {
+    it('Test 4 - Verify Source dropdown field', () => {
       cy.get(AddNewCustomerDialogElements.source_type_input).within(()=>{
         cy.contains("Showroom")
         cy.contains("Phone")
@@ -200,14 +89,14 @@ context('Add New Customer', () => {
       });
     })
 
-    it('Test 11 - Verify Cancel and Add Customer Buttons in Add New Customer form', () => {
+    it('Test 5 - Verify Cancel and Add Customer Buttons in Add New Customer form', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.contains(AddNewCustomerDialogElements.cancel_button)
         cy.contains(AddNewCustomerDialogElements.add_new_customer_button)
       })
     })
 
-    it('Test 12 - Validate default Salespeople assign to the Customer', () => {
+    it('Test 6 - Validate default Salespeople assign to the Customer', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.sales_people_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.sales_people_list_div).first().within(() => {
@@ -217,7 +106,7 @@ context('Add New Customer', () => {
       })
     })
 
-    it('Test 13 - Remove salespeople which assigned', () => {
+    it('Test 7 - Remove salespeople which assigned', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.sales_people_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.sales_people_list_div).first().within(() => {
@@ -236,7 +125,7 @@ context('Add New Customer', () => {
     })
 
 
-    it('Test 14 - Add salespeople to the Customer', () => {
+    it('Test 8 - Add salespeople to the Customer', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.sales_people_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.sales_people_add_new_list_div)
@@ -270,7 +159,7 @@ context('Add New Customer', () => {
     })
 
 
-    it('Test 15 - Search Existing salespeople in that store', () => {
+    it('Test 9 - Search Existing salespeople in that store', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.sales_people_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.sales_people_add_new_list_div).first().click()
@@ -285,7 +174,7 @@ context('Add New Customer', () => {
       })
     })
 
-    it('Test 16 - Search NOT Existing salespeople in that store', () => {
+    it('Test 10 - Search NOT Existing salespeople in that store', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.sales_people_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.sales_people_add_new_list_div).first().click()
@@ -301,7 +190,7 @@ context('Add New Customer', () => {
     })
 
 
-    it('Test 17 - Search Existing BDC in that store', () => {
+    it('Test 11 - Search Existing BDC in that store', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.bdc_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.bdc_add_new_list_div).first().click()
@@ -320,7 +209,7 @@ context('Add New Customer', () => {
       })
     })
 
-    it('Test 18 - Search NOT Existing BDC in that store', () => {
+    it('Test 12 - Search NOT Existing BDC in that store', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.bdc_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.bdc_add_new_list_div).first().click()
@@ -337,7 +226,7 @@ context('Add New Customer', () => {
     })
 
 
-    it('Test 19 - Add BDC to the Customer', () => {
+    it('Test 13 - Add BDC to the Customer', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.bdc_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.bdc_add_new_list_div)
@@ -363,7 +252,7 @@ context('Add New Customer', () => {
     })
 
 
-    it('Test 20 - Remove BDC which assigned to Customer', () => {
+    it('Test 14 - Remove BDC which assigned to Customer', () => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
         cy.get(AddNewCustomerDialogElements.bdc_div).within(()=>{
             cy.get(AddNewCustomerDialogElements.bdc_list_div)
@@ -383,7 +272,7 @@ context('Add New Customer', () => {
       })
     })
 
-    it('Test 21 - Add Interested Vehicle by Inventory', () => {
+    it('Test 15 - Add Interested Vehicle by Inventory', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
         cy.get(AddNewCustomerDialogElements.new_vehicle_buttons_list).first().click()
@@ -396,7 +285,7 @@ context('Add New Customer', () => {
       cy.get('.driveNewCustomerVehicleInterested .dealVehicleActions').click({ force: true })
     })
 
-    it('Test 22 - Add Interested Vehicle by Inventory', () => {
+    it('Test 16 - Add Interested Vehicle by Custom', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
         cy.contains('Add Custom').click()
@@ -419,7 +308,6 @@ context('Add New Customer', () => {
       cy.get('.driveNewCustomerVehicleInterested .dealVehicleActions').click({ force: true })
     })
     
-
-  })
+  });
 
 })

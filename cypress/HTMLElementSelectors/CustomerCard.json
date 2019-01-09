@@ -1,4 +1,5 @@
 {
 	"main_div": "[data-test=customerCard-parent-div]",
-	"contact_card_button": ".customer-summary-trigger"
+	"contact_card_button": ".customer-summary-trigger",
+	"close_div": "[data-test=customerCard-parent-div] .deal-card.is-active .modal-close"
 }

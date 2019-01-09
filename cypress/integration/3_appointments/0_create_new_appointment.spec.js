@@ -1,8 +1,10 @@
 import * as TopNavigationHeader from './../../HTMLElementSelectors/TopNavigationHeader.json';
+import * as customersList from './../../fixtures/customers.json';
+const customer = customersList[0];
 
-context('Global Customer Search', () => {
+context('Appointments', () => {
 
-    describe('Enterprise User - Global Customer Search', () => {
+    describe('Enterprise User - Add New Appointment', () => {
 		before(function () {
 	       cy.loginUI('enterprise')
 		})
@@ -16,14 +18,20 @@ context('Global Customer Search', () => {
 	    })
 	    
 	  
-	    it('Customer First Name Search ', function() {
+	    it('Validate Add Appointment Tab visibility', function() {
 		    //Enter Customer First Name
-			cy.get(TopNavigationHeader.global_search_textbox).clear().type('Roger').should('have.value', 'Roger')
+			cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName+" "+customer.lastName)
 			cy.wait('@QuickSearch').then((xhr) => {
 				//Verify the displayed results
-				cy.get(TopNavigationHeader.displayed_result).each(($el, index, $list) => {
-				    cy.wrap($el).contains('Roger')
-				})
+				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+		          if($list.length > 0){
+		            cy.wrap($list).first().click()
+		            cy.get(CustomerCardElements.main_div).should('be.visible')
+		            cy.get(CustomerCardElements.contact_card_button).should('be.visible')
+		            cy.get(CustomerCardElements.contact_card_button).click()
+		            cy.get(CustomerContactCardElements.main_div).should('be.visible')
+		          }
+		        })
 		    })
 			
 		  

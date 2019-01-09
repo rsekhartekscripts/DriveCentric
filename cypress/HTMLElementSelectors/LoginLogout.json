@@ -1,6 +1,6 @@
 {
-	"username_textbox" : "[name=inputEmail]",
-	"password_textbox" : "[name=inputPassword]",
+	"username_textbox" : "[data-test=login-textinput-username]",
+	"password_textbox" : "[data-test=login-textinput-password]",
 	"login_button" : "[data-test=login-button-login]",
 	"eo_menu" : "EO",
 	"logout_button" : "Logout",

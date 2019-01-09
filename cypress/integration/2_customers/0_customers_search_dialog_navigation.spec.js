@@ -1,18 +1,12 @@
 import * as SalesHomeElements from './../../HTMLElementSelectors/SalesHome.json';
 import * as CustomerSearchDialogElements from './../../HTMLElementSelectors/CustomerSearchDialog.json';
-
-const customer = {
-    "firstName": "Appointment",
-    "lastName": "One",
-    "email": "testEmail@test.com",
-    "phone": "9999999999",
-    "companyName": "Test Company"
-  }
+import * as customersList from './../../fixtures/customers.json';
+const customer = customersList[0];
 
 
 context('Customer', () => {
 
-  describe('All Perms User - Customer Search Dialog Navigation', () => {
+  describe('Enterprise User - Customer Search Dialog Navigation', () => {
 
     before(function () {
       cy.loginUI('enterprise')
@@ -24,10 +18,15 @@ context('Customer', () => {
         method: 'POST',
         url: '/api/legacy',
       }).as('legacy')
+      cy.get(SalesHomeElements.add_new_customer_button).click()
+    })
+
+    afterEach(() => {
+      cy.get(CustomerSearchDialogElements.close_dialog_button).should('be.visible')
+      cy.get(CustomerSearchDialogElements.close_dialog_button).click()
     })
 
     it('Test 1 - Navigate to Search New Customer Dialog', () => {
-      cy.get(SalesHomeElements.add_new_customer_button).click()
       cy.get(SalesHomeElements.customer_search_dialog).should('be.visible')
     })
 

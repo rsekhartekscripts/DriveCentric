@@ -6,5 +6,5 @@
 	"email_input": "[placeholder=Email]",
 	"store_input": ".driveNewCustomerSearch select",
 	"add_customer_button": "Add Customer",
-	"close_dialog_button": ".driveDialogClose"
+	"close_dialog_button": "[data-test=dialog-newCustomer-div-container] .driveDialogClose"
 }
