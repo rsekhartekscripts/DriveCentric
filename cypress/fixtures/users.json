@@ -3,6 +3,10 @@
     "email": "enterprise1@drivecentric.com",
     "password": "enterprise1"
   },
+  "sales": {
+    "email": "sales1A@drivecentric.com",
+    "password": "salesrules1a"
+  },
   "invalidUsername": {
   	"email": "testEmailInvalid@test.com",
   	"password": "invalidPasswordForTest"

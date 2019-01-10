@@ -14,5 +14,6 @@
   "reporterOptions": {
     "reportDir": "reports",
     "overwrite": false
-  }
+  },
+  "numTestsKeptInMemory": 4
 }

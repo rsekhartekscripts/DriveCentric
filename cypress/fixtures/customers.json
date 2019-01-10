@@ -1,9 +1,17 @@
-{
-  "one": {
-    "firstName": "Appointment",
-    "lastName": "One",
-    "email": "testEmail@test.com",
-    "phone": "9999999999",
-    "companyName": "Test Company"
-  }
-}
+[
+    {
+      "firstName": "Drivecentric",
+      "lastName": "Test",
+      "email": "testEmail@test.com",
+      "phone": "9999999999",
+      "companyName": "Test Company"
+    },
+    {
+	  "firstName": "Roger",
+	  "lastName": "Schwartz",
+	  "companyName": "Test Company",
+	  "phone": "(314) 600-0681",
+	  "email": "illonetruly@gmail.com"
+	}
+
+]

@@ -2,7 +2,7 @@ import * as TopNavigationHeader from './../../HTMLElementSelectors/TopNavigation
 
 context('Global Customer Search', () => {
 
-    describe('All Perms User - Global Customer Search', () => {
+    describe('Enterprise User - Global Customer Search', () => {
 		before(function () {
 	       cy.loginUI('enterprise')
 		})
