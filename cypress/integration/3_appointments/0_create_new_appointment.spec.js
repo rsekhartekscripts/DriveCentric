@@ -3,6 +3,7 @@ import * as customersList from './../../fixtures/customers.json';
 
 import * as SalesHomeElements from './../../HTMLElementSelectors/SalesHome.json';
 import * as CustomerCardElements from './../../HTMLElementSelectors/CustomerCard.json';
+import * as AppointmentCardElements from './../../HTMLElementSelectors/AppointmentCard.json';
 
 const customer = customersList[0];
 
@@ -17,11 +18,38 @@ const timeSlots = [
 const existingAppointmentText = "This customer already has an appointment scheduled for them at this time";
 const outOfBusinessHoursErrortext = "Sorry, you can't schedule an appointment for this time. It is outside of business hours";
 
+const appointmentTypes = ["Sales", "Delivery", "Service", "General"];
+
 context('Appointments', () => {
 
     describe('Enterprise User - Add New Appointment', () => {
+
+    	let currentTestNum = 2;
+
 		before(function () {
-	       cy.loginUI('enterprise')
+	      cy.loginUI('enterprise')
+	      cy.server()
+	      cy.route({
+	        method: 'POST',
+	        url: '/api/legacy/DriveSearch/QuickSearch',
+	      }).as('QuickSearch')
+	      cy.route({
+	        method: 'GET',
+	        url: '/api/customers/*/summary',
+	      }).as('CustomerSummary')
+	      cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName+" "+customer.lastName)
+			cy.wait('@QuickSearch').then((xhr) => {
+				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+		          if($list.length > 0){
+		            cy.wrap($list).first().click()
+            		cy.wait("@CustomerSummary").then((xhr) => {
+            			cy.get(CustomerCardElements.main_div).should('be.visible')
+			            cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+			            cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+            		})
+		          }
+		        })
+		    })
 		})
 
 	    beforeEach(() => {
@@ -31,186 +59,261 @@ context('Appointments', () => {
 	        url: '/api/legacy/DriveSearch/QuickSearch',
 	      }).as('QuickSearch')
 	      cy.route({
+	        method: 'GET',
+	        url: '/api/customers/*/summary',
+	      }).as('CustomerSummary')
+	      cy.route({
 	        method: 'POST',
 	        url: '/api/customers/*/appointment',
 	      }).as('CreateAppointment')
 	      cy.route({
+	        method: 'POST',
+	        url: '/api/appointments',
+	      }).as('EditAppointment')
+	      cy.route({
+	        method: 'DELETE',
+	        url: '/api/appointments/*',
+	      }).as('DeleteAppointment')
+	      cy.route({
 	        method: 'GET',
 	        url: '/api/customers/*/timeline/',
 	      }).as('Timeline')
-	      cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName+" "+customer.lastName)
-			cy.wait('@QuickSearch').then((xhr) => {
-				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
-		          if($list.length > 0){
-		            cy.wrap($list).first().click()
-            		cy.get(CustomerCardElements.main_div).should('be.visible')
-		            cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
-		            cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
-		          }
-		        })
-		    })
 	    })
 
 	    afterEach(() => {
-	    	cy.get(CustomerCardElements.close_div).click()
+	    	cy.get(CustomerCardElements.activity_appt_textarea).clear()
+	    	cy.get(CustomerCardElements.activity_appt_date_input).clear()
+	    	cy.wait(1000)
+	    	cy.get(CustomerCardElements.activity_appt_date_children).then(($list) => {
+	    		if($list.length > 1){
+	    			cy.get(CustomerCardElements.activity_appt_date).click()
+	    		}
+	    	})
+	    	cy.wait(1000)
+	    	cy.get(CustomerCardElements.activity_appt_date_children).then(($list) => {
+	    		if($list.length > 1){
+	    			cy.get(CustomerCardElements.activity_appt_date).click()
+	    		}
+	    	})
+	    	cy.get(CustomerCardElements.activity_appt_time_slot).clear()
 	    })
-	    
-	  
-	    it('Test 1 - Validate Add Appointment Tab visibility', function() {
-            cy.get(CustomerCardElements.activity_appt_textarea).should('be.visible')
-		})
-	  
-	    it('Test 2 - Validate fields for Types of Appointments under APPT', function() {
-		    cy.get(CustomerCardElements.activity_appt_textarea).type("Test Text").then(()=>{
-		   		cy.get(CustomerCardElements.activity_appt_textarea).clear()
-		    })
-		    cy.get(CustomerCardElements.activity_appt_extra_options).then(($list) => {
-		    	assert($list.length == 4)
-		    })
-		    cy.get(CustomerCardElements.activity_appt_extra_options).first().get("select").within(() => {
-		    	cy.contains("Sales")
-		    	cy.contains("Delivery")
-		    	cy.contains("Service")
-		    	cy.contains("General")
-		    })
-		    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
-		    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
-		    	for(let i=0; i<timeSlots.length; i++){
-		    		cy.contains(timeSlots[i])
-		    	}
-		    })
-			cy.get(CustomerCardElements.activity_appt_extra_options).last().get("select").within(() => {
-		    	cy.contains("Assign to me")
-		    })
-		})
 
-	    it('Test 3 - Create Sales Appointment and assign to me', function() {
-		    cy.get(CustomerCardElements.activity_appt_textarea).type("Test Text")
-		    cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
-		    	cy.get("select").select("Sales")
-		    })
-		    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
-		    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
-		    	cy.contains(timeSlots[22]).click()
-		    })
-		    let selectedTimeSlot = ""
-		    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
-		    	selectedTimeSlot = text
-		    })
-		    cy.get(CustomerCardElements.activity_appt_date).click()
-		    cy.wait(1000)
-		    cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click()
-		    let selectedDate = ""
-		    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
-		    	selectedDate = text
-		    })
-			cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
-				cy.get("select").select("Assign to me")
+	    after(() => {
+	    	// cy.get(CustomerCardElements.close_div).click({force: true})
+	    })
+
+
+		    it(`Test 1 - Validate Add Appointment Tab visibility`, function() {
+	            cy.get(CustomerCardElements.activity_appt_textarea).should('be.visible')
 			})
-			cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
-			cy.get(CustomerCardElements.activity_appt_save_button).click()
-			cy.wait("@CreateAppointment").then((xhr) => {
-				// console.log(xhr)
-				cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
-				cy.wait("@Timeline").then((xhr) => {
-					cy.wait(4000)
+		  
+		    it(`Test 2 - Validate fields for Types of Appointments under APPT`, function() {
+			    cy.get(CustomerCardElements.activity_appt_textarea).type("Test Text").then(()=>{
+			   		cy.get(CustomerCardElements.activity_appt_textarea).clear()
+			    })
+			    cy.get(CustomerCardElements.activity_appt_extra_options).then(($list) => {
+			    	assert($list.length == 4)
+			    })
+			    cy.get(CustomerCardElements.activity_appt_extra_options).first().get("select").within(() => {
+			    	cy.contains("Sales")
+			    	cy.contains("Delivery")
+			    	cy.contains("Service")
+			    	cy.contains("General")
+			    })
+			    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
+			    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
+			    	for(let i=0; i<timeSlots.length; i++){
+			    		cy.contains(timeSlots[i])
+			    	}
+			    })
+				cy.get(CustomerCardElements.activity_appt_extra_options).last().get("select").within(() => {
+			    	cy.contains("Assign to me")
+			    })
+			})
+
+
+	    appointmentTypes.forEach((aptType) => {
+
+		    it(`Test  ${++currentTestNum} - Create ${aptType} Appointment and assign to me`, function() {
+		    	let dataToType = "Test Text "+(new Date()).getTime()
+			    cy.get(CustomerCardElements.activity_appt_textarea).type(dataToType)
+			    cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
+			    	cy.get("select").select(aptType)
+			    })
+			    cy.get(CustomerCardElements.activity_appt_date).click()
+			    cy.wait(1000)
+			    cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click({force: true})
+			    let selectedDate = ""
+			    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
+			    	selectedDate = text
+			    })
+			    cy.wait(2000)
+			    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
+			    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
+			    	cy.contains(timeSlots[22]).click({force: true})
+			    })
+			    let selectedTimeSlot = ""
+			    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
+			    	selectedTimeSlot = text
+			    })
+				cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
+					cy.get("select").select("Assign to me")
+				})
+				cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
+				cy.get(CustomerCardElements.activity_appt_save_button).click()
+				cy.wait("@CreateAppointment").then((xhr) => {
 					// console.log(xhr)
-					cy.get(CustomerCardElements.activity_appts_list).should("be.visible")
-					cy.get(CustomerCardElements.activity_appts_list).last().within(() => {
-						cy.contains("Test Text")
-						cy.contains(selectedDate)
-						cy.contains(selectedTimeSlot)
+					cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
+					cy.wait("@Timeline").then((xhr) => {
+						cy.wait(4000)
+						// console.log(xhr)
+						cy.get(CustomerCardElements.activity_appts_list).should("be.visible")
+						cy.get(CustomerCardElements.activity_appts_list).last().within(() => {
+							cy.contains(dataToType)
+							cy.contains(selectedDate)
+							cy.contains(selectedTimeSlot)
+						})
 					})
 				})
 			})
-		})
 
 
-	    it('Test 4 - Create Duplicate Sales Appointment <with existing appointment date and time> ', function() {
-		    cy.get(CustomerCardElements.activity_appt_textarea).type("Test Text")
-		    cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
-		    	cy.get("select").select("Sales")
-		    })
-		    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
-		    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
-		    	cy.contains(timeSlots[22]).click()
-		    })
-		    let selectedTimeSlot = ""
-		    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
-		    	selectedTimeSlot = text
-		    })
-		    cy.get(CustomerCardElements.activity_appt_date).click()
-		    cy.wait(1000)
-		    cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click()
-		    let selectedDate = ""
-		    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
-		    	selectedDate = text
-		    })
-			cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
-				cy.get("select").select("Assign to me")
-			})
-			cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
-			cy.get(CustomerCardElements.activity_appt_save_button).click()
-			cy.wait("@CreateAppointment").then((xhr) => {
-				// console.log(xhr)
-				cy.get(CustomerCardElements.alert_dialog).should("be.visible")
-				cy.get(CustomerCardElements.alert_dialog).within(() => {
-					cy.contains(existingAppointmentText)
+		    it(`Test  ${++currentTestNum} - Create Duplicate ${aptType} Appointment <with existing appointment date and time> `, function() {
+			    cy.get(CustomerCardElements.activity_appt_textarea).type("Test Text")
+			    cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
+			    	cy.get("select").select(aptType)
+			    })
+			    cy.get(CustomerCardElements.activity_appt_date).click()
+			    cy.wait(1000)
+			    cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click({force: true})
+			    let selectedDate = ""
+			    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
+			    	selectedDate = text
+			    })
+			    cy.wait(2000)
+			    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
+			    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
+			    	cy.contains(timeSlots[22]).click({force: true})
+			    })
+			    let selectedTimeSlot = ""
+			    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
+			    	selectedTimeSlot = text
+			    })
+				cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
+					cy.get("select").select("Assign to me")
 				})
-				cy.get(CustomerCardElements.alert_dialog_actions).within(() => {
-					cy.contains("Done").click()
+				cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
+				cy.get(CustomerCardElements.activity_appt_save_button).click()
+				cy.wait("@CreateAppointment").then((xhr) => {
+					// console.log(xhr)
+					cy.get(CustomerCardElements.alert_dialog).should("be.visible")
+					cy.get(CustomerCardElements.alert_dialog).within(() => {
+						cy.contains(existingAppointmentText)
+					})
+					cy.get(CustomerCardElements.alert_dialog_actions).within(() => {
+						cy.contains("Done").click()
+					})
 				})
 			})
-		})
 
-		it('Test 5 - Create Sales Appointment with After business hours ', function() {
-		    cy.get(CustomerCardElements.activity_appt_textarea).type("Test Text")
-		    cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
-		    	cy.get("select").select("Sales")
-		    })
-		    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
-		    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
-		    	cy.contains(timeSlots[0]).click()
-		    })
-		    let selectedTimeSlot = ""
-		    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
-		    	selectedTimeSlot = text
-		    })
-		    cy.get(CustomerCardElements.activity_appt_date).click()
-		    cy.wait(1000)
-		    cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click()
-		    let selectedDate = ""
-		    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
-		    	selectedDate = text
-		    })
-			cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
-				cy.get("select").select("Assign to me")
-			})
-			cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
-			cy.get(CustomerCardElements.activity_appt_save_button).click()
-			cy.wait("@CreateAppointment").then((xhr) => {
-				// console.log(xhr)
-				cy.get(CustomerCardElements.alert_dialog).should("be.visible")
-				cy.get(CustomerCardElements.alert_dialog).within(() => {
-					cy.contains(outOfBusinessHoursErrortext)
+			if(aptType == appointmentTypes[0] || aptType == appointmentTypes[1]){
+				it(`Test  ${++currentTestNum} - Create ${aptType} Appointment with After business hours `, function() {
+				    cy.get(CustomerCardElements.activity_appt_textarea).type("Test Text")
+				    cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
+				    	cy.get("select").select(aptType)
+				    })
+				    cy.get(CustomerCardElements.activity_appt_date).click()
+				    cy.wait(1000)
+				    cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click({force: true})
+				    let selectedDate = ""
+				    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
+				    	selectedDate = text
+				    })
+				    cy.wait(2000)
+				    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
+				    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
+				    	cy.contains(timeSlots[6]).click({force: true})
+				    })
+				    let selectedTimeSlot = ""
+				    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
+				    	selectedTimeSlot = text
+				    })
+					cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
+						cy.get("select").select("Assign to me")
+					})
+					cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
+					cy.get(CustomerCardElements.activity_appt_save_button).click()
+					cy.wait("@CreateAppointment").then((xhr) => {
+						// console.log(xhr)
+						cy.get(CustomerCardElements.alert_dialog).should("be.visible")
+						cy.get(CustomerCardElements.alert_dialog).within(() => {
+							cy.contains(outOfBusinessHoursErrortext)
+						})
+						cy.get(CustomerCardElements.alert_dialog_actions).within(() => {
+							cy.contains("Done").click()
+						})
+						cy.wait(2000)
+					})
 				})
-				cy.get(CustomerCardElements.alert_dialog_actions).within(() => {
-					cy.contains("Done").click()
-				})
-				cy.wait(2000)
+			}
+
+
+			it(`Test  ${++currentTestNum} - Create ${aptType} Appointment with Past date`, function() {
+			    cy.get(CustomerCardElements.activity_appt_date).click()
+			    cy.wait(1000)
+			    cy.get(CustomerCardElements.activity_appt_date_disabled_cell).first().click({force: true})
+			    let selectedDate = ""
+			    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
+			    	assert((!text || text.trim().length <=0 ))
+			    })
 			})
-		})
 
+			it(`Test  ${++currentTestNum} - Edit ${aptType} Appointment of customer and assign to me`, function() {
+			    cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click()
+			    cy.get(AppointmentCardElements.main_div).should("be.visible")
+			    cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
+			    let dataToType = "Lorem Ipsum "+(new Date()).getTime()
+			    cy.get(AppointmentCardElements.notes_textarea).clear().type(dataToType)
+			    cy.get(AppointmentCardElements.save_button).click()
+			    cy.wait("@EditAppointment").then((xhr) => {
+					cy.wait(1000)
+					cy.get(AppointmentCardElements.main_div).should("not.be.visible")
+					cy.wait("@Timeline").then((xhr) => {
+						cy.wait(2000)
+						cy.get(CustomerCardElements.activity_appts_list).should("be.visible")
+						cy.get(CustomerCardElements.activity_appts_list).first().within(() => {
+							cy.contains(dataToType)
+						})
+					})
+				})
+			})
 
-		it('Test 6 - Create Sales Appointment with Past date', function() {
-		    cy.get(CustomerCardElements.activity_appt_date).click()
-		    cy.wait(1000)
-		    cy.get(CustomerCardElements.activity_appt_date_disabled_cell).first().click({force: true})
-		    let selectedDate = ""
-		    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
-		    	assert((!text || text.trim().length <=0 ))
-		    })
-		})
+			it(`Test  ${++currentTestNum} - Delete ${aptType} Appointment of customer`, function() {
+				let listOfAppointments = 0
+				cy.get(CustomerCardElements.activity_appts_list).then(($list) => {
+					listOfAppointments = $list.length
+					if(listOfAppointments > 0){
+						cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Delete").click()
+					    cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
+					    cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
+					    cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
+					    cy.wait("@DeleteAppointment").then((xhr) => {
+					    	cy.get(CustomerCardElements.confirmation_dialog).should("not.be.visible")
+					    	cy.wait("@Timeline").then((xhr) => {
+								cy.wait(4000)
+								cy.get(CustomerCardElements.activity_appts_list_parent).should("be.visible")
+								cy.get(CustomerCardElements.activity_appts_list_parent).then(($ulElement) => {
+									assert($ulElement.find("ul li.appointment").length < listOfAppointments)
+								})
+							})
+					    })
+					}
+				})
+			})
+
+	    });
+	    
+	  
 
 
 	})

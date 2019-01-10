@@ -1,0 +1,15 @@
+{
+	"main_div": ".appointment-card .card-wrap",
+	"card_title": ".appointment-card .card-wrap .card-title",
+	"close_dialog": ".appointment-card .card-wrap .card-title .card-close",
+	"department_select": ".appointment-card .card-wrap .card-content .appointment-department select",
+	"slot_time": ".appointment-card .card-wrap .card-content .time-input-searchable input",
+	"date_option": ".appointment-card .card-wrap .card-content .appointment-date .mydp",
+	"date_option_input": ".appointment-card .card-wrap .card-content .appointment-date .mydp input",
+	"date_option_disabled_cell": ".appointment-card .card-wrap .card-content .appointment-date .mydp .daycell.disabled",
+	"activity_appt_time_slot_options": ".appointment-card .card-wrap .card-content .time-input-searchable .ng-star-inserted",
+	"date_option_not_disabled_cell": ".appointment-card .card-wrap .card-content .appointment-date .mydp .daycell.currmonth:not(.disabled)",
+	"notes_textarea": ".appointment-card .card-wrap .card-content .appointment-notes textarea",
+	"save_button": ".appointment-card .card-wrap .card-footer ul li:first-child",
+	"close_button": ".appointment-card .card-wrap .card-footer ul li:last-child"
+}

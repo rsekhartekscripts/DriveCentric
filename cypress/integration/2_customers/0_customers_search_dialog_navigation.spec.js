@@ -24,7 +24,7 @@ context('Customer', () => {
 
     afterEach(() => {
       cy.get(CustomerSearchDialogElements.close_dialog_button).should('be.visible')
-      cy.get(CustomerSearchDialogElements.close_dialog_button).click()
+      cy.get(CustomerSearchDialogElements.close_dialog_button).click({force: true})
     })
 
 	afterEach(function () {

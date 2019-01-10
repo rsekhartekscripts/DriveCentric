@@ -17,6 +17,25 @@ context('Customer Contact Card', () => {
 
     before(() => {
       cy.loginUI('enterprise')
+      cy.server()
+      cy.route({
+        method: 'POST',
+        url: '/api/legacy',
+      }).as('legacy')
+      cy.get(SalesHomeElements.recent_customers_button).click()
+      cy.wait('@legacy').then((xhr) => {
+        cy.contains("Recent Customers")
+        cy.get(SalesHomeElements.recent_customers_result_div).should('be.visible')
+        cy.get(SalesHomeElements.recent_customers_result_div_loading).should('not.be.visible')
+        cy.get(SalesHomeElements.recent_customers_result_div_list).then(($list) => {
+          if($list.length > 0){
+            cy.wrap($list).first().click()
+            cy.get(CustomerCardElements.main_div).should('be.visible')
+            cy.get(CustomerCardElements.contact_card_button).should('be.visible')
+            cy.get(CustomerCardElements.contact_card_button).click()
+          }
+        })
+      })
     })
 
     beforeEach(() => {
@@ -37,25 +56,14 @@ context('Customer Contact Card', () => {
         method: 'POST',
         url: '/api/users/current',
       }).as('currentUser')
-      cy.get(SalesHomeElements.recent_customers_button).click()
-      cy.wait('@legacy').then((xhr) => {
-        cy.contains("Recent Customers")
-        cy.get(SalesHomeElements.recent_customers_result_div).should('be.visible')
-        cy.get(SalesHomeElements.recent_customers_result_div_loading).should('not.be.visible')
-        cy.get(SalesHomeElements.recent_customers_result_div_list).then(($list) => {
-          if($list.length > 0){
-            cy.wrap($list).first().click()
-            cy.get(CustomerCardElements.main_div).should('be.visible')
-            cy.get(CustomerCardElements.contact_card_button).should('be.visible')
-            cy.get(CustomerCardElements.contact_card_button).click()
-          }
-        })
-      })
     })
 
     afterEach(() => {
-      cy.get(CustomerCardElements.contact_card_button).click()
-      cy.get(CustomerCardElements.close_div).click()
+    })
+
+    after(() => {
+      cy.get(CustomerCardElements.contact_card_button).click({force: true})
+      cy.get(CustomerCardElements.close_div).click({force: true})
     })
 
     it('Test 1 - Verify customer contact window', () => {
@@ -78,8 +86,8 @@ context('Customer Contact Card', () => {
     })
 
     it('Test 5 - Navigate to Edit customer window from customer contact card', () => {
-      cy.get(CustomerContactCardElements.contact_details_edit_button).should("be.visible")
-      cy.get(CustomerContactCardElements.contact_details_edit_button).click()
+      cy.get(CustomerContactCardElements.contact_details_edit_button).first().should("be.visible")
+      cy.get(CustomerContactCardElements.contact_details_edit_button).first().click()
       cy.get(EditCustomerDialogElements.main_div).should("be.visible")
       cy.get(EditCustomerDialogElements.main_div).contains("Edit Customer")
       cy.get(EditCustomerDialogElements.close_dialog).click()
