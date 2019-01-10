@@ -24,9 +24,6 @@ context('Add New Customer Dialog', () => {
 
     before(() => {
       cy.loginUI('enterprise')
-    })
-
-    beforeEach(() => {
       cy.server()
       cy.route({
         method: 'POST',
@@ -34,6 +31,7 @@ context('Add New Customer Dialog', () => {
       }).as('legacy')
       cy.get(SalesHomeElements.add_new_customer_button).click()
       cy.get(CustomerSearchDialogElements.company_input).clear()
+      cy.get(CustomerSearchDialogElements.company_input).type(customer.companyName)
       cy.get(CustomerSearchDialogElements.first_name_input).clear()
       cy.get(CustomerSearchDialogElements.first_name_input).type(customer.firstName)
       cy.get(CustomerSearchDialogElements.last_name_input).clear()
@@ -48,12 +46,12 @@ context('Add New Customer Dialog', () => {
       })
     })
 
-    afterEach(() => {
+    after(() => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
-        cy.contains(AddNewCustomerDialogElements.cancel_button).click()
+        cy.contains(AddNewCustomerDialogElements.cancel_button).click({force: true})
       })
       cy.wait(2000)
-      cy.get(CustomerSearchDialogElements.close_dialog_button).click()
+      cy.get(CustomerSearchDialogElements.close_dialog_button).click({force: true})
     })
 
 
@@ -201,10 +199,6 @@ context('Add New Customer Dialog', () => {
                 cy.wait(4000)
                 cy.get(AddNewCustomerDialogElements.add_bdc_list_li_div).first().contains('Big Daddy')
             })
-            cy.wait(4000)
-            cy.get(AddNewCustomerDialogElements.bdc_add_new_list_div).first().within(() => {
-                cy.get(AddNewCustomerDialogElements.bdc_close_button).first().click()
-            })
           })
       })
     })
@@ -219,7 +213,6 @@ context('Add New Customer Dialog', () => {
                 cy.get(AddNewCustomerDialogElements.add_bdc_input).type('abcdefgh')
                 cy.wait(4000)
                 cy.get(AddNewCustomerDialogElements.add_bdc_list_li_div).first().contains('No Results Found')
-                cy.get(AddNewCustomerDialogElements.bdc_close_button).first().click()
             })
           })
       })

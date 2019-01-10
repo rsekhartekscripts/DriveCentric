@@ -22,9 +22,11 @@ cypress.run()
       fs.rename(path.join(__dirname, '..', '..', 'testReports', `${uuid}.html`), path.join(__dirname, '..', '..', 'testReports', 'index.html'), function(err) {
           if ( err ) console.log('ERROR: ' + err);
       });
+      fs.rename(path.join(__dirname, '..', '..', `${uuid}.json`), path.join(__dirname, '..', '..', 'testReports', 'allReports.json'), function(err) {
+          if ( err ) console.log('ERROR: ' + err);
+      });
       // cleanup
       rimraf(path.join(__dirname, '..', '..', 'reports'), () => {});
-      rimraf(path.join(__dirname, '..', '..', `${uuid}.json`), () => {});
     });
   })
   .catch((err) => {

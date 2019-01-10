@@ -15,5 +15,6 @@
     "reportDir": "reports",
     "overwrite": false
   },
-  "numTestsKeptInMemory": 4
+  "numTestsKeptInMemory": 2,
+  "video": false
 }

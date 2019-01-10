@@ -7,13 +7,20 @@
 	"activity_appt_textarea": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment textarea",
 	"activity_appt_extra_options": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .toolbar ul li",
 	"activity_appt_date": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .toolbar ul li .mydp",
+	"activity_appt_date_children": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .toolbar ul li .mydp div",
 	"activity_appt_date_input": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .toolbar ul li .mydp input",
 	"activity_appt_date_disabled_cell": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .toolbar ul li .mydp .daycell.disabled",
+	"activity_appt_date_not_disabled_cell": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .toolbar ul li .mydp .daycell.currmonth:not(.disabled)",
 	"activity_appt_time_slot": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .toolbar ul li .time-input-searchable input",
 	"activity_appt_time_slot_options": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .toolbar ul li .time-input-searchable .ng-star-inserted",
-	"activity_appt_date_not_disabled_cell": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .toolbar ul li .mydp .daycell.currmonth:not(.disabled)",
 	"activity_appt_save_button": "[data-test=customerCard-parent-div] .cust-act-cnt-appointment .cust-act-cnt-act .actions .schedule",
+	"activity_appts_list_parent": "[data-test=customerCard-parent-div] .deal-info-content .timeline .planned",
 	"activity_appts_list": "[data-test=customerCard-parent-div] .deal-info-content .timeline .planned ul li.appointment",
 	"alert_dialog": "[data-test=dialog-alert-div]",
-	"alert_dialog_actions": "[data-test=dialog-alert-div] .driveDialogActions"
+	"alert_dialog_actions": "[data-test=dialog-alert-div] .driveDialogActions",
+	"activity_appts_list_actions": "[data-test=customerCard-parent-div] .deal-info-content .timeline .planned ul li.appointment .srContent .cmp-tml-act ul",
+	"confirmation_dialog": ".driveDialogAlert .driveDialogContent",
+	"confirmation_dialog_content": ".driveDialogAlert .driveDialogContent .driveDialogMessage",
+	"confirmation_dialog_actions": ".driveDialogAlert .driveDialogContent .driveDialogMessage .driveDialogActions",
+	"confirmation_doalog_close": ".driveDialogAlert .driveDialogContent .driveDialogClose"
 }

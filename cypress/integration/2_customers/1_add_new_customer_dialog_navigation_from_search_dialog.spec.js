@@ -37,10 +37,10 @@ context('Add New Customer', () => {
 
     afterEach(() => {
       cy.get(SalesHomeElements.add_new_customer_dialog).within(()=>{
-        cy.contains(AddNewCustomerDialogElements.cancel_button).click()
+        cy.contains(AddNewCustomerDialogElements.cancel_button).click({force: true})
       })
       cy.wait(2000)
-      cy.get(CustomerSearchDialogElements.close_dialog_button).click()
+      cy.get(CustomerSearchDialogElements.close_dialog_button).click({force: true})
     })
 
 
@@ -68,8 +68,8 @@ context('Add New Customer', () => {
         cy.get(AddNewCustomerDialogElements.source_description_input).should('be.visible')
         cy.get(AddNewCustomerDialogElements.sales_people_div).should('be.visible')
         cy.get(AddNewCustomerDialogElements.bdc_div).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.interested_vehicle_div).should('be.visible')
-        cy.get(AddNewCustomerDialogElements.trade_in_div).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.interested_vehicle_div).contains("Interested Vehicle")
+        cy.get(AddNewCustomerDialogElements.trade_in_div).contains("Trade-In")
 
         cy.get(AddNewCustomerDialogElements.customer_type_input).select(companyType)
         cy.get(AddNewCustomerDialogElements.first_name_input).should('not.be.visible')
@@ -86,16 +86,13 @@ context('Add New Customer', () => {
       cy.get(CustomerSearchDialogElements.last_name_input).type(customer.lastName)
       cy.get(CustomerSearchDialogElements.phone_input).clear()
       cy.get(CustomerSearchDialogElements.phone_input).type(customer.phone)
-      cy.get(CustomerSearchDialogElements.email_input).clear()
-      cy.get(CustomerSearchDialogElements.email_input).type(customer.email)
       cy.wait('@legacy').then((xhr) => {
         cy.contains(CustomerSearchDialogElements.add_customer_button).click()
+        cy.get(AddNewCustomerDialogElements.phone_input).should('have.value', Utils.getMaskedPhone(customer.phone))
         cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
         cy.get(AddNewCustomerDialogElements.customer_type_input).find(':selected').contains(individualType)
         cy.get(AddNewCustomerDialogElements.first_name_input).should('have.value', customer.firstName)
         cy.get(AddNewCustomerDialogElements.last_name_input).should('have.value', customer.lastName)
-        cy.get(AddNewCustomerDialogElements.email_input).should('have.value', customer.email)
-        cy.get(AddNewCustomerDialogElements.phone_input).should('have.value', Utils.getMaskedPhone(customer.phone))
       })
     })
 
@@ -105,7 +102,6 @@ context('Add New Customer', () => {
       cy.get(CustomerSearchDialogElements.company_input).clear()
       cy.get(CustomerSearchDialogElements.company_input).type(customer.companyName)
       cy.get(CustomerSearchDialogElements.phone_input).clear()
-      cy.get(CustomerSearchDialogElements.phone_input).type(customer.phone)
       cy.get(CustomerSearchDialogElements.email_input).clear()
       cy.get(CustomerSearchDialogElements.email_input).type(customer.email)
       cy.wait('@legacy').then((xhr) => {
@@ -114,7 +110,6 @@ context('Add New Customer', () => {
         cy.get(AddNewCustomerDialogElements.customer_type_input).find(':selected').contains(companyType)
         cy.get(AddNewCustomerDialogElements.company_name_input).should('have.value', customer.companyName)
         cy.get(AddNewCustomerDialogElements.email_input).should('have.value', customer.email)
-        cy.get(AddNewCustomerDialogElements.phone_input).should('have.value', Utils.getMaskedPhone(customer.phone))
       })
     })
 
