@@ -94,7 +94,7 @@ context('Appointments', () => {
 	    })
 
 	    after(() => {
-	    	// cy.get(CustomerCardElements.close_div).click({force: true})
+	    	cy.logoutUI()
 	    })
 
 

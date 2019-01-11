@@ -54,6 +54,10 @@ context('Add New Customer Dialog', () => {
       cy.get(CustomerSearchDialogElements.close_dialog_button).click({force: true})
     })
 
+    after(function () {
+      cy.logoutUI()
+    })
+
 
 
     it('Test 1 - Verify Type dropdown field', () => {

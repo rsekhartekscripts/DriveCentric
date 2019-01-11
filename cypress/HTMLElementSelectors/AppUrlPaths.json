@@ -1,4 +1,5 @@
 {
-	"login":"login.aspx",
+	"login":"Login.aspx",
+	"logout":"Logout.aspx",
 	"sales_home":"#/salesHome"
 }

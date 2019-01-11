@@ -63,6 +63,14 @@ Cypress.Commands.add('loginUI', (userType) => {
   return cy.loginUser(userType);
 })
 
+
+Cypress.Commands.add("logoutUI", () => {
+  //Click on Logout link
+  cy.get(LoginLogout.profile_menu).click({force: true})
+  cy.get(LoginLogout.logout_button).click({force: true})
+  cy.url().should('include', AppUrlPaths.login);
+})
+
 Cypress.Commands.add('login', (userType) => {
   cy.getUsers().then(users => {
     const user = users[userType]
