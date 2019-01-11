@@ -83,6 +83,7 @@ context('Login', () => {
         cy.loginUser('enterprise')
         verifyRedirectToHomepage()
         verifyUserSession()
+        cy.logoutUI()
     })
 
   })

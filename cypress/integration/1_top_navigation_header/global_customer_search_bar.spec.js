@@ -14,6 +14,10 @@ context('Global Customer Search', () => {
 	        url: '/api/legacy/DriveSearch/QuickSearch',
 	      }).as('QuickSearch')
 	    })
+
+	    after(function () {
+	    	cy.logoutUI()
+	    })
 	    
 	  
 	    it('Customer First Name Search ', function() {

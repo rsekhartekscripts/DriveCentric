@@ -9,5 +9,7 @@
 	"learnMore_link" : "[data-test=login-link-learn-more]",
 	"learnMorePage_logo_link" : ".custom-logo-link",
 	"error_message_text":"[data-test=login-text-error-message]",
-	"privacy_policy_link":"[data-test=login-link-privacy-policy]"
+	"privacy_policy_link":"[data-test=login-link-privacy-policy]",
+	"profile_menu": "[data-test=profile-button-avatar]",
+	"logout_button": "[data-test=profile-link-logout]"
 }

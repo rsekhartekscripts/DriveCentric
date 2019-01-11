@@ -43,6 +43,10 @@ context('Add New Customer', () => {
       cy.get(CustomerSearchDialogElements.close_dialog_button).click({force: true})
     })
 
+    after(function () {
+      cy.logoutUI()
+    })
+
 
 
     it('Test 1 - Check Add Customer Dialog Visibility and Form Fields Validation', () => {

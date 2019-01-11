@@ -26,6 +26,10 @@ context('Customer', () => {
       cy.get(CustomerSearchDialogElements.close_dialog_button).click({force: true})
     })
 
+    after(function () {
+      cy.logoutUI()
+    })
+
     it('Test 1 - Navigate to Search New Customer Dialog', () => {
       cy.get(SalesHomeElements.customer_search_dialog).should('be.visible')
     })

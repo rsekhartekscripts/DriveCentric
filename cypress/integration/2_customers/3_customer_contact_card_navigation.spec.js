@@ -64,6 +64,7 @@ context('Customer Contact Card', () => {
     after(() => {
       cy.get(CustomerCardElements.contact_card_button).click({force: true})
       cy.get(CustomerCardElements.close_div).click({force: true})
+      cy.logoutUI()
     })
 
     it('Test 1 - Verify customer contact window', () => {
