@@ -1,0 +1,23 @@
+{
+	"store_settings_option" : "[data-test=profile-menu-storeSettings]",
+	"general_link" : "General",
+	"user_management_link" : "User Management",
+	"search_user_input" : ".driveStoreSettingsContent .dsUMFilters .dsUMFiltersSearch input",
+	"displayed_search_user_div" : ".driveStoreSettingsContent .dsUMListingContainer",
+	"dialog_main_div": ".driveDialogContent",
+	"dialog_main_actions": ".driveDialogContent .driveDialogActions",
+	"user_dialog_tabs" : ".driveDialogContent .dsUMCardBody .dsUMCardTabs",
+	"user_details_first_name" : ".driveDialogContent .dsUMCardBody .dsUMDetails .umFirstName input",
+	"confirm_checkbox_false" : "span[.='Confirm'] < label > md-switch[aria-checked=false]",
+	"confirm_checkbox_true" : "span[.='Confirm'] < label > md-switch[aria-checked=true]",
+	"delete_appointment_checkbox_false" : "span[.=Delete Appointment] < label > md-switch[aria-checked=false]",
+	"delete_appointment_checkbox_true" : "span[.=Delete Appointment] < label > md-switch[aria-checked=true]",
+	"edit_appointment_false" : "span[.='Edit Appointment'] < label > md-switch[aria-checked=false]",
+	"edit_appointment_true" : "span[.='Edit Appointment'] < label > md-switch[aria-checked=true]",
+	"reassign_appointment_false" : "span[.='Reassign Appointment'] < label > md-switch[aria-checked=false]",
+	"reassign_appointment_true" : "span[.='Reassign Appointment'] < label > md-switch[aria-checked=true]",
+	"reschedule_checkbox_false" : "span[.='Confirm'] < label > md-switch[aria-checked=false]",
+	"reschedule_checkbox_true" : "span[.='Confirm'] < label > md-switch[aria-checked=true]",
+	"update_button" : "Update",
+	"Cancel_button" : "Cancel"
+}
