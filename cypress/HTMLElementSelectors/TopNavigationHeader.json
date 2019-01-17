@@ -1,4 +1,8 @@
 {
 	"global_search_textbox" : "input[placeholder=\"Search customers\"]",
-	"displayed_result": ".driveMiniSearch span[class=\"name\"] > span[class=\"highlightsearch\"]"
+	"displayed_result": ".driveMiniSearch span[class=\"name\"] > span[class=\"highlightsearch\"]",
+	"displayed_result1": ".driveMiniSearch span[class=\"name\"] > span[class=\"highlightsearch\"]:first-child",
+	"displayed_result2": ".driveMiniSearch span[class=\"name\"] > span[class=\"highlightsearch\"]:last-child",
+	"displayed_result_not_highlight": ".driveMiniSearch .srContent > span[class=\"name\"]",
+	"mouse_over_name": ".customername"
 }

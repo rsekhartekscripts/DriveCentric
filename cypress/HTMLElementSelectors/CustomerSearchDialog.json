@@ -6,5 +6,10 @@
 	"email_input": "[placeholder=Email]",
 	"store_input": ".driveNewCustomerSearch select",
 	"add_customer_button": "Add Customer",
-	"close_dialog_button": "[data-test=dialog-newCustomer-div-container] .driveDialogClose"
+	"close_dialog_button": "[data-test=dialog-newCustomer-div-container] .driveDialogClose",
+	"firstName_result" : "[ng-if*='result.CustomerFirstName']",
+	"lastName_result" : "[ng-if*='result.CustomerLastName']",
+	"phone_result" : "[ng-class*='result.CellPhone']",
+	"company_result" : "[ng-if*='result.Company']",
+	"email_result" : "[ng-if*='result.Email']"
 }
