@@ -7,5 +7,13 @@
 	"graph_bars": ".customer-summary-contact .highcharts-series-group .highcharts-point",
 	"contact_details_div": ".customer-summary-contact .cnv-cnt-crd-blck.ng-star-inserted",
 	"contact_details_edit_button": ".customer-summary-contact .cnv-cnt-crd-blck.ng-star-inserted .editAction",
-	"customer_notes_textarea": ".customer-summary-tab-container .note textarea"
+	"customer_notes_textarea": ".customer-summary-tab-container .customer-summary-notes .note textarea",
+	"customer_notes_save": ".customer-summary-tab-container .customer-summary-notes .note button",
+	"customer_notes_list": ".customer-summary-tab-container .customer-summary-notes .cmp-cnv-box ul",
+	"customer_notes_list_items": ".customer-summary-tab-container .customer-summary-notes .cmp-cnv-box ul li",
+	"customer_notes_list_items_actions": ".conversation-item .cmp-cnv-ft",
+	"customer_notes_list_items_edit_actions": ".conversation-actions",
+	"customer_notes_list_items_notes_text": ".conversation-item .cmp-cnv-bd span",
+	"dialog_content_div": ".driveDialogContent",
+	"dialog_actions": ".driveDialogActions"
 }
