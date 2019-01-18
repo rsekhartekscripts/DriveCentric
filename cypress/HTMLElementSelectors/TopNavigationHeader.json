@@ -4,5 +4,12 @@
 	"displayed_result1": ".driveMiniSearch span[class=\"name\"] > span[class=\"highlightsearch\"]:first-child",
 	"displayed_result2": ".driveMiniSearch span[class=\"name\"] > span[class=\"highlightsearch\"]:last-child",
 	"displayed_result_not_highlight": ".driveMiniSearch .srContent > span[class=\"name\"]",
-	"mouse_over_name": ".customername"
+	"mouse_over_name": ".customername",
+	"recent_customers_loading_hide": "li[class=\"list-loading ng-hide\"]",
+	"recent_customers_icon": "button[aria-label=\"Recent Customers\"]",
+	"recent_customers_icon_afterclick": "div[class=\"listbox active recentcustomers\"]",
+	"recent_customers_heaer": "div[class=\"listbox active recentcustomers\"] > h4",
+	"recent_customers_displayed": "div[class=\"listbox active recentcustomers\"] .srContent > span[class=\"name\"]",
+	"recent_customers_first_record": "div[class=\"listbox active recentcustomers\"] .srContent > span[class=\"name\"](1)",
+	"customer_card_name": ".deal-customer .cust-name"
 }
