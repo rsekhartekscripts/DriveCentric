@@ -11,6 +11,8 @@ import * as CustomerContactCardElements from './../../HTMLElementSelectors/Custo
 import * as EditCustomerDialogElements from './../../HTMLElementSelectors/EditCustomerDialog.json';
 
 
+import * as salespersons from './../../fixtures/salespersons.json';
+
 context('Customer Contact Card', () => {
 
   describe('Enterprise User - Customer Contact Card Navigation', () => {
@@ -72,6 +74,14 @@ context('Customer Contact Card', () => {
         method: 'DELETE',
         url: '/api/customers/notes/*',
       }).as('deleteNotes')
+      cy.route({
+        method: 'POST',
+        url: '/api/customers/*/primary-sales/*',
+      }).as('addPrimarySalesPerson')
+      cy.route({
+        method: 'POST',
+        url: '/api/customers/*/secondary-sales/*',
+      }).as('addSecondarySalesPerson')
     })
 
     afterEach(() => {
@@ -221,6 +231,58 @@ context('Customer Contact Card', () => {
         })
       })
     })
+
+    it('Test 12 - Verify that Details tab in the customer contact card', () => {
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Details").click()
+      cy.get(CustomerContactCardElements.details_tab_salesperson_header).contains("Salesperson")
+      cy.get(CustomerContactCardElements.details_tab_bdc_header).contains("BDC")
+      cy.get(CustomerContactCardElements.details_tab_service_bdc_header).contains("Service BDC")
+      cy.get(CustomerContactCardElements.details_tab_garage_header).contains("Garage")
+    })
+
+    it('Test 13 - Verify +symbol is available to add the salesperson', () => {
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Details").click()
+      cy.get(CustomerContactCardElements.details_tab_salesperson_add_li).then(($list) => {
+        expect($list.length).to.equal(2)
+      })
+    })
+
+    it('Test 14 - Add a salesperson to the customer from customer contact card', () => {
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Details").click()
+      cy.get(CustomerContactCardElements.details_tab_salesperson_add_li)
+        .each(($el, index, $list) => {
+          cy.wrap($el).within(() => {
+            cy.get(CustomerContactCardElements.details_tab_salesperson_add_li_plusbutton).click()
+            cy.get(CustomerContactCardElements.details_tab_salesperson_search_user_input).clear().type(salespersons[index].name)
+            cy.get(CustomerContactCardElements.details_tab_salesperson_search_user_results).first().click()
+            let waitFor = "@addPrimarySalesPerson";
+            if(index > 0){
+              waitFor = "@addSecondarySalesPerson";
+            }
+              cy.wait(waitFor).then((xhr) => {
+                cy.wait(4000)
+              })
+          })
+        })
+      cy.wait(4000)
+      cy.get(CustomerContactCardElements.details_tab_salesperson_add_li)
+        .each(($el, index, $list) => {
+          cy.wrap($el).within(() => {
+            cy.get(CustomerContactCardElements.details_tab_salesperson_list_name).contains(salespersons[index].name)
+          })
+        })
+    })
+
+    // it('Test 15 - Remove salesperson from the customer', () => {
+    //   cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Details").click()
+    //   cy.get(CustomerContactCardElements.details_tab_salesperson_add_li).then(($list) => {
+    //     for(let i=($list.length - 1); i>=0; i--){
+    //       cy.wrap($list[i]).within(() => {
+
+    //       })
+    //     }
+    //   })
+    // })
 
   })
 

@@ -15,5 +15,14 @@
 	"customer_notes_list_items_edit_actions": ".conversation-actions",
 	"customer_notes_list_items_notes_text": ".conversation-item .cmp-cnv-bd span",
 	"dialog_content_div": ".driveDialogContent",
-	"dialog_actions": ".driveDialogActions"
+	"dialog_actions": ".driveDialogActions",
+	"details_tab_salesperson_header": "drc-customer-summary-sales .cnv-cnt-crd-blck-tl",
+	"details_tab_bdc_header": "drc-customer-summary-bdc .cnv-cnt-crd-blck-tl",
+	"details_tab_service_bdc_header": "drc-customer-summary-service-bdc .cnv-cnt-crd-blck-tl",
+	"details_tab_garage_header": "drc-customer-summary-garage .cnv-cnt-crd-blck-tl",
+	"details_tab_salesperson_add_li": "drc-customer-summary-sales .cnv-cnt-crd-blck-cnt ul li",
+	"details_tab_salesperson_add_li_plusbutton": ".addicon",
+	"details_tab_salesperson_search_user_input": "drc-add-user-search .deal-act-body input",
+	"details_tab_salesperson_search_user_results": "drc-add-user-search .deal-act-body .result-boxList li",
+	"details_tab_salesperson_list_name": ".genericvalue"
 }
