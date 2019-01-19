@@ -11,27 +11,19 @@ context('Recent Customers Search', () => {
 	      cy.server()
 	      cy.route({
 	        method: 'POST',
-	        url: '/api/legacy/*',
+	        url: '/api/legacy/DriveTile/GetNotificationCounts',
 	      }).as('RecentCustomers')
-	    })
-		
-		afterEach(() => {
-			cy.get(TopNavigationHeader.recent_customers_icon_afterclick).then((attr) => {
-					if(attr == 'true'){
-						cy.get(TopNavigationHeader.recent_customers_icon_afterclick).click()
-					}
-				})	      
 	    })
 		
 	    after(function () {
 	    	cy.logoutUI()
 	    }) 
 	  
-	    it.only('Verification Of Recent Customers Displayed List', function() {	
+	    it('Verification Of Recent Customers Displayed List', function() {	
 		    //Click on the Recent Customers Icon
 			cy.get(TopNavigationHeader.recent_customers_icon).click();
-			cy.wait('@RecentCustomers').then((xhr) => {
-				
+			
+			cy.wait('@RecentCustomers').then((xhr) => {				
 				//wait for list display
 				cy.get(TopNavigationHeader.recent_customers_loading_hide).should('exist')
 				
@@ -43,25 +35,37 @@ context('Recent Customers Search', () => {
 		    })			 
 		})
 		
-		it('Verification Of Recent Customers Card', function() {		
-		    //Click on the Recent Customers Icon
-			cy.get(TopNavigationHeader.recent_customers_icon).click();
-			
+		it('Verification Name in The Recent Customers Card', function() {
 			cy.wait('@RecentCustomers').then((xhr) => {
-			cy.get(TopNavigationHeader.recent_customers_displayed).then(($ele) => {
+			cy.get(TopNavigationHeader.recent_customers_displayed).first().then(($ele) => {
 
-			  //wait for list display
+			 //wait for list display
 			 cy.get(TopNavigationHeader.recent_customers_loading_hide).should('exist')
 				
               //store the first customer name
-               const firstCustomerName = $ele.get(1).text();
+               const firstCustomerName = $ele.text();
 			   cy.log(firstCustomerName);
 
 			   //click on the first customer name
-			 //  cy.get(TopNavigationHeader.recent_customers_first_record).click()
-			   $ele.get(1).click()
-			   //verify cistomer card name
-			   cy.get(TopNavigationHeader.recent_customers_first_record).should('have.text', firstCustomerName)
+			   $ele.click()
+			   
+			  //wait for window display
+			  cy.get(TopNavigationHeader.customer_card_name).should('exist')
+			 
+			   //verify customer card name
+			   cy.get(TopNavigationHeader.customer_card_name).should('have.text', firstCustomerName)
+			   
+			   //Verify tabs on the customer card
+			   cy.get(TopNavigationHeader.customer_card_tabs).should(($tab) => {
+				  expect($tab).to.contain('Activity')
+				  expect($tab).to.contain('Conversation')
+				  expect($tab).to.contain('Open')
+				  expect($tab).to.contain('Deals')
+				  expect($tab).to.contain('Value')
+				})
+				
+			   //close the window
+			   cy.get(TopNavigationHeader.close_winodw).click()
 			   
               })
 		    })				 
