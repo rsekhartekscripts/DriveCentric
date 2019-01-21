@@ -1,0 +1,16 @@
+[
+	{
+		"status": "New",
+		"year": "2019",
+		"make": "Honda",
+		"model": "City",
+		"trim": "Test Trim",
+		"stock": 2,
+		"vim": 12,
+		"mileage": 14,
+		"price": 2000,
+		"acv": 3000,
+		"interior": "Grey",
+		"exterior": "Black"
+	}
+]
