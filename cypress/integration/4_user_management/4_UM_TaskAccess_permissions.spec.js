@@ -124,7 +124,7 @@ context('User Management', () => {
 			})
 		})
 
-		it('Test 10 - Verify all TaskAccess section Check box enabled Permissions', function () {
+		it('Test 10 - Validate TaskAccess section Check box enabled Permissions', function () {
 			//Click on EO Menu
 			cy.get(LoginLogoutElements.profile_menu).should('be.visible').click()
 
