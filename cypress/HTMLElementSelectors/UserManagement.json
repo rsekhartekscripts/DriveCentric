@@ -1,5 +1,8 @@
 {
+	//Appointment Access elements
+
 	"store_settings_option" : "[data-test=profile-menu-storeSettings]",
+	"search_user_name" : "Sales One A",
 	"general_link" : "General",
 	"user_management_link" : "User Management",
 	"search_user_input" : ".driveStoreSettingsContent .dsUMFilters .dsUMFiltersSearch input",
@@ -8,6 +11,7 @@
 	"dialog_main_actions": ".driveDialogContent .driveDialogActions",
 	"user_dialog_tabs" : ".driveDialogContent .dsUMCardBody .dsUMCardTabs",
 	"user_details_first_name" : ".driveDialogContent .dsUMCardBody .dsUMDetails .umFirstName input",
+	"dc_homelogo" : "[aria-label='DriveCentric']",
 	"confirm_checkbox_false" : "span[.='Confirm'] < label > md-switch[aria-checked=false]",
 	"confirm_checkbox_true" : "span[.='Confirm'] < label > md-switch[aria-checked=true]",
 	"delete_appointment_checkbox_false" : "span[.=Delete Appointment] < label > md-switch[aria-checked=false]",
@@ -19,5 +23,26 @@
 	"reschedule_checkbox_false" : "span[.='Confirm'] < label > md-switch[aria-checked=false]",
 	"reschedule_checkbox_true" : "span[.='Confirm'] < label > md-switch[aria-checked=true]",
 	"update_button" : "Update",
-	"Cancel_button" : "Cancel"
+	"Cancel_button" : "Cancel",
+	//Credi section elements (CSS selectors)
+	"pull_credit_report_section" : "[ng-if] ul:nth-child(2) .umApptCheck:nth-of-type(1) .md-default-theme",
+	"pull_credit_report_button" : "[ng-if] ul:nth-child(2) .umApptCheck:nth-of-type(1) .md-thumb",
+	"push_credit_report_section" : "[ng-if] ul:nth-child(2) .umApptCheck:nth-of-type(2) [ng-model]",
+	"push_credit_report_button" : "[ng-if] ul:nth-child(2) .umApptCheck:nth-of-type(2) .md-thumb",
+	"user_permissions_update_button" : ".driveDialogActions li:nth-of-type(2) span",
+	"Pull_Credit_Report_false" : "span[.=Pull Credit Report] < label > md-switch[aria-checked=false]",
+	"Pull_Credit_Report_true" : "span[.=Pull Credit Report] < label > md-switch[aria-checked=true]",
+	"user_permissions_window_close" : ".driveDialogContent > [ng-click]",
+	//Customer Change Access section elements (CSS selectors)
+	"change_BDC" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(1) [ng-model]",
+	"change_BDC_buttom" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(1) .md-thumb",
+	"change_sales" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(2) [ng-model]",
+	"change_sales_button" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(2) .md-thumb" ,
+	"change_service" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(2) [ng-model]",
+	"change_service_button" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(3) .md-thumb" ,
+	"claim_override" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(2) [ng-model]",
+	"claim_override_button" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(4) .md-thumb",
+	"merge" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(2) [ng-model]",
+	"merge_button" : "[ng-if] ul:nth-child(10) .umApptCheck:nth-of-type(5) .md-thumb",	
+	"Test" : "Test Elements"
 }
