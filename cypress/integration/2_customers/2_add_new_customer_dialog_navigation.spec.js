@@ -299,6 +299,34 @@ context('Add New Customer Dialog', () => {
       cy.get('.driveNewCustomerVehicleInterested .dealVehicleActions').click({ force: true })
     })
     
+	it('Test 17 - Verify Interested Vehicle Button', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+        cy.contains('Add Custom').should('be.visible')
+		cy.contains('Add Inventory').should('be.visible')		
+      })
+      
+    })
+	
+	it.only('Test 18 - Verify Add Inventory Page Fields', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Inventory').click()		
+      })
+	 
+	  cy.get('.driveInventoryFiltersHeader h4').should('be.visible').then(function($lis){
+		  expect($lis).to.have.length(7)
+          expect($lis.eq(0)).to.contain('Enterprise')
+		  expect($lis.eq(1)).to.contain('Year')
+		  expect($lis.eq(2)).to.contain('Make')
+		  expect($lis.eq(3)).to.contain('Model')
+		  expect($lis.eq(4)).to.contain('Trim')
+		  expect($lis.eq(5)).to.contain('Color')
+		  expect($lis.eq(6)).to.contain('New/Used')
+        })
+		cy.contains('Add a tag').should('be.visible')
+    })
+	
   });
 
 })
