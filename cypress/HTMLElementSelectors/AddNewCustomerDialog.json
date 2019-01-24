@@ -34,5 +34,6 @@
 	"sales_person_remove_button": ".srContentCustomerRemove",
 	"bdc_remove_button": ".srContentCustomerRemove",
 	"bdc_close_button": ".srContentCustomerClose",
-	"add_new_vehicle_inventory_dialog": ".driveDialog .driveInventory"
+	"add_new_vehicle_inventory_dialog": ".driveDialog .driveInventory",
+	"add_inventory_dialog_options": ".driveInventoryFiltersHeader h4"
 }

@@ -314,7 +314,7 @@ context('Add New Customer Dialog', () => {
 		cy.contains('Add Inventory').click()		
       })
 	 
-	  cy.get('.driveInventoryFiltersHeader h4').should('be.visible').then(function($lis){
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).should('be.visible').then(function($lis){
 		  expect($lis).to.have.length(7)
           expect($lis.eq(0)).to.contain('Enterprise')
 		  expect($lis.eq(1)).to.contain('Year')
