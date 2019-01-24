@@ -308,7 +308,7 @@ context('Add New Customer Dialog', () => {
       
     })
 	
-	it.only('Test 18 - Verify Add Inventory Page Fields', () => {
+	it('Test 18 - Verify Add Inventory Page Fields', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Inventory').click()		
