@@ -21,7 +21,7 @@ context('User Management', () => {
 			cy.logoutUI()
 		})
 
-		it('Test 11 - Validate Notification section perfmissions check boxes are disabled', function () {
+		it('Test 11 - Validate Notification section permissions check boxes are disabled', function () {
 
 			//Click on EO Menu
 			cy.get(LoginLogoutElements.profile_menu).should('be.visible').click()
