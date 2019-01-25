@@ -327,6 +327,57 @@ context('Add New Customer Dialog', () => {
 		cy.contains('Add a tag').should('be.visible')
     })
 	
+	it('Test 19 - Verify Filters in the Add Inventory Dialog and check selected vales are displayed in search tag', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Inventory').click()		
+      })
+	  //Wait for the Add Inventory dialog Options
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).should('have.length', 7)
+	  
+	  //Click on the Year and then click the first values of Year
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).eq(1).should('be.visible').contains('Year').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_year_list).first().should('be.visible').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_search_tags).should('be.visible')
+	  
+	  //Click on the Make and then click the first values of Make
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).eq(2).should('be.visible').contains('Make').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_make_list).first().should('be.visible').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_search_tags).should('be.visible')
+	  
+	  //Click on the Model and then click the first values of Model
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).eq(3).should('be.visible').contains('Model').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_model_list).first().should('be.visible').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_search_tags).should('be.visible')
+	  
+	  //Click on the Trim and then click the first values of Trim
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).eq(4).should('be.visible').contains('Trim').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_trim_list).first().should('be.visible').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_search_tags).should('be.visible')
+	  
+	  //Click on the Color and then click the first values of Color
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).eq(5).should('be.visible').contains('Color').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_color_list).first().should('be.visible').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_search_tags).should('be.visible')
+	  
+	  //Click on the New/Used and then click the first values of New/Used
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).eq(6).should('be.visible').contains('New/Used').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_newused_list).first().should('be.visible').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_search_tags).should('be.visible')
+	  
+	  //Verify Selected Values are dispalyed as a tags in the search bar
+	  cy.get(AddNewCustomerDialogElements.add_inventory_search_tags).should('be.visible').then(function($lis){
+		  expect($lis).to.have.length(6)
+		  expect($lis.eq(0)).to.contain('Year')
+		  expect($lis.eq(1)).to.contain('Make')
+		  expect($lis.eq(2)).to.contain('Model')
+		  expect($lis.eq(3)).to.contain('Trim')
+		  expect($lis.eq(4)).to.contain('Color')
+		  expect($lis.eq(5)).to.contain('New/Used')
+        })
+	 
+    })
+	
   });
 
 })

@@ -35,5 +35,12 @@
 	"bdc_remove_button": ".srContentCustomerRemove",
 	"bdc_close_button": ".srContentCustomerClose",
 	"add_new_vehicle_inventory_dialog": ".driveDialog .driveInventory",
-	"add_inventory_dialog_options": ".driveInventoryFiltersHeader h4"
+	"add_inventory_dialog_options": ".driveInventoryFiltersHeader h4",
+	"add_inventory_year_list": "li[ng-repeat*=\"yearTag\"]",
+	"add_inventory_make_list": "li[ng-repeat*=\"makeTag\"]",
+	"add_inventory_model_list": "li[ng-repeat*=\"modelTag\"]",
+	"add_inventory_trim_list": "li[ng-repeat*=\"trimTag\"]",
+	"add_inventory_color_list": "li[ng-repeat*=\"colorTag\"]",
+	"add_inventory_newused_list": "li[ng-repeat*=\"newUsedTypeTag\"]",
+	"add_inventory_search_tags": ".InventorySearchTag > div > div:nth-child(1)"
 }
