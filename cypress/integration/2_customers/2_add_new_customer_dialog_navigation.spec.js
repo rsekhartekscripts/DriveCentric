@@ -378,6 +378,57 @@ context('Add New Customer Dialog', () => {
 	 
     })
 	
+	it('Test 20 - Verify Add Interested Vehicle by Inventory', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Inventory').click()		
+      })
+	  //Wait for the Add Inventory dialog Options
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).should('have.length', 7)
+	  
+	  //Click on the Year and then click the first values of Year
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).eq(1).should('be.visible').contains('Year').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_year_list).first().should('be.visible').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_search_tags).should('be.visible')
+	  
+	  //Click on the add vehicle button of selected vehicle 
+	  cy.get(AddNewCustomerDialogElements.add_vehicle_button).eq(0).should('be.visible').click()
+	  
+	  //Verify the selected vehicle uner inventary
+	   cy.get(AddNewCustomerDialogElements.added_vehicle_under_inventary).should('be.visible')
+	  
+    })
+	
+	it('Test 21 - Verify Text Fields in Custom vehicle window ', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Custom').click()		
+      })
+	  //Wait for the Add Custom dialog Options
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
+	  
+	  //Verify Add Custom dialog fields
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('be.visible').then(function($lis){
+		  expect($lis).to.have.length(14)
+		  expect($lis.eq(0)).to.contain('New/Used')
+		  expect($lis.eq(1)).to.contain('Year')
+		  expect($lis.eq(2)).to.contain('Make')
+		  expect($lis.eq(3)).to.contain('Model')
+		  expect($lis.eq(4)).to.contain('Trim')
+		  expect($lis.eq(5)).to.contain('Stock #')
+		  expect($lis.eq(6)).to.contain('VIN #')
+		  expect($lis.eq(7)).to.contain('Mileage')
+		  expect($lis.eq(8)).to.contain('Price')
+		  expect($lis.eq(10)).to.contain('Cost')
+		  expect($lis.eq(11)).to.contain('Interior Color')
+		  expect($lis.eq(12)).to.contain('Exterior Color')
+		   expect($lis.eq(13)).to.contain('Comments')
+		  
+        })
+	  
+    })
+	
+	
   });
 
 })

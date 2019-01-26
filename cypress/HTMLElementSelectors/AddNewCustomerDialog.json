@@ -42,5 +42,8 @@
 	"add_inventory_trim_list": "li[ng-repeat*=\"trimTag\"]",
 	"add_inventory_color_list": "li[ng-repeat*=\"colorTag\"]",
 	"add_inventory_newused_list": "li[ng-repeat*=\"newUsedTypeTag\"]",
-	"add_inventory_search_tags": ".InventorySearchTag > div > div:nth-child(1)"
+	"add_inventory_search_tags": ".InventorySearchTag > div > div:nth-child(1)",
+	"add_vehicle_button": "button[class*='add-vehicle-button']",
+	"added_vehicle_under_inventary": "li[ng-if*='interestedVehicle']",
+	"add_custom_dialog_fields": "[class*=\"driveCustomInventory\"] .formlabel"
 }
