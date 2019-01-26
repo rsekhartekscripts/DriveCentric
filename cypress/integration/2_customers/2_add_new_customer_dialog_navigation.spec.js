@@ -425,6 +425,13 @@ context('Add New Customer Dialog', () => {
 		   expect($lis.eq(13)).to.contain('Comments')
 		  
         })
+		//Click on the New/Used dropdown and Check the Options
+		cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(1).should('have.text', 'New')
+		cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(2).should('have.text', 'Used')
+		
+		//Verify Add and Cancel  button
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Add')		
 	  
     })
 	

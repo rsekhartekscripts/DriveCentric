@@ -45,5 +45,7 @@
 	"add_inventory_search_tags": ".InventorySearchTag > div > div:nth-child(1)",
 	"add_vehicle_button": "button[class*='add-vehicle-button']",
 	"added_vehicle_under_inventary": "li[ng-if*='interestedVehicle']",
-	"add_custom_dialog_fields": "[class*=\"driveCustomInventory\"] .formlabel"
+	"add_custom_dialog_fields": "[class*=\"driveCustomInventory\"] .formlabel",
+	"new_used_dropdown_options": "select[ng-model=\"selected.options.NewUsedType\"] > option",
+	"add_custom_dialog_buttons": ".driveDialogActions button>span"
 }
