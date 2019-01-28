@@ -47,5 +47,9 @@
 	"added_vehicle_under_inventary": "li[ng-if*='interestedVehicle']",
 	"add_custom_dialog_fields": "[class*=\"driveCustomInventory\"] .formlabel",
 	"new_used_dropdown_options": "select[ng-model=\"selected.options.NewUsedType\"] > option",
-	"add_custom_dialog_buttons": ".driveDialogActions button>span"
+	"add_custom_dialog_buttons": ".driveDialogActions button>span",
+	"add_custom_dialog_vin_field": ".driveCustomInventoryVin > label > input",
+	"add_custom_dialog_field_values": "input[class$='ng-modified']",
+	"add_custom_dialog": ".driveCustomInventoryDialog",
+	"add_custom_dialog_confirm_alert": "[class=\"driveDialogAlert\"]"
 }

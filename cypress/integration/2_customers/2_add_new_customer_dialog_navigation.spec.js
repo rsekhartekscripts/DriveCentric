@@ -435,6 +435,61 @@ context('Add New Customer Dialog', () => {
 	  
     })
 	
+	it('Test 22 - Validate VIN # field with the value given ', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Custom').click()		
+      })
+		 //Wait for the Add Custom dialog Options
+		 cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
+	  
+		//Enter text in the VIN# field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).type(customer.vin)
+		
+		//Assert the displayed field values for Year, Mark, Model, Trim and VIN
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
+		  
+    })
+	
+	it('Test 23 - Validate CANCEL button in Add Vehicle window WITHOUT data ', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Custom').click()		
+		})
+		 //Wait for the Add Custom dialog Options
+		 cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
+	  
+		//Click On CANCEL button
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog).within(()=>{
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).contains('Cancel').click()
+        })	
+	    cy.get(AddNewCustomerDialogElements.add_custom_dialog).should('not.exist')
+		
+    })
+	
+	it('Test 24 - Validate CANCEL button in Add Vehicle window WITH data ', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Custom').click()		
+      })
+		 //Wait for the Add Custom dialog Options
+		 cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
+	  
+		//Enter text in the VIN# field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).type(customer.vin)
+		  
+		//Click On CANCEL button
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog).within(()=>{
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).contains('Cancel').click()
+        })		
+		
+		//Verify the confirm alert present
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).should('have.text', 'You have unsaved changes, are you sure you wish to cancel those changes and close the dialog?')
+    })
 	
   });
 

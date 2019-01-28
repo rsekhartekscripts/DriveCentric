@@ -4,6 +4,7 @@
     "lastName": "Test",
     "email": "testEmail@test.com",
     "phone": "9999999999",
-    "companyName": "Test Company"
+    "companyName": "Test Company",
+	"vin": "1GCHSAEA5K1122824"
   }
 ]
