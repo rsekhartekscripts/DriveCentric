@@ -1,10 +1,17 @@
 [
   {
-    "firstName": "Drivecentric",
-    "lastName": "Test",
-    "email": "testEmail@test.com",
-    "phone": "9999999999",
+    "firstName": "Roger",
+    "lastName": "Schwartz",
+    "email": "illonetruly@gmail.com",
+    "phone": "(561) 568-6500",
     "companyName": "Test Company",
-	"vin": "1GCHSAEA5K1122824"
+	"vin_old": "1GCHSAEA5K1122824",
+	"year": "2019",
+	"make": "HONDA",
+	"model": "CIVIC",
+	"new_used": "New",
+	"color": "Black",
+	"cost": "200",
+	"vin_new": "SYAM12345"
   }
 ]

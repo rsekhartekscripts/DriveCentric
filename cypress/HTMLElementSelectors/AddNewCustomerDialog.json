@@ -47,9 +47,16 @@
 	"added_vehicle_under_inventary": "li[ng-if*='interestedVehicle']",
 	"add_custom_dialog_fields": "[class*=\"driveCustomInventory\"] .formlabel",
 	"new_used_dropdown_options": "select[ng-model=\"selected.options.NewUsedType\"] > option",
-	"add_custom_dialog_buttons": ".driveDialogActions button>span",
+	"add_custom_dialog_buttons": ".driveDialogActions button[type='button']>span",
 	"add_custom_dialog_vin_field": ".driveCustomInventoryVin > label > input",
 	"add_custom_dialog_field_values": "input[class$='ng-modified']",
 	"add_custom_dialog": ".driveCustomInventoryDialog",
-	"add_custom_dialog_confirm_alert": "[class=\"driveDialogAlert\"]"
+	"add_custom_dialog_confirm_alert": "[class=\"driveDialogAlert\"]",
+	"add_custom_dialog_year_field": ".driveCustomInventoryYear > label > input",
+	"add_custom_dialog_make_field": ".driveCustomInventoryMake > label > input",
+	"add_custom_dialog_model_field": ".driveCustomInventoryModel > label > input",
+	"add_custom_dialog_newused_field": ".driveCustomInventoryStatus > label > select",
+	"add_custom_dialog_cost_field": ".driveCustomInventoryACV > label > input",
+	"add_custom_dialog_externalcolor_field": ".driveCustomInventoryExterior> label > input",
+	"remove_vehicle_inventary": "[aria-label=\'Remove Interested Vehicle\']"
 }

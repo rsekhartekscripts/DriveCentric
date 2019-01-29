@@ -394,7 +394,7 @@ context('Add New Customer Dialog', () => {
 	  //Click on the add vehicle button of selected vehicle 
 	  cy.get(AddNewCustomerDialogElements.add_vehicle_button).eq(0).should('be.visible').click()
 	  
-	  //Verify the selected vehicle uner inventary
+	  //Verify the selected vehicle under inventary
 	   cy.get(AddNewCustomerDialogElements.added_vehicle_under_inventary).should('be.visible')
 	  
     })
@@ -435,7 +435,25 @@ context('Add New Customer Dialog', () => {
 	  
     })
 	
-	it('Test 22 - Validate VIN # field with the value given ', () => {
+	it('Test 22 - Verify Text Fields in Custom vehicle window ', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Custom').click()		
+      })
+	  //Wait for the Add Custom dialog Options
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
+	  
+		//Click on the New/Used dropdown and Check the Options
+		cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(1).should('have.text', 'New')
+		cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(2).should('have.text', 'Used')
+		
+		//Verify Add and Cancel  button
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Add')
+	  
+    })	
+	
+	it('Test 23 - Validate VIN # field with the value given ', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -444,7 +462,7 @@ context('Add New Customer Dialog', () => {
 		 cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
 	  
 		//Enter text in the VIN# field
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).type(customer.vin)
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).type(customer.existingvin)
 		
 		//Assert the displayed field values for Year, Mark, Model, Trim and VIN
 		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
@@ -455,7 +473,7 @@ context('Add New Customer Dialog', () => {
 		  
     })
 	
-	it('Test 23 - Validate CANCEL button in Add Vehicle window WITHOUT data ', () => {
+	it('Test 24 - Validate CANCEL button in Add Vehicle window WITHOUT data ', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -471,7 +489,7 @@ context('Add New Customer Dialog', () => {
 		
     })
 	
-	it('Test 24 - Validate CANCEL button in Add Vehicle window WITH data ', () => {
+	it('Test 25 - Validate CANCEL button in Add Vehicle window WITH data ', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -488,7 +506,76 @@ context('Add New Customer Dialog', () => {
         })		
 		
 		//Verify the confirm alert present
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).should('have.text', 'You have unsaved changes, are you sure you wish to cancel those changes and close the dialog?')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('You have unsaved changes, are you sure you wish to cancel those changes and close the dialog?')
+    })
+	
+	it('Test 26 - Add Interested Vehicle by Custom type ', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Custom').click()		
+      })
+		 //Wait for the Add Custom dialog Options
+		 cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
+	  
+		//Select New/Used dropdown value
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_newused_field).select(customer.new_used)
+		
+		//Enter text in the Year field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_year_field).type(customer.year)
+		
+		//Enter text in the Make field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_make_field).type(customer.make)
+		
+		//Enter text in the Model field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_model_field).type(customer.model)
+		
+		//Enter text in the VIN# field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).type(customer.vin_new)
+		
+		//Enter text in the Cost field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_cost_field).type(customer.cost)
+		
+		//Enter text in the external color
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_externalcolor_field).type(customer.color)
+		  
+		//Click On SAVE button
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog).within(()=>{
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).contains('Add').click()
+        })	
+		cy.wait(3000)
+		
+		//Verify the created vehicle under inventary
+	   cy.get(AddNewCustomerDialogElements.added_vehicle_under_inventary).should('be.visible')
+    })
+	
+	it('Test 27 - Remove Interested Vehicle from the list ', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Custom').click()		
+      })
+		//Wait for the Add Custom dialog Options
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
+	  
+		//Enter text in the VIN# field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).type(customer.vin_old)
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_externalcolor_field).click()
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
+		  
+		//Click On SAVE button
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog).within(()=>{
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).contains('Add').click()
+        })	
+		
+		//Verify the created vehicle under inventary
+	   cy.get(AddNewCustomerDialogElements.added_vehicle_under_inventary).should('be.visible')
+	   cy.wait(3000)
+	   //Click on Remove Interested Vehicle
+	   cy.get(AddNewCustomerDialogElements.remove_vehicle_inventary).click({ force: true })
+	   
+	    cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).should('be.visible')
+      })
+	   
     })
 	
   });
