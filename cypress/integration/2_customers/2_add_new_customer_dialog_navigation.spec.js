@@ -578,6 +578,41 @@ context('Add New Customer Dialog', () => {
 	   
     })
 	
+	it('Test 28 - Verify Add Trade In window fields ', () => {
+      cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()	
+      })
+	  //Wait for the Trade-in dialog Options
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 18)
+	  
+	  //Verify Trade-in dialog fields
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('be.visible').then(function($lis){
+		  expect($lis).to.have.length(18)
+		  expect($lis.eq(0)).to.contain('Year')
+		  expect($lis.eq(1)).to.contain('Make')
+		  expect($lis.eq(2)).to.contain('Model')
+		  expect($lis.eq(3)).to.contain('Trim')
+		  expect($lis.eq(4)).to.contain('Stock #')
+		  expect($lis.eq(5)).to.contain('VIN #')
+		  expect($lis.eq(6)).to.contain('Mileage')
+		  expect($lis.eq(7)).to.contain('Allowance')
+		  expect($lis.eq(8)).to.contain('Payoff')
+		  expect($lis.eq(9)).to.contain('ACV')
+		  expect($lis.eq(10)).to.contain('Interior Color')
+		  expect($lis.eq(11)).to.contain('Exterior Color')
+		  expect($lis.eq(12)).to.contain('Bank')
+		  expect($lis.eq(13)).to.contain('Contact')
+		  expect($lis.eq(14)).to.contain('Good Until')
+		  expect($lis.eq(15)).to.contain('Account')
+		  expect($lis.eq(16)).to.contain('Per Diem')
+		  expect($lis.eq(17)).to.contain('Comments')
+        })	   
+		  
+		//Verify Add and Cancel  button
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Add')
+    })
+	
   });
 
 })
