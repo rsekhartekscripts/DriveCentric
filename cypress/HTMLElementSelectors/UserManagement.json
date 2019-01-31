@@ -29,6 +29,7 @@
 	"user_details_team" : ".driveDialogContent .dsUMCardBody .dsUMDetails .umTeam select",
 	"user_details_phonenumber" : "(789) 535-4656",
 	"user_details_cellnumber" : "(456) 535-4656",
+	"user_details_drivealias" : "sales2A@staging1drivecentric.com",
 	"dc_homelogo" : "[aria-label='DriveCentric']",
 	"confirm_checkbox_false" : "span[.='Confirm'] < label > md-switch[aria-checked=false]",
 	"confirm_checkbox_true" : "span[.='Confirm'] < label > md-switch[aria-checked=true]",
