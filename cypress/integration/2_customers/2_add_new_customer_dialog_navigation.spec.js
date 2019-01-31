@@ -466,10 +466,10 @@ context('Add New Customer Dialog', () => {
 		
 		//Assert the displayed field values for Year, Mark, Model, Trim and VIN
 		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_year_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_make_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_model_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_trim_field).should('have.class', 'ng-modified')
 		  
     })
 	
@@ -611,6 +611,65 @@ context('Add New Customer Dialog', () => {
 		//Verify Add and Cancel  button
 		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
 		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Add')
+    })
+	
+	it('Test 29 - Validate VIN # field with the value given in Tarde-in ', () => {
+      cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
+      cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+      })
+		//Wait for the Trade-in dialog Options
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 18)
+	  
+		//Enter text in the VIN# field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).type(customer.vin_old)
+		
+		//Assert the displayed field values for Year, Mark, Model, Trim and VIN
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_year_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_make_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_model_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_trim_field).should('have.class', 'ng-modified')
+    })
+	
+	it('Test 30 - Validate CANCEL button in "Add Trade In" window WITHOUT data provided in the fields', () => {
+       cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
+       cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+      })
+		//Wait for the Tarde-in dialog Options
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 18)
+	  
+		//Click On CANCEL button
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog).within(()=>{
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).contains('Cancel').click()
+        })
+	    cy.get(AddNewCustomerDialogElements.add_custom_dialog).should('not.exist')
+    })
+	
+	it('Test 31 - Validate CANCEL button in  "Add Trade In" window WITH data provided in the fields', () => {
+		  cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
+		   cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		  })
+		 //Wait for the Add Custom dialog Options
+		 cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 18)
+	  
+		//Enter text in the VIN# field
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).type(customer.vin_old)
+		  
+		//Click On CANCEL button
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog).within(()=>{
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).contains('Cancel').click()
+        })		
+		
+		//Verify the confirm alert present
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('You have unsaved changes, are you sure you wish to cancel those changes and close the dialog?')
+    })
+	
+	it('Test 32 - Validate Add New Customer without <Source>, <Description> field values', () => {
+		//Click on Add Customer button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Add Customer').click()
+		
+		//Verify the confirm alert present
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('Please select a source type.')
     })
 	
   });
