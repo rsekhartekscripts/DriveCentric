@@ -1721,220 +1721,407 @@ context('User Management', () => {
 			})
 		})
 		
-		// it('Test 25 - Validate Page Access section perfmissions check boxes are disabled', function () {
+		it('Test 25 - Validate Default Turn ON permissions of any type of user', function () {
 
-			// //Click on EO Menu
-			// cy.get(LoginLogoutElements.profile_menu).should('be.visible').click()
+			//Click on EO Menu
+			cy.get(LoginLogoutElements.profile_menu).should('be.visible').click()
 
-			// //Click on Store Settings
-			// cy.get(UserManagementElements.store_settings_option).should('be.visible').click()
+			//Click on Store Settings
+			cy.get(UserManagementElements.store_settings_option).should('be.visible').click()
 
-			// //Click on General
-			// cy.contains(UserManagementElements.general_link).should('be.visible').click()
+			//Click on General
+			cy.contains(UserManagementElements.general_link).should('be.visible').click()
 
-			// //Scroll to UserManagement and click
-			// cy.contains(UserManagementElements.user_management_link).should('be.visible').click()
+			//Scroll to UserManagement and click
+			cy.contains(UserManagementElements.user_management_link).should('be.visible').click()
 
-			// //Enter User Names in the Search Box
-			// cy.get(UserManagementElements.search_user_input).clear({
-				// force: true
-			// }).type(UserManagementElements.search_user_name, {
-				// force: true
-			// }).should('have.value', UserManagementElements.search_user_name)
+			//Enter User Names in the Search Box
+			cy.get(UserManagementElements.search_user_input).clear({
+				force: true
+			}).type(UserManagementElements.default_permission_user, {
+				force: true
+			}).should('have.value', UserManagementElements.default_permission_user)
 
-			// //Click displayed user name
-			// cy.get(UserManagementElements.displayed_search_user_div).contains(UserManagementElements.search_user_name).click()
+			//Click displayed user name
+			cy.get(UserManagementElements.displayed_search_user_div).contains(UserManagementElements.default_permission_user).click()
 
-			// cy.get(UserManagementElements.dialog_main_div).should('be.visible')
+			cy.get(UserManagementElements.dialog_main_div).should('be.visible')
 
-			// cy.wait("@legacy").then((xhr) => {
-				// //check if details tab visible
-				// cy.get(UserManagementElements.user_details_first_name).should('be.visible')
+			cy.wait("@legacy").then((xhr) => {
+				//check if details tab visible
+				cy.get(UserManagementElements.user_details_first_name).should('be.visible')
 
-				// //Click on Permission
-				// cy.get(UserManagementElements.user_dialog_tabs).contains("Permissions").should('be.visible').click()
+				//Click on Permission
+				cy.get(UserManagementElements.user_dialog_tabs).contains("Permissions").should('be.visible').click()
 
-				// //get initial values of all checkboxes
-				// //Check the Business Rules button is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Business Rules").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Campaigns button is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Campaigns").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Drive Score Open button is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Drive Score").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Email Blast is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Email Blast").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Manage Store button is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Manage Store").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Phone Dashboard button is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Phone Dashboard").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Reports button is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Reports").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Store Templates button is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Store Templates").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Store Video Access button is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Store Video Access").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Store Workplan button is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Store Workplan").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// //Check the Surveys is checked, if yes uncheck and click on update.
-				// cy.get(UserManagementElements.dialog_main_div).contains("Surveys").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// if (attr == 'true') {
-							// cy.get(".md-thumb").click()
-						// }
-					// })
-				// })
-				// cy.wait(4000)
-				// cy.get(UserManagementElements.user_permissions_update_button).click()
+				//Check the Push Credit Report button is checked in credit section
+				cy.get(UserManagementElements.dialog_main_div).contains("Push Credit Report").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("true")
+					})
+				})
+				//Check the Check Out button is checked in Data Access section.
+				cy.get(UserManagementElements.dialog_main_div).contains("Check Out").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("true")
+					})
+				})
 
-				// //Enter User Names in the Search Box
-				// cy.get(UserManagementElements.search_user_input).clear({
-					// force: true
-				// }).type(UserManagementElements.search_user_name, {
-					// force: true
-				// }).should('have.value', UserManagementElements.search_user_name)
+				//Check the Roadmap Access button is checked
+				cy.get(UserManagementElements.dialog_main_div).contains("Roadmap Access").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("true")
+					})
+				})
 
-				// //Click displayed user name
-				// cy.get(UserManagementElements.displayed_search_user_div).contains(UserManagementElements.search_user_name).click()
+				//Check the Appt. Reassignment is selected as User in User Lists section
+				cy.get(UserManagementElements.dialog_main_div).contains("Appt. Reassignment").within(() => {
+					//cy.get("select").select('User')
+					cy.get(UserManagementElements.selected_user_option).should('have.selected', 'selected')
+				})
 
-				// //check if details tab visible
-				// cy.get(UserManagementElements.user_details_first_name).should('be.visible')
+				//Check the Task Reassignment is selected as User in User Lists section
+				cy.get(UserManagementElements.dialog_main_div).contains("Task Reassignment").within(() => {
+					//cy.get("select").select('User')
+					cy.get(UserManagementElements.selected_user_option).should('have.selected', 'selected')
+				})
+				//Check the Customer Search is selected as User in  Customer Access section
+				cy.get(UserManagementElements.dialog_main_div).contains("Customer Search").within(() => {
+					//cy.get("select").select('User')
+					cy.get(UserManagementElements.selected_user_option).should('have.selected', 'selected')
+				})
+				//Check the Data Access is selected as User in  Data Access section
+				// cy.get(UserManagementElements.dialog_main_div).contains("Data Access").within(() => {
+					// //cy.get("select").select('User')
+					// cy.get(UserManagementElements.selected_user_option).should('have.selected', 'selected')
+				// })
+				//Check the Video Access is selected as User in  Data Access section
+				cy.get(UserManagementElements.dialog_main_div).contains("Video Access").within(() => {
+					//cy.get("select").select('User')
+					cy.get(UserManagementElements.selected_user_option).should('have.selected', 'selected')
+				})
 
-				// //Click on Permission
-				// cy.get(UserManagementElements.user_dialog_tabs).contains("Permissions").should('be.visible').click()
+				//Close the User permissions window.
+				cy.get(UserManagementElements.user_permissions_window_close).click()
+				//Click on Drivecentric logo on home page
+				cy.get(UserManagementElements.dc_homelogo).click()
+			})
+		})
+		it('Test 26 - Validate Default Turn OFF permissions of any type of user', function () {
 
-				// //Check the Business Rules button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Business Rules").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Check the Campaigns button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Campaigns").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
+			//Click on EO Menu
+			cy.get(LoginLogoutElements.profile_menu).should('be.visible').click()
 
-				// //Check the Drive Score button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Drive Score").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Check the Email Blast button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Email Blast").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Check the Manage Store button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Manage Store").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Check the Phone Dashboard button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Phone Dashboard").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Check the Reports button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Reports").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Check the Store Templates button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Store Templates").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Check the Store Video Access button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Store Video Access").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Check the Store Workplan button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Store Workplan").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Check the Surveys button is unchecked
-				// cy.get(UserManagementElements.dialog_main_div).contains("Surveys").within(() => {
-					// cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
-						// expect(attr).to.equal("false")
-					// })
-				// })
-				// //Close the User permissions window.
-				// cy.get(UserManagementElements.user_permissions_window_close).click()
-				// //Click on Drivecentric logo on home page
-				// cy.get(UserManagementElements.dc_homelogo).click()
-			// })
-		// })
+			//Click on Store Settings
+			cy.get(UserManagementElements.store_settings_option).should('be.visible').click()
+
+			//Click on General
+			cy.contains(UserManagementElements.general_link).should('be.visible').click()
+
+			//Scroll to UserManagement and click
+			cy.contains(UserManagementElements.user_management_link).should('be.visible').click()
+
+			//Enter User Names in the Search Box
+			cy.get(UserManagementElements.search_user_input).clear({
+				force: true
+			}).type(UserManagementElements.default_permission_user, {
+				force: true
+			}).should('have.value', UserManagementElements.default_permission_user)
+
+			//Click displayed user name
+			cy.get(UserManagementElements.displayed_search_user_div).contains(UserManagementElements.default_permission_user).click()
+
+			cy.get(UserManagementElements.dialog_main_div).should('be.visible')
+
+			cy.wait("@legacy").then((xhr) => {
+				//check if details tab visible
+				cy.get(UserManagementElements.user_details_first_name).should('be.visible')
+
+				//Click on Permission
+				cy.get(UserManagementElements.user_dialog_tabs).contains("Permissions").should('be.visible').click()
+
+				//Check the Pull Credit Report: button is checked in credit section
+				cy.get(UserManagementElements.dialog_main_div).contains("Pull Credit Report").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Message Impersonation").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Confirm").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Delete Appointment").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Edit Appointment").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Reassign Appointment").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Reschedule").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Change BDC").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Change Sales").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Change Service").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Claim Override").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Merge").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Change Source").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Create Multiple Open").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Delete Deal").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Delete Planned Rule").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Desking").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Fire Caddy").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Manually Deliver").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Modify Delivery").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Push to DMS").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Rescue").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Transfer Deal").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Unwind Deal").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("View DMS Amounts").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Delete Task").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Edit Task").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Reassign Task").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Business Rules").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Campaigns").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Drive Score").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Email Blast").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Manage Store").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Phone Dashboard").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Reports").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Store Templates").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Store Video Access").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Store Workplan").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Surveys").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Grab It!").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Clock In").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Clock In Others").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Delete Service Lead").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Service Leads").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Service Leads - Parts").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Service Leads - Service").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Delete Visit").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Resolve").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Campaign Videos").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Drive Score Edit").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Edit Deal Docs").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Phone Numbers").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Website URLs").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Library").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				cy.get(UserManagementElements.dialog_main_div).contains("Phone Library").within(() => {
+					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
+						expect(attr).to.equal("false")
+					})
+				})
+				//Close the User permissions window.
+				cy.get(UserManagementElements.user_permissions_window_close).click()
+				//Click on Drivecentric logo on home page
+				cy.get(UserManagementElements.dc_homelogo).click()
+			})
+		})
 		
 		
 		

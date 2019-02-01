@@ -55,8 +55,8 @@ context('User Management', () => {
 				cy.wait(4000)
 
 				//get initial values of all checkboxes
-				//Check the change BDC button is checked, if yes uncheck and click on update.
-				cy.get(UserManagementElements.dialog_main_div).contains("Change Closer").within(() => {
+				//Check the Resolve button is checked, if yes uncheck and click on update.
+				cy.get(UserManagementElements.dialog_main_div).contains("Resolve").within(() => {
 					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
 						if (attr == 'true') {
 							cy.get(".md-thumb").click()
@@ -83,8 +83,8 @@ context('User Management', () => {
 				//Click on Permission
 				cy.get(UserManagementElements.user_dialog_tabs).contains("Permissions").should('be.visible').click()
 
-				//Check the Change Closer button is unchecked
-				cy.get(UserManagementElements.dialog_main_div).contains("Change Closer").within(() => {
+				//Check the Resolve button is unchecked
+				cy.get(UserManagementElements.dialog_main_div).contains("Resolve").within(() => {
 					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
 						expect(attr).to.equal("false")
 					})
@@ -130,8 +130,8 @@ context('User Management', () => {
 				cy.get(UserManagementElements.user_dialog_tabs).contains("Permissions").should('be.visible').click()
 
 				//get initial values of all checkboxes
-				//Check the Change Closer button is checked, if yes uncheck and click on update.
-				cy.get(UserManagementElements.dialog_main_div).contains("Change Closer").within(() => {
+				//Check the Resolve button is checked, if yes uncheck and click on update.
+				cy.get(UserManagementElements.dialog_main_div).contains("Resolve").within(() => {
 					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
 						if (attr == 'false') {
 							cy.get(".md-thumb").click()
@@ -158,8 +158,8 @@ context('User Management', () => {
 				//Click on Permission
 				cy.get(UserManagementElements.user_dialog_tabs).contains("Permissions").should('be.visible').click()
 
-				//Check the Change Closer button is checked
-				cy.get(UserManagementElements.dialog_main_div).contains("Change Closer").within(() => {
+				//Check the Resolve button is checked
+				cy.get(UserManagementElements.dialog_main_div).contains("Resolve").within(() => {
 					cy.get("md-switch").should('have.attr', 'aria-checked').then((attr) => {
 						expect(attr).to.equal("true")
 					})

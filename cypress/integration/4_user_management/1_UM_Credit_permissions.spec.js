@@ -78,7 +78,7 @@ context('User Management', () => {
 				//Enter User Names in the Search Box
 				cy.get(UserManagementElements.search_user_input).clear({
 					force: true
-				}).type('SALES ONE A', {
+				}).type(UserManagementElements.search_user_name, {
 					force: true
 				}).should('have.value', UserManagementElements.search_user_name)
 
@@ -110,7 +110,7 @@ context('User Management', () => {
 			})
 		})
 
-		it('Test 4 - Verify all Credit Access Check box enabled Permissions', function () {
+		it('Test 4 - Validate Credit Access Check box enabled Permissions', function () {
 			//Click on EO Menu
 			cy.get(LoginLogoutElements.profile_menu).should('be.visible').click()
 
@@ -126,7 +126,7 @@ context('User Management', () => {
 			//Enter User Names in the Search Box
 			cy.get(UserManagementElements.search_user_input).clear({
 				force: true
-			}).type('SALES ONE A', {
+			}).type(UserManagementElements.search_user_name, {
 				force: true
 			}).should('have.value', UserManagementElements.search_user_name)
 
@@ -166,7 +166,7 @@ context('User Management', () => {
 				//Enter User Names in the Search Box
 				cy.get(UserManagementElements.search_user_input).clear({
 					force: true
-				}).type('SALES ONE A', {
+				}).type(UserManagementElements.search_user_name, {
 					force: true
 				}).should('have.value', UserManagementElements.search_user_name)
 
