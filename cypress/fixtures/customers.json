@@ -12,6 +12,8 @@
 	"new_used": "New",
 	"color": "Black",
 	"cost": "200",
-	"vin_new": "SYAM12345"
+	"vin_new": "SYAM12345",
+	"source": "Phone",
+	"description": "Inbound"
   }
 ]

@@ -670,7 +670,64 @@ context('Add New Customer Dialog', () => {
 		
 		//Verify the confirm alert present
 		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('Please select a source type.')
+		
+		//Click on Alert NO button
+		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('No').click()
     })
+	
+	it('Test 33 - Validate Add New Customer with <Source>, <Description> and Interested Vehicle NOT added', () => {
+		//Select Source dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_source).select(customer.source)
+		
+		//Select Description dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_description).select(customer.description)
+		
+		//Click on Add Customer button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Add Customer').click()
+		
+		//Verify the confirm alert present
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('No interested vehicle has been selected.  Are you sure you wish to save?')
+		
+		//Click on Alert NO button
+		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('No').click()
+		
+    })
+	
+	it('Test 34 - Validate Add New Customer with <Source>, <Description> field alert YES confirmation', () => {
+		//Click on CANCEL Button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Cancel').click()
+		
+		//Clear first name field
+		cy.get(CustomerSearchDialogElements.first_name_input).clear()
+		cy.get(CustomerSearchDialogElements.company_input).clear()
+		cy.get(CustomerSearchDialogElements.phone_input).clear()
+		cy.get(CustomerSearchDialogElements.email_input).clear()
+			cy.wait('@legacy').then((xhr) => {
+		cy.contains(CustomerSearchDialogElements.add_customer_button).click()
+		cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
+			})
+		//Select Source dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_source).select(customer.source)
+		
+		//Select Description dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_description).select(customer.description)
+		
+		//Click on Add Customer button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Add Customer').click()
+		
+		//Verify the confirm alert present
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('No interested vehicle has been selected.  Are you sure you wish to save?')
+		
+		//Click on Alert Yes button
+		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Yes').click()
+		
+		cy.wait('@legacy').then((xhr) => {
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('Drive Exception: No first name was provided when creating the customer for type individual.')
+		//Click on Alert Done button
+		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Done').click()
+			})		
+    })
+	
 	
   });
 

@@ -60,5 +60,9 @@
 	"add_custom_dialog_cost_field": ".driveCustomInventoryACV > label > input",
 	"add_custom_dialog_externalcolor_field": ".driveCustomInventoryExterior> label > input",
 	"remove_vehicle_inventary": "[aria-label=\'Remove Interested Vehicle\']",
-	"add_new_customer_page_buttons": ".driveDialogActions button > span"
+	"add_new_customer_page_buttons": ".driveDialogActions button > span",
+	"add_new_customer_source": ".sourceType>select",
+	"add_new_customer_description": ".sourceDescription>select",
+	"new_customer_firstname": ".firstname>input",
+	"alert_buttons": ".driveDialogAlert +.driveDialogActions button > span"
 }
