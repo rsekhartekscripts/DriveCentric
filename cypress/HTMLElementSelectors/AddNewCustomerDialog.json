@@ -63,6 +63,14 @@
 	"add_new_customer_page_buttons": ".driveDialogActions button > span",
 	"add_new_customer_source": ".sourceType>select",
 	"add_new_customer_description": ".sourceDescription>select",
-	"new_customer_firstname": ".firstname>input",
-	"alert_buttons": ".driveDialogAlert +.driveDialogActions button > span"
+	"alert_buttons": ".driveDialogAlert +.driveDialogActions button > span",
+	"add_new_customer_type": ".apptype>select",
+	"add_new_customer_homephone": ".home>input",
+	"add_new_customer_address": ".address>input",
+	"add_new_customer_city": ".city>input",
+	"add_new_customer_state": ".state>input",
+	"add_new_customer_zip": ".zip>input",
+	"added_new_customer_name": ".cust-name",
+	"customer_card_dialog_close": ".modal-close"
+	
 }

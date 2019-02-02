@@ -729,6 +729,156 @@ context('Add New Customer Dialog', () => {
     })
 	
 	
+	it('Test 35 - Validate Add New Customer with <Source>, <Description> field for company check', () => {
+		//Click on CANCEL Button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Cancel').click()
+		
+		//Clear last name field
+		cy.get(CustomerSearchDialogElements.last_name_input).clear()
+		cy.get(CustomerSearchDialogElements.company_input).clear()
+		cy.get(CustomerSearchDialogElements.phone_input).clear()
+		cy.get(CustomerSearchDialogElements.email_input).clear()
+			cy.wait('@legacy').then((xhr) => {
+		cy.contains(CustomerSearchDialogElements.add_customer_button).click()
+		cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
+			})
+		//Select Type dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_type).select(customer.type)
+		
+		//Select Source dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_source).select(customer.source)
+		
+		//Select Description dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_description).select(customer.description)
+		
+		//Click on Add Customer button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Add Customer').click()
+		
+		//Verify the confirm alert present
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('No interested vehicle has been selected.  Are you sure you wish to save?')
+		
+		//Click on Alert Yes button
+		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Yes').click()
+		
+		cy.wait('@legacy').then((xhr) => {
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('Drive Exception: No company name was provided when creating the customer for type company.')
+		//Click on Alert Done button
+		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Done').click()
+			})		
+    })
+	
+	it('Test 36 - Validate Add customer with Type as Individual', () => {
+		//Click on CANCEL Button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Cancel').click()
+		
+		//Clear Company field
+		cy.get(CustomerSearchDialogElements.company_input).clear()
+		cy.wait('@legacy').then((xhr) => {
+		cy.contains(CustomerSearchDialogElements.add_customer_button).click()
+		cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
+		})
+		//Select company dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_type).select('Individual')
+		
+		//Enter Home Phone
+		cy.get(AddNewCustomerDialogElements.add_new_customer_homephone).clear().type(customer.homephone).should('have.value', customer.homephone)
+		
+		//Enter Address
+		cy.get(AddNewCustomerDialogElements.add_new_customer_address).clear().type(customer.address).should('have.value', customer.address)
+		
+		//Enter City
+		cy.get(AddNewCustomerDialogElements.add_new_customer_city).clear().type(customer.city).should('have.value', customer.city)
+		
+		//Enter State
+		cy.get(AddNewCustomerDialogElements.add_new_customer_state).clear().type(customer.state).should('have.value', customer.state)
+		
+		//Enter Zip
+		cy.get(AddNewCustomerDialogElements.add_new_customer_zip).clear().type(customer.zip).should('have.value', customer.zip)
+		
+		//Select Source dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_source).select(customer.source)
+		
+		//Select Description dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_description).select(customer.description)
+		
+		//Click on Add Customer button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Add Customer').click()
+		
+		//Verify the confirm alert present
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('No interested vehicle has been selected.  Are you sure you wish to save?')
+		
+		//Click on Alert Yes button
+		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Yes').click()
+		
+		//Assert saved customer name
+		cy.get(AddNewCustomerDialogElements.added_new_customer_name).should('be.visible').invoke('text').then((text) => {
+		expect(text.trim()).contains(customer.firstName)
+		expect(text.trim()).contains(customer.lastName)
+		})
+		
+		//Close the saved customer window page
+		cy.get(AddNewCustomerDialogElements.customer_card_dialog_close).should('be.visible').click({ force: true })
+		
+		cy.get(SalesHomeElements.add_new_customer_button).click()
+		cy.get(CustomerSearchDialogElements.company_input).clear()
+		cy.get(CustomerSearchDialogElements.company_input).type(customer.companyName)
+		cy.wait('@legacy').then((xhr) => {
+        cy.contains(CustomerSearchDialogElements.add_customer_button).click()
+        cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
+      })
+		
+    })
+	
+	it('Test 37 - Validate Add customer with Type as Company', () => {
+		
+		//Enter Home Phone
+		cy.get(AddNewCustomerDialogElements.add_new_customer_homephone).clear().type(customer.homephone).should('have.value', customer.homephone)
+		
+		//Enter Address
+		cy.get(AddNewCustomerDialogElements.add_new_customer_address).clear().type(customer.address).should('have.value', customer.address)
+		
+		//Enter City
+		cy.get(AddNewCustomerDialogElements.add_new_customer_city).clear().type(customer.city).should('have.value', customer.city)
+		
+		//Enter State
+		cy.get(AddNewCustomerDialogElements.add_new_customer_state).clear().type(customer.state).should('have.value', customer.state)
+		
+		//Enter Zip
+		cy.get(AddNewCustomerDialogElements.add_new_customer_zip).clear().type(customer.zip).should('have.value', customer.zip)
+		
+		//Select Source dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_source).select(customer.source)
+		
+		//Select Description dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_description).select(customer.description)
+		
+		//Click on Add Customer button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Add Customer').click()
+		
+		//Verify the confirm alert present
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('No interested vehicle has been selected.  Are you sure you wish to save?')
+		
+		//Click on Alert Yes button
+		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Yes').click()
+		
+		//Assert saved customer name
+		cy.get(AddNewCustomerDialogElements.added_new_customer_name).should('be.visible').invoke('text').then((text) => {
+		expect(text.trim()).contains(customer.companyName)
+		})
+		
+		//Close the saved customer window page
+		cy.get(AddNewCustomerDialogElements.customer_card_dialog_close).should('be.visible').click({ force: true })
+		
+		cy.get(SalesHomeElements.add_new_customer_button).click()
+		cy.get(CustomerSearchDialogElements.company_input).clear()
+		cy.get(CustomerSearchDialogElements.company_input).type(customer.companyName)
+		cy.wait('@legacy').then((xhr) => {
+        cy.contains(CustomerSearchDialogElements.add_customer_button).click()
+        cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
+      })
+		
+    })
+	
   });
 
 })

@@ -14,6 +14,12 @@
 	"cost": "200",
 	"vin_new": "SYAM12345",
 	"source": "Phone",
-	"description": "Inbound"
+	"description": "Inbound",
+	"type": "Company",
+	"homephone": "(845) 568-6500",
+	"address": "#25,FL-25",
+	"city": "airm",
+	"state": "Florida",
+	"zip": "FL54632"
   }
 ]
