@@ -11,4 +11,8 @@
   	"email": "testEmailInvalid@test.com",
   	"password": "invalidPasswordForTest"
   }
+  "appointmentUsername": {
+  	"email": "sales1A@drivecentric.com",
+    "password": "salesrules1a"
+  }
 }
