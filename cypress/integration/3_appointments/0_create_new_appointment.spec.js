@@ -28,7 +28,7 @@ context('Appointments', () => {
     	let currentTestNum = 2;
 
 		before(function () {
-	      cy.loginUI('enterprise')
+	      cy.loginUI('aptUserwthpermission')
 	      cy.server()
 	      cy.route({
 	        method: 'POST',
@@ -253,22 +253,22 @@ context('Appointments', () => {
 			}
 
 
-			// it(`Test  ${++currentTestNum} - Create ${aptType} Appointment with Past date`, function() {
-			//     cy.get(CustomerCardElements.activity_appt_date_input).clear()
-			//     cy.wait(1000)
-			//     cy.get(CustomerCardElements.activity_appt_date).click()
-			//     cy.wait(1000)
-		 //    	cy.get(CustomerCardElements.activity_appt_date_children).then(($list) => {
-		 //    		if($list.length <= 1){
-		 //    			cy.get(CustomerCardElements.activity_appt_date).click()
-		 //    		}
-		 //    	})
-			//     cy.get(CustomerCardElements.activity_appt_date_disabled_cell).first().click({force: true})
-			//     let selectedDate = ""
-			//     cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
-			//     	assert((!text || text.trim().length <=0 ))
-			//     })
-			// })
+			it(`Test  ${++currentTestNum} - Create ${aptType} Appointment with Past date`, function() {
+			    cy.get(CustomerCardElements.activity_appt_date_input).clear()
+			    cy.wait(1000)
+			    cy.get(CustomerCardElements.activity_appt_date).click()
+			    cy.wait(1000)
+		    	cy.get(CustomerCardElements.activity_appt_date_children).then(($list) => {
+		    		if($list.length <= 1){
+		    			cy.get(CustomerCardElements.activity_appt_date).click()
+		    		}
+		    	})
+			    cy.get(CustomerCardElements.activity_appt_date_disabled_cell).first().click({force: true})
+			    let selectedDate = ""
+			    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
+			    	assert((!text || text.trim().length <=0 ))
+			    })
+			})
 
 			it(`Test  ${++currentTestNum} - Edit ${aptType} Appointment of customer and assign to me`, function() {
 			    cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click()

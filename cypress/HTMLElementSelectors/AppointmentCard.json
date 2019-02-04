@@ -11,5 +11,13 @@
 	"date_option_not_disabled_cell": ".appointment-card .card-wrap .card-content .appointment-date .mydp .daycell.currmonth:not(.disabled)",
 	"notes_textarea": ".appointment-card .card-wrap .card-content .appointment-notes textarea",
 	"save_button": ".appointment-card .card-wrap .card-footer ul li:first-child",
-	"close_button": ".appointment-card .card-wrap .card-footer ul li:last-child"
+	"close_button": ".appointment-card .card-wrap .card-footer ul li:last-child",
+	"appointment_delete_button" : ".appointment-actions ul li .delete",
+	"appointment_confirm_checkbox" : ".appointment-card .card-wrap .check .checkbox-input",
+	"appointment_confirmed" : ".appointment-card .card-wrap .confirmed",
+	"appointment_assigned_to" : ".appointment-assigned drc-avatar .avatar",
+	"appointment_serach_user_dialog" : "[placeholder='Search for people to add']",
+	"appointment_assign_user_list" : "drc-add-user-search .result-boxList",
+	//Give a user to reassign
+	"appointment_reassign_user" : "abc abc"
 }

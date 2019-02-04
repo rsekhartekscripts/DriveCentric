@@ -10,8 +10,12 @@
   "invalidUsername": {
   	"email": "testEmailInvalid@test.com",
   	"password": "invalidPasswordForTest"
-  }
-  "appointmentUsername": {
+  },
+  "aptUserwthpermission": {
+  	"email": "enterprise1@drivecentric.com",
+    "password": "enterprise1"
+  },
+  "aptUserwthoutpermission": {
   	"email": "sales1A@drivecentric.com",
     "password": "salesrules1a"
   }
