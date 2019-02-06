@@ -57,5 +57,11 @@
 	"details_tab_garage_add_vehicle_exterior": ".driveCustomInventory .driveCustomInventoryExterior input",
 	"details_tab_garage_add_vehicle_actions": ".driveCustomInventoryDialog .driveDialogActions",
 	"details_tab_garage_list_name": ".genericvalue",
-	"details_tab_garage_list_remove_vehicle": ".srActions .remove"
+	"details_tab_garage_list_remove_vehicle": ".srActions .remove",
+	"open_tab_headers": "drc-customer-summary-open-deal .cnv-cnt-crd-blck-tl",
+	"open_tab_customer_sections": "[class*='customer-summary-open-deal'] .srContent",
+	"open_tab_customer_sections_details": ".vehicle",
+	"open_tab_interested_section": "div:contains('Interested')+div",
+	"add_interested_plussymbol": ".addicon.ng-star-inserted",
+	"add_vehicle_button": ".driveListingContent button"
 }

@@ -9,6 +9,7 @@ import * as SalesHomeElements from './../../HTMLElementSelectors/SalesHome.json'
 import * as CustomerCardElements from './../../HTMLElementSelectors/CustomerCard.json';
 import * as CustomerContactCardElements from './../../HTMLElementSelectors/CustomerContactCard.json';
 import * as EditCustomerDialogElements from './../../HTMLElementSelectors/EditCustomerDialog.json';
+import * as AddNewCustomerDialogElements from './../../HTMLElementSelectors/AddNewCustomerDialog.json';
 
 
 import * as salespersons from './../../fixtures/salespersons.json';
@@ -494,6 +495,51 @@ context('Customer Contact Card', () => {
       })
     })
 
+	it('Test 26 - Verify the headers under open tab from customer card', () => {
+	  //Click on the open tab
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
+	  
+	  //Verify the herad in the open tab page
+      cy.get(CustomerContactCardElements.open_tab_headers).should('be.visible').then(function($lis){
+		  expect($lis).to.have.length(4)
+          expect($lis.eq(0)).to.contain('Deal')
+		  expect($lis.eq(1)).to.contain('Interested')
+		  expect($lis.eq(2)).to.contain('Trade')
+		  expect($lis.eq(3)).to.contain('Source')
+        })
+		//Verify the details are present
+		cy.get(CustomerContactCardElements.open_tab_customer_sections).first().within(() => {
+          cy.get(CustomerContactCardElements.open_tab_customer_sections_details).contains('days')
+        })
+    })
+	
+	it('Test 27 - Add vehicle from customer contact card under "Interested" section', () => {
+	  //Click on the open tab
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
+	  
+	  //Verify the details are present
+	  cy.get(CustomerContactCardElements.open_tab_interested_section).first().within(() => {
+         cy.get(CustomerContactCardElements.add_interested_plussymbol).should('be.visible').click()
+      })
+	  
+	  //Wait for the Add Inventory dialog Options
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).should('have.length', 7)
+	  
+	  //Click on the Year and then click the first values of Year
+	  cy.get(AddNewCustomerDialogElements.add_inventory_dialog_options).eq(1).should('be.visible').contains('Year').click()
+      cy.wait(3000)	 
+	  cy.get(AddNewCustomerDialogElements.add_inventory_year_list).first().scrollIntoView()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_year_list).first().should('be.visible').click()
+	  cy.get(AddNewCustomerDialogElements.add_inventory_search_tags).should('be.visible')
+	  	  
+	  //Click on add vehicle button
+	  cy.get(AddNewCustomerDialogElements.add_vehicle_button).first().should('be.visible').contains('Add Vehicle').click()	
+		
+		//Verify the details are present
+	  cy.get(CustomerContactCardElements.open_tab_interested_section).first().within(() => {
+         cy.get(CustomerContactCardElements.add_interested_plussymbol).should('be.visible')
+      })
+    })
 
 
   })
