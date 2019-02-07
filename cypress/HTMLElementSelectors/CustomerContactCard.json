@@ -63,5 +63,7 @@
 	"open_tab_customer_sections_details": ".vehicle",
 	"open_tab_interested_section": "div:contains('Interested')+div",
 	"add_interested_plussymbol": ".addicon.ng-star-inserted",
-	"add_vehicle_button": ".driveListingContent button"
+	"add_vehicle_button": ".driveListingContent button",
+	"add_interested_existing_vehicle": ".clickable.ng-star-inserted",
+	"new_used_dropdown": "select[ng-model=\"selected.options.NewUsedType\"]",
 }

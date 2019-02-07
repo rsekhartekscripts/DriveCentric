@@ -541,6 +541,70 @@ context('Customer Contact Card', () => {
       })
     })
 
+	it('Test 28 - Validate Edit vehicle Dropdown fields', () => {
+	  //Click on the open tab
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
+	  
+	   //Verify the details are present
+	  cy.get(CustomerContactCardElements.open_tab_interested_section).first().within(() => {
+         cy.get(CustomerContactCardElements.add_interested_existing_vehicle).should('be.visible').click()
+      })
+	  
+	  //Checck New/Used drop down
+	  cy.get(CustomerContactCardElements.new_used_dropdown).should('be.exist')
+	  cy.get(CustomerContactCardElements.new_used_dropdown).within(() => {
+		  cy.get('option[selected=selected]').should('have.attr', 'selected', 'selected')
+	   })
+	   
+	  //Click on Cancel  button
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel').click({force: true})
+    })
+	
+	it('Test 29 - Validate Edit vehicle Text Fields ', () => {
+	  //Click on the open tab
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
+	  
+	   //Verify the details are present
+	  cy.get(CustomerContactCardElements.open_tab_interested_section).first().within(() => {
+         cy.get(CustomerContactCardElements.add_interested_existing_vehicle).should('be.visible').click()
+      })
+	  //Vrify the fields in the vehicle page
+	   cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('be.visible').then(function($lis){
+		  expect($lis).to.have.length(14)
+		  expect($lis.eq(0)).to.contain('New/Used')
+		  expect($lis.eq(1)).to.contain('Year')
+		  expect($lis.eq(2)).to.contain('Make')
+		  expect($lis.eq(3)).to.contain('Model')
+		  expect($lis.eq(4)).to.contain('Trim')
+		  expect($lis.eq(5)).to.contain('Stock #')
+		  expect($lis.eq(6)).to.contain('VIN #')
+		  expect($lis.eq(7)).to.contain('Mileage')
+		  expect($lis.eq(8)).to.contain('Price')
+		  expect($lis.eq(10)).to.contain('Cost')
+		  expect($lis.eq(11)).to.contain('Interior Color')
+		  expect($lis.eq(12)).to.contain('Exterior Color')
+		  expect($lis.eq(13)).to.contain('Comments')
+        })
+		
+	  //Click on Cancel  button
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel').click({force: true})
+    })
+	
+	it('Test 30 - Validate Edit vehicle Buttons ', () => {
+	  //Click on the open tab
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
+	  
+	   //Verify the details are present
+	  cy.get(CustomerContactCardElements.open_tab_interested_section).first().within(() => {
+         cy.get(CustomerContactCardElements.add_interested_existing_vehicle).should('be.visible').click()
+      })
+	  
+	  //Verify Cancel and Save buttons
+	  cy.get(CustomerContactCardElements.new_used_dropdown).should('be.exist')
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Save')
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel').click({force: true})
+    })
 
   })
 
