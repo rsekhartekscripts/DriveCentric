@@ -1,7 +1,7 @@
 {
 	"main_div": ".appointment-card .card-wrap",
 	"card_title": ".appointment-card .card-wrap .card-title",
-	"close_dialog": ".appointment-card .card-wrap .card-title .card-close",
+	"close_dialog": ".card-close",
 	"department_select": ".appointment-card .card-wrap .card-content .appointment-department select",
 	"slot_time": ".appointment-card .card-wrap .card-content .time-input-searchable input",
 	"date_option": ".appointment-card .card-wrap .card-content .appointment-date .mydp",
@@ -18,6 +18,12 @@
 	"appointment_assigned_to" : ".appointment-assigned drc-avatar .avatar",
 	"appointment_serach_user_dialog" : "[placeholder='Search for people to add']",
 	"appointment_assign_user_list" : "drc-add-user-search .result-boxList",
+	//View Appointment locators
+	"View_appointment_main_details" : "#editappointment",
+	"appointment_icon_button" : "#driveWrapper .container .driveCustomerActionMenu [data-test='header-li-appointments'] button",
+	"apt_datefilter_next_Button" : ".container .driveListBody .drivePipelineHeaderActions .filterblock .fltr-date-fltr-cnt-next",
+	"apt_data_list" : "[data-test] [data-test='list-row']",
+	"apt_customer_name" : ".appointment-customer .name",
 	//Give a user to reassign
 	"appointment_reassign_user" : "abc abc"
 }

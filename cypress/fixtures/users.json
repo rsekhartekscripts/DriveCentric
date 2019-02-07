@@ -18,5 +18,9 @@
   "aptUserwthoutpermission": {
   	"email": "sales1A@drivecentric.com",
     "password": "salesrules1a"
+  },
+  "viewaptUser": {
+  	"email": "sales1A@drivecentric.com",
+    "password": "salesrules1a"
   }
 }
