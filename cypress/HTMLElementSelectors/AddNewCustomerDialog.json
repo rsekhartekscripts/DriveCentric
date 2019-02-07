@@ -58,6 +58,8 @@
 	"add_custom_dialog_trim_field": ".driveCustomInventoryTrim > label > input",
 	"add_custom_dialog_newused_field": ".driveCustomInventoryStatus > label > select",
 	"add_custom_dialog_cost_field": ".driveCustomInventoryACV > label > input",
+	"add_custom_dialog_price_field": ".driveCustomInventoryPrice> label > input",
+	"add_custom_dialog_mileage_field": ".driveCustomInventoryMileage> label > input",
 	"add_custom_dialog_externalcolor_field": ".driveCustomInventoryExterior> label > input",
 	"remove_vehicle_inventary": "[aria-label=\'Remove Interested Vehicle\']",
 	"add_new_customer_page_buttons": ".driveDialogActions button > span",
