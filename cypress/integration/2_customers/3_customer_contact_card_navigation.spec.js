@@ -693,6 +693,59 @@ context('Customer Contact Card', () => {
 	  cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Done').click()
     })
 
+	it('Test 35 - Validate Edit Custom vehicle without <Year>, <Make>, <Model> field values', () => {
+	  //Click on the open tab
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
+	  
+	   //Verify the details are present
+	  cy.get(CustomerContactCardElements.open_tab_interested_section).first().within(() => {
+         cy.get(CustomerContactCardElements.add_interested_existing_vehicle).should('be.visible').click()
+      })
+	  //Clear text in the Year field
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_year_field).clear()
+	  
+	  //Clear text in the Make field
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_make_field).clear()
+	  
+	  //Clear text in the Model field
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_model_field).clear()
+	  		
+	  //Click on Save button
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Save').click()
+	  
+	  //Verify the confirm alert present
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('Please fill in a Year, Make, and Model.')
+	  
+	  //Click on Alert Done button
+	  cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Done').click()
+    })
+	
+	it('Test 36 - Validate Edit Custom vehicle without Model field value', () => {
+	  //Click on the open tab
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
+	  
+	   //Verify the details are present
+	  cy.get(CustomerContactCardElements.open_tab_interested_section).first().within(() => {
+         cy.get(CustomerContactCardElements.add_interested_existing_vehicle).should('be.visible').click()
+      })
+	  //Clear text in the Year field
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_year_field).clear()
+	  
+	  //Clear text in the Make field
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_make_field).clear()
+	  
+	  //Clear text in the Model field
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_model_field).clear()
+	  		
+	  //Click on Cancel button
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel').click()
+	  
+	  //Verify the confirm alert present
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('You have unsaved changes, are you sure you wish to cancel those changes and close the dialog?')
+	  
+	  //Click on Alert Yes button
+	  cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Yes').click()
+    })
 	
   })
 })
