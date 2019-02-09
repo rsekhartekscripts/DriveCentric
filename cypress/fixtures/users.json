@@ -10,5 +10,25 @@
   "invalidUsername": {
   	"email": "testEmailInvalid@test.com",
   	"password": "invalidPasswordForTest"
+  },
+  "aptUserwthpermission": {
+  	"email": "enterprise1@drivecentric.com",
+    "password": "enterprise1"
+  },
+  "aptUserwthoutpermission": {
+  	"email": "sales1A@drivecentric.com",
+    "password": "salesrules1a"
+  },
+  "viewaptUser": {
+  	"email": "sales1A@drivecentric.com",
+    "password": "salesrules1a"
+  },
+  "viewaptWithUserPerm": {
+  	"email": "sales1A@drivecentric.com",
+    "password": "salesrules1a"
+  },
+  "viewaptWithOutUserPerm": {
+  	"email": "sales1A@drivecentric.com",
+    "password": "salesrules1a"
   }
 }
