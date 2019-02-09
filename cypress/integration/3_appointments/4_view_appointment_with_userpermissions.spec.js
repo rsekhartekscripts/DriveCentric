@@ -173,7 +173,122 @@ context('Appointments', () => {
 				// // })
 		// })
 
-		it(`Test 2 - Verify Delete button in view appointment screen without a user Delete permission`, function () {
+		// it(`Test 2 - Delete button in view appointment screen without a user Delete permission`, function () {
+			// //Click on appointments icon at menubar
+			// cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+				// force: true
+			// })
+			// //click on next date button
+			// cy.wait("@AppointmentGrid").then((xhr) => {
+				// cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
+					// // capture what num is right now
+					// const num1 = text
+						// //cy.log(num1)
+
+				// })
+				// cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					// cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
+					// // const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+					// // cy.log(todaysDate)
+					// cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
+						// force: true
+					// })
+					// cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+				// cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					// force: true
+				// })
+				// //View appointment window header
+				// cy.get(AppointmentCardElements.card_title).should('be.exist')
+				// //Delete Button existance
+				// cy.get(AppointmentCardElements.appointment_delete_button).should('not.exist')
+				// //cy.get(AppointmentCardElements.apt_notes_text_are).should('have.attr', 'disabled')
+			// })
+			// //Close view appointment window
+			// cy.get(AppointmentCardElements.view_apt_window_close).click()
+			// //navigate back to home screen
+			// cy.get(UserManagementElemenets.dc_homelogo).click()
+
+		// })
+		// it(`Test 3 - Confirm an Appointment without a User Confirm Appointment Permission from view appointment window`, function () {
+			// //Click on appointments icon at menubar
+			// cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+				// force: true
+			// })
+			// //click on next date button
+			// cy.wait("@AppointmentGrid").then((xhr) => {
+				// cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
+					// // capture what num is right now
+					// const num1 = text
+						// //cy.log(num1)
+
+				// })
+				// cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					// cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
+					// // const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+					// // cy.log(todaysDate)
+					// cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
+						// force: true
+					// })
+					// cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+				// cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					// force: true
+				// })
+				// //View appointment window header
+				// cy.get(AppointmentCardElements.card_title).should('be.exist')
+				// cy.get(AppointmentCardElements.appointment_confirm_checkbox).should('not.exist')
+				// //cy.get(AppointmentCardElements.apt_notes_text_are).should('have.attr', 'disabled')
+			// })
+			// //Close view appointment window
+			// cy.get(AppointmentCardElements.view_apt_window_close).click()
+			// //navigate back to home screen
+			// cy.get(UserManagementElemenets.dc_homelogo).click()
+
+		// })
+		// it(`Test 4 - Reassign an Appointment without a User a Permission from view appointment window`, function () {
+			// //Click on appointments icon at menubar
+			// cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+				// force: true
+			// })
+			// //click on next date button
+			// cy.wait("@AppointmentGrid").then((xhr) => {
+				// cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
+					// // capture what num is right now
+					// const num1 = text
+						// //cy.log(num1)
+
+				// })
+				// cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					// cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
+					// // const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+					// // cy.log(todaysDate)
+					// cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
+						// force: true
+					// })
+					// cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+				// cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					// force: true
+				// })
+				// //View appointment window header
+				// cy.get(AppointmentCardElements.card_title).should('be.exist')
+				// cy.get(AppointmentCardElements.appointment_assigned_to).click({force: true})
+				// cy.get(AppointmentCardElements.apt_search_user_input_box).clear({
+					// force: true
+				// }).type(AppointmentCardElements.appointment_reassign_user)
+				// cy.get(AppointmentCardElements.apt_search_user_results).should('not.have.value', AppointmentCardElements.appointment_reassign_user)
+			// })
+			// //Close view appointment window
+			// cy.get(AppointmentCardElements.view_apt_window_close).click()
+			// //navigate back to home screen
+			// cy.get(UserManagementElemenets.dc_homelogo).click()
+
+		// })
+		it(`Test 5 - Reschedule an Appointment without a User a Permission from view appointment window`, function () {
 			//Click on appointments icon at menubar
 			cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
 				force: true
@@ -201,9 +316,9 @@ context('Appointments', () => {
 				})
 				//View appointment window header
 				cy.get(AppointmentCardElements.card_title).should('be.exist')
-				//Delete Button existance
-				cy.get(AppointmentCardElements.appointment_delete_button).should('not.exist')
-				//cy.get(AppointmentCardElements.apt_notes_text_are).should('have.attr', 'disabled')
+				cy.get(AppointmentCardElements.apt_date_input).should('have.attr', 'disabled')
+				cy.get(AppointmentCardElements.apt_time_input_box).should('be.disabled')
+				
 			})
 			//Close view appointment window
 			cy.get(AppointmentCardElements.view_apt_window_close).click()
@@ -211,7 +326,7 @@ context('Appointments', () => {
 			cy.get(UserManagementElemenets.dc_homelogo).click()
 
 		})
-		// it(`Test 3 - Delete Appointment After test`, function () {
+		// it(`Test 6 - Delete Appointment After test`, function () {
 			// cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName + " " + customer.lastName)
 			// cy.wait('@QuickSearch').then((xhr) => {
 				// cy.get(TopNavigationHeader.displayed_result).then(($list) => {
