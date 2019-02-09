@@ -46,6 +46,8 @@
 	"appt_view__date_not_disabled_cell" : ".appointment-card .appointment-date .mydp .daycell.currmonth:not(.disabled)",
 	"apt_date_input" : ".appointment-date .mydp input",
 	"apt_time_section" : ".appointment-time",
+	"apt_notes_section" : ".appointment-notes label",
+	"apt_notes_text_are" : ".appointment-notes label textarea",
 	"apt_time_input_box" : ".appointment-time .time-input-searchable input",
 	"apt_user_msg_alert_window" : ".ngdialog .driveDialogContent .driveDialogAlert",
 	"apt_alert_window_done_button" : "[data-test='dialog-alert-button-done']",

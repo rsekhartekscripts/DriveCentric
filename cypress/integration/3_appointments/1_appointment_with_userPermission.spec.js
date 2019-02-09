@@ -23,7 +23,7 @@ const outOfBusinessHoursErrortext = "Sorry, you can't schedule an appointment fo
 
 context('Appointments', () => {
 
-	describe('Enterprise User - Add New Appointment', () => {
+	describe('Appointment User - Edit Appointment Window Permissions', () => {
 
 		let currentTestNum = 2;
 

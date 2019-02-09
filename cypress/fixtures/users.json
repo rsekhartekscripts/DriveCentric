@@ -22,5 +22,13 @@
   "viewaptUser": {
   	"email": "sales1A@drivecentric.com",
     "password": "salesrules1a"
+  },
+  "viewaptWithUserPerm": {
+  	"email": "sales1A@drivecentric.com",
+    "password": "salesrules1a"
+  },
+  "viewaptWithOutUserPerm": {
+  	"email": "sales1A@drivecentric.com",
+    "password": "salesrules1a"
   }
 }
