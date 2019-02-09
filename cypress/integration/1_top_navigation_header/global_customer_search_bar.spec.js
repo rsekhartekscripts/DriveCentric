@@ -12,7 +12,7 @@ context('Global Customer Search', () => {
 	      cy.server()
 	      cy.route({
 	        method: 'POST',
-	        url: '/api/legacy/DriveSearch/QuickSearch',
+	        url: '/api/legacy/*',
 	      }).as('QuickSearch')
 		  
 		  //Load global_search.json file
@@ -29,15 +29,11 @@ context('Global Customer Search', () => {
             .each( function (data) {
 		    //Enter Customer First Name
 			cy.get(TopNavigationHeader.global_search_textbox).clear().type(data.firstName).should('have.value', data.firstName)
-			cy.wait('@QuickSearch').then((xhr) => {
 				//Verify the displayed results
 				cy.get(TopNavigationHeader.displayed_result).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.firstName)
-				})
-		    })
-			
-		 })	
-			 
+				})			
+			})				 
 		})
 
 		it('Customer Last Name Search ', function() {
@@ -45,12 +41,10 @@ context('Global Customer Search', () => {
             .each( function (data) {
 			//Enter Customer Last Name
 			cy.get(TopNavigationHeader.global_search_textbox).clear().type(data.lastName).should('have.value', data.lastName)
-			cy.wait('@QuickSearch').then((xhr) => {
 				//Verify the displayed results
 				cy.get(TopNavigationHeader.displayed_result).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.lastName)
 				})
-		    })
 			})
 		})
 
@@ -59,15 +53,14 @@ context('Global Customer Search', () => {
             .each( function (data) {
 			//Enter Customer Fisrt and Last Name
 			cy.get(TopNavigationHeader.global_search_textbox).clear().type(data.firstName+" "+data.lastName).should('have.value', data.firstName+" "+ data.lastName)
-			cy.wait('@QuickSearch').then((xhr) => {
+			
 				//Verify the displayed results
 				cy.get(TopNavigationHeader.displayed_result1).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.firstName)
 				})
 				cy.get(TopNavigationHeader.displayed_result2).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.lastName)
-				})
-			})			
+				})	
 			})
 		}) 
 		
@@ -76,7 +69,7 @@ context('Global Customer Search', () => {
             .each( function (data) {
 			//Enter Customer Phone Number
 			cy.get(TopNavigationHeader.global_search_textbox).clear().type(data.phone).should('have.value', data.phone)
-			cy.wait('@QuickSearch').then((xhr) => {
+			
 				//Verify the displayed results
 				cy.get(TopNavigationHeader.displayed_result_not_highlight).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.firstName)
@@ -84,7 +77,6 @@ context('Global Customer Search', () => {
 				cy.get(TopNavigationHeader.displayed_result_not_highlight).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.lastName)
 				})
-			})	
 			})
 		})
 		
@@ -93,7 +85,7 @@ context('Global Customer Search', () => {
             .each( function (data) {
 			//Enter Customer Email
 			cy.get(TopNavigationHeader.global_search_textbox).clear().type(data.email).should('have.value', data.email)
-			cy.wait('@QuickSearch').then((xhr) => {
+			
 				//Verify the displayed results
 				cy.get(TopNavigationHeader.displayed_result_not_highlight).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.firstName)
@@ -101,7 +93,6 @@ context('Global Customer Search', () => {
 				cy.get(TopNavigationHeader.displayed_result_not_highlight).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.lastName)
 				})
-			})
 			})			
 		})
 		
@@ -110,7 +101,7 @@ context('Global Customer Search', () => {
             .each( function (data) {
 			//Enter Customer COmpany name
 			cy.get(TopNavigationHeader.global_search_textbox).clear().type(data.companyName).should('have.value', data.companyName)
-			cy.wait('@QuickSearch').then((xhr) => {
+			
 				//Verify the displayed results
 				cy.get(TopNavigationHeader.displayed_result_not_highlight).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.firstName)
@@ -118,28 +109,21 @@ context('Global Customer Search', () => {
 				cy.get(TopNavigationHeader.displayed_result_not_highlight).each(($el, index, $list) => {
 				    cy.wrap($el).contains(data.lastName)
 				})
-			})
 			})			
 		})
 		
-		it.only('Mouse Over Customer Name Search ', function() {
+		it('Mouse Over Customer Name Search ', function() {
 			cy.get('@globalsearch')
             .each( function (data) {
-			//Enter Customer COmpany name
+			//Enter Customer Company name
 			cy.get(TopNavigationHeader.global_search_textbox).clear().type(data.firstName+" "+data.lastName).should('have.value', data.firstName+" "+data.lastName)
-			cy.wait('@QuickSearch').then((xhr) => {
-				
-				//Mouse Over on the displayed name
-				cy.get(TopNavigationHeader.displayed_result_not_highlight).trigger('mouseover')
-				
+	
 				//Verify the displayed results
-				cy.get(TopNavigationHeader.mouse_over_name).each(($el, index, $list) => {
-				    cy.wrap($el).contains(data.firstName)
+				cy.get(TopNavigationHeader.displayed_result_not_highlight).each(($el, index, $list) => {
+				   cy.wrap($el).trigger('mouseover').should('be.visible')
+				   cy.get(TopNavigationHeader.mouse_over_name).contains(data.firstName)
+				   cy.get(TopNavigationHeader.mouse_over_name).contains(data.lastName)
 				})
-				cy.get(TopNavigationHeader.mouse_over_name).each(($el, index, $list) => {
-				    cy.wrap($el).contains(data.lastName)
-				})
-			})
 			})			
 		})
 
