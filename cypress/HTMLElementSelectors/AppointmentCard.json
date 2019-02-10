@@ -52,7 +52,7 @@
 	"apt_user_msg_alert_window" : ".ngdialog .driveDialogContent .driveDialogAlert",
 	"apt_alert_window_done_button" : "[data-test='dialog-alert-button-done']",
 	"apt_search_user_input_box" : "[placeholder='Search for people to add']",
-	"apt_search_user_results" : ".act-block .result-box ",
+	"apt_search_user_results" : ".act-block .result-box",
 	//Give a user to reassign
 	"appointment_reassign_user" : "abc abc"
 }

@@ -36,23 +36,7 @@ context('Appointments', () => {
 				method: 'POST',
 				url: '/api/legacy/DriveSearch/QuickSearch',
 			}).as('QuickSearch')
-			// cy.route({
-			// method: 'GET',
-			// url: '/api/customers/*/summary',
-			// }).as('CustomerSummary')
-			// cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName + " " + customer.lastName)
-			// cy.wait('@QuickSearch').then((xhr) => {
-			// cy.get(TopNavigationHeader.displayed_result).then(($list) => {
-			// if ($list.length > 0) {
-			// cy.wrap($list).first().click()
-			// cy.wait("@CustomerSummary").then((xhr) => {
-			// cy.get(CustomerCardElements.main_div).should('be.visible')
-			// cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
-			// cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
-			// })
-			// }
-			// })
-			// })
+			
 		})
 
 		beforeEach(() => {
@@ -99,195 +83,195 @@ context('Appointments', () => {
 			cy.logoutUI()
 		})
 
-		// it(`Test 1 - Create an Appointment WITH a User Confirm Appointment Permission `, function () {
-			// cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName + " " + customer.lastName)
-			// cy.wait('@QuickSearch').then((xhr) => {
-				// cy.get(TopNavigationHeader.displayed_result).then(($list) => {
-					// if ($list.length > 0) {
-						// cy.wrap($list).first().click()
-						// cy.wait("@CustomerSummary").then((xhr) => {
-							// cy.get(CustomerCardElements.main_div).should('be.visible')
-							// cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
-							// cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
-						// })
-					// }
-				// })
-			// })
-			// //Create appointment with the type as sales
-			// let dataToType = "Test Text " + (new Date()).getTime()
-				// cy.get(CustomerCardElements.activity_appt_textarea).type(dataToType)
-				// cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
-					// cy.get("select").select("Sales")
-				// })
-				// cy.get(CustomerCardElements.activity_appt_date).click()
-				// cy.wait(1000)
-				// cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click({
-					// force: true
-				// })
-				// let selectedDate = ""
-				// cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
-					// selectedDate = text
-				// })
-				// cy.wait(2000)
-				// // cy.get(CustomerCardElements.activity_appt_time_slot).focus()
-				// // cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() => {
-				// // cy.contains(timeSlots[22]).click({
-				// // force: true
-				// // })
-				// // })
-				// //Enter time into Time field
-				// cy.get(CustomerCardElements.activity_appt_time_slot).type('11:25 AM', {
-					// force: true
-				// })
-				// let selectedTimeSlot = ""
-				// cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
-					// selectedTimeSlot = text
-				// })
-				// cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
-					// cy.get("select").select("Assign to me")
-				// })
-				// cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
-				// cy.get(CustomerCardElements.activity_appt_save_button).click()
-				// cy.get(".modal-close").click()
-
-				// // //Not required at this movment can Delete created appointment as to avoid the duplicates
-				// // let listOfAppointments = 0
-				// // cy.get(CustomerCardElements.activity_appts_list).then(($list) => {
-					// // listOfAppointments = $list.length
-						// // if (listOfAppointments > 0) {
-							// // cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Delete").click()
-							// // cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
-							// // cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
-							// // cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
-							// // cy.wait("@DeleteAppointment").then((xhr) => {
-								// // cy.get(CustomerCardElements.confirmation_dialog).should("not.be.visible")
-								// // cy.wait("@Timeline").then((xhr) => {
-									// // cy.wait(4000)
-									// // cy.get(CustomerCardElements.activity_appts_list_parent).should("be.visible")
-									// // cy.get(CustomerCardElements.activity_appts_list_parent).then(($ulElement) => {
-										// // assert($ulElement.find("ul li.appointment").length < listOfAppointments)
-									// // })
-								// // })
-							// // })
-						// // }
-				// // })
-		// })
-
-		// it(`Test 2 - Delete button in view appointment screen without a user Delete permission`, function () {
-			// //Click on appointments icon at menubar
-			// cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+		it(`Test 1 - Create an Appointment WITH a User Confirm Appointment Permission `, function () {
+			cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName + " " + customer.lastName)
+			cy.wait('@QuickSearch').then((xhr) => {
+				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+					if ($list.length > 0) {
+						cy.wrap($list).first().click()
+						cy.wait("@CustomerSummary").then((xhr) => {
+							cy.get(CustomerCardElements.main_div).should('be.visible')
+							cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+							cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+						})
+					}
+				})
+			})
+			//Create appointment with the type as sales
+			let dataToType = "Test Text " + (new Date()).getTime()
+				cy.get(CustomerCardElements.activity_appt_textarea).type(dataToType)
+				cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
+					cy.get("select").select("Sales")
+				})
+				cy.get(CustomerCardElements.activity_appt_date).click()
+				cy.wait(1000)
+				cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click({
+					force: true
+				})
+				let selectedDate = ""
+				cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
+					selectedDate = text
+				})
+				cy.wait(2000)
+				// cy.get(CustomerCardElements.activity_appt_time_slot).focus()
+				// cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() => {
+				// cy.contains(timeSlots[22]).click({
 				// force: true
-			// })
-			// //click on next date button
-			// cy.wait("@AppointmentGrid").then((xhr) => {
-				// cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
-					// // capture what num is right now
-					// const num1 = text
-						// //cy.log(num1)
-
 				// })
-				// cy.get(AppointmentCardElements.apt_date_filter_button).click()
-					// cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
-					// cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
-					// // const todaysDate = Cypress.moment().format('MM/DD/YYYY')
-					// // cy.log(todaysDate)
-					// cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
-						// force: true
-					// })
-					// cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
-					// cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
-				// cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
-					// force: true
 				// })
-				// //View appointment window header
-				// cy.get(AppointmentCardElements.card_title).should('be.exist')
-				// //Delete Button existance
-				// cy.get(AppointmentCardElements.appointment_delete_button).should('not.exist')
-				// //cy.get(AppointmentCardElements.apt_notes_text_are).should('have.attr', 'disabled')
-			// })
-			// //Close view appointment window
-			// cy.get(AppointmentCardElements.view_apt_window_close).click()
-			// //navigate back to home screen
-			// cy.get(UserManagementElemenets.dc_homelogo).click()
+				//Enter time into Time field
+				cy.get(CustomerCardElements.activity_appt_time_slot).type('11:25 AM', {
+					force: true
+				})
+				let selectedTimeSlot = ""
+				cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
+					selectedTimeSlot = text
+				})
+				cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
+					cy.get("select").select("Assign to me")
+				})
+				cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
+				cy.get(CustomerCardElements.activity_appt_save_button).click()
+				cy.get(".modal-close").click()
 
-		// })
-		// it(`Test 3 - Confirm an Appointment without a User Confirm Appointment Permission from view appointment window`, function () {
-			// //Click on appointments icon at menubar
-			// cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
-				// force: true
-			// })
-			// //click on next date button
-			// cy.wait("@AppointmentGrid").then((xhr) => {
-				// cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
-					// // capture what num is right now
-					// const num1 = text
-						// //cy.log(num1)
-
+				// //Not required at this movment can Delete created appointment as to avoid the duplicates
+				// let listOfAppointments = 0
+				// cy.get(CustomerCardElements.activity_appts_list).then(($list) => {
+					// listOfAppointments = $list.length
+						// if (listOfAppointments > 0) {
+							// cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Delete").click()
+							// cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
+							// cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
+							// cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
+							// cy.wait("@DeleteAppointment").then((xhr) => {
+								// cy.get(CustomerCardElements.confirmation_dialog).should("not.be.visible")
+								// cy.wait("@Timeline").then((xhr) => {
+									// cy.wait(4000)
+									// cy.get(CustomerCardElements.activity_appts_list_parent).should("be.visible")
+									// cy.get(CustomerCardElements.activity_appts_list_parent).then(($ulElement) => {
+										// assert($ulElement.find("ul li.appointment").length < listOfAppointments)
+									// })
+								// })
+							// })
+						// }
 				// })
-				// cy.get(AppointmentCardElements.apt_date_filter_button).click()
-					// cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
-					// cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
-					// // const todaysDate = Cypress.moment().format('MM/DD/YYYY')
-					// // cy.log(todaysDate)
-					// cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
-						// force: true
-					// })
-					// cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
-					// cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
-				// cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
-					// force: true
-				// })
-				// //View appointment window header
-				// cy.get(AppointmentCardElements.card_title).should('be.exist')
-				// cy.get(AppointmentCardElements.appointment_confirm_checkbox).should('not.exist')
-				// //cy.get(AppointmentCardElements.apt_notes_text_are).should('have.attr', 'disabled')
-			// })
-			// //Close view appointment window
-			// cy.get(AppointmentCardElements.view_apt_window_close).click()
-			// //navigate back to home screen
-			// cy.get(UserManagementElemenets.dc_homelogo).click()
+		})
 
-		// })
-		// it(`Test 4 - Reassign an Appointment without a User a Permission from view appointment window`, function () {
-			// //Click on appointments icon at menubar
-			// cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
-				// force: true
-			// })
-			// //click on next date button
-			// cy.wait("@AppointmentGrid").then((xhr) => {
-				// cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
-					// // capture what num is right now
-					// const num1 = text
-						// //cy.log(num1)
+		it(`Test 2 - Delete button in view appointment screen without a user Delete permission`, function () {
+			//Click on appointments icon at menubar
+			cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+				force: true
+			})
+			//click on next date button
+			cy.wait("@AppointmentGrid").then((xhr) => {
+				cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
+					// capture what num is right now
+					const num1 = text
+						//cy.log(num1)
 
-				// })
-				// cy.get(AppointmentCardElements.apt_date_filter_button).click()
-					// cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
-					// cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
-					// // const todaysDate = Cypress.moment().format('MM/DD/YYYY')
-					// // cy.log(todaysDate)
-					// cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
-						// force: true
-					// })
-					// cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
-					// cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
-				// cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
-					// force: true
-				// })
-				// //View appointment window header
-				// cy.get(AppointmentCardElements.card_title).should('be.exist')
-				// cy.get(AppointmentCardElements.appointment_assigned_to).click({force: true})
-				// cy.get(AppointmentCardElements.apt_search_user_input_box).clear({
-					// force: true
-				// }).type(AppointmentCardElements.appointment_reassign_user)
-				// cy.get(AppointmentCardElements.apt_search_user_results).should('not.have.value', AppointmentCardElements.appointment_reassign_user)
-			// })
-			// //Close view appointment window
-			// cy.get(AppointmentCardElements.view_apt_window_close).click()
-			// //navigate back to home screen
-			// cy.get(UserManagementElemenets.dc_homelogo).click()
+				})
+				cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
+					// const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+					// cy.log(todaysDate)
+					cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
+						force: true
+					})
+					cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
+					cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+				cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					force: true
+				})
+				//View appointment window header
+				cy.get(AppointmentCardElements.card_title).should('be.exist')
+				//Delete Button existance
+				cy.get(AppointmentCardElements.appointment_delete_button).should('not.exist')
+				//cy.get(AppointmentCardElements.apt_notes_text_are).should('have.attr', 'disabled')
+			})
+			//Close view appointment window
+			cy.get(AppointmentCardElements.view_apt_window_close).click()
+			//navigate back to home screen
+			cy.get(UserManagementElemenets.dc_homelogo).click()
 
-		// })
+		})
+		it(`Test 3 - Confirm an Appointment without a User Confirm Appointment Permission from view appointment window`, function () {
+			//Click on appointments icon at menubar
+			cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+				force: true
+			})
+			//click on next date button
+			cy.wait("@AppointmentGrid").then((xhr) => {
+				cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
+					// capture what num is right now
+					const num1 = text
+						//cy.log(num1)
+
+				})
+				cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
+					// const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+					// cy.log(todaysDate)
+					cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
+						force: true
+					})
+					cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
+					cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+				cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					force: true
+				})
+				//View appointment window header
+				cy.get(AppointmentCardElements.card_title).should('be.exist')
+				cy.get(AppointmentCardElements.appointment_confirm_checkbox).should('not.exist')
+				//cy.get(AppointmentCardElements.apt_notes_text_are).should('have.attr', 'disabled')
+			})
+			//Close view appointment window
+			cy.get(AppointmentCardElements.view_apt_window_close).click()
+			//navigate back to home screen
+			cy.get(UserManagementElemenets.dc_homelogo).click()
+
+		})
+		it(`Test 4 - Reassign an Appointment without a User a Permission from view appointment window`, function () {
+			//Click on appointments icon at menubar
+			cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+				force: true
+			})
+			//click on next date button
+			cy.wait("@AppointmentGrid").then((xhr) => {
+				cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
+					// capture what num is right now
+					const num1 = text
+						//cy.log(num1)
+
+				})
+				cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
+					// const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+					// cy.log(todaysDate)
+					cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
+						force: true
+					})
+					cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
+					cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+				cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					force: true
+				})
+				//View appointment window header
+				cy.get(AppointmentCardElements.card_title).should('be.exist')
+				cy.get(AppointmentCardElements.appointment_assigned_to).click({force: true})
+				cy.get(AppointmentCardElements.apt_search_user_input_box).clear({
+					force: true
+				}).type(AppointmentCardElements.appointment_reassign_user)
+				cy.get(AppointmentCardElements.apt_search_user_results).should('not.have.value', AppointmentCardElements.appointment_reassign_user)
+			})
+			//Close view appointment window
+			cy.get(AppointmentCardElements.view_apt_window_close).click()
+			//navigate back to home screen
+			cy.get(UserManagementElemenets.dc_homelogo).click()
+
+		})
 		it(`Test 5 - Reschedule an Appointment without a User a Permission from view appointment window`, function () {
 			//Click on appointments icon at menubar
 			cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
@@ -326,41 +310,41 @@ context('Appointments', () => {
 			cy.get(UserManagementElemenets.dc_homelogo).click()
 
 		})
-		// it(`Test 6 - Delete Appointment After test`, function () {
-			// cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName + " " + customer.lastName)
-			// cy.wait('@QuickSearch').then((xhr) => {
-				// cy.get(TopNavigationHeader.displayed_result).then(($list) => {
-					// if ($list.length > 0) {
-						// cy.wrap($list).first().click()
-						// cy.wait("@CustomerSummary").then((xhr) => {
-							// cy.get(CustomerCardElements.main_div).should('be.visible')
-							// cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
-							// cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
-						// })
-					// }
-				// })
-			// })
-			// let listOfAppointments = 0
-				// cy.get(CustomerCardElements.activity_appts_list).then(($list) => {
-					// listOfAppointments = $list.length
-						// if (listOfAppointments > 0) {
-							// cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Delete").click()
-							// cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
-							// cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
-							// cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
-							// cy.wait("@DeleteAppointment").then((xhr) => {
-								// cy.get(CustomerCardElements.confirmation_dialog).should("not.be.visible")
-								// cy.wait("@Timeline").then((xhr) => {
-									// cy.wait(4000)
-									// cy.get(CustomerCardElements.activity_appts_list_parent).should("be.visible")
-									// cy.get(CustomerCardElements.activity_appts_list_parent).then(($ulElement) => {
-										// assert($ulElement.find("ul li.appointment").length < listOfAppointments)
-									// })
-								// })
-							// })
-						// }
-				// })
-		// })
+		it(`Test 6 - Delete Appointment After test`, function () {
+			cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName + " " + customer.lastName)
+			cy.wait('@QuickSearch').then((xhr) => {
+				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+					if ($list.length > 0) {
+						cy.wrap($list).first().click()
+						cy.wait("@CustomerSummary").then((xhr) => {
+							cy.get(CustomerCardElements.main_div).should('be.visible')
+							cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+							cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+						})
+					}
+				})
+			})
+			let listOfAppointments = 0
+				cy.get(CustomerCardElements.activity_appts_list).then(($list) => {
+					listOfAppointments = $list.length
+						if (listOfAppointments > 0) {
+							cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Delete").click()
+							cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
+							cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
+							cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
+							cy.wait("@DeleteAppointment").then((xhr) => {
+								cy.get(CustomerCardElements.confirmation_dialog).should("not.be.visible")
+								cy.wait("@Timeline").then((xhr) => {
+									cy.wait(4000)
+									cy.get(CustomerCardElements.activity_appts_list_parent).should("be.visible")
+									cy.get(CustomerCardElements.activity_appts_list_parent).then(($ulElement) => {
+										assert($ulElement.find("ul li.appointment").length < listOfAppointments)
+									})
+								})
+							})
+						}
+				})
+		})
 		
 		
 
