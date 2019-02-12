@@ -19,13 +19,13 @@ const existingAppointmentText = "This customer already has an appointment schedu
 const outOfBusinessHoursErrortext = "Sorry, you can't schedule an appointment for this time. It is outside of business hours";
 
 const appointmentTypes = ["Sales", "Delivery", "Service", "General"];
-// const appointmentTypes = ["Sales"];
+//const appointmentTypes = ["Delivery"];
 
 context('Appointments', () => {
 
     describe('Enterprise User - Add New Appointment', () => {
 
-    	let currentTestNum = 2;
+    	let currentTestNum = 3;
 
 		before(function () {
 	      cy.loginUI('aptUserwthpermission')
@@ -91,6 +91,7 @@ context('Appointments', () => {
 	    	// 	}
 	    	// })
 	    	cy.get(CustomerCardElements.activity_appt_time_slot).clear()
+			
 	    })
 
 	    after(() => {
@@ -125,6 +126,51 @@ context('Appointments', () => {
 			    	cy.contains("Assign to me")
 			    })
 			})
+			it(`Test 3 - Delete appointments if already exists`, function() {
+				let dataToType = "Test Text "+(new Date()).getTime()
+			    cy.get(CustomerCardElements.activity_appt_textarea).type(dataToType)
+			    cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
+			    	cy.get("select").select("Sales")
+			    })
+			    cy.get(CustomerCardElements.activity_appt_date).click()
+			    cy.wait(1000)
+			    cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).first().click({force: true})
+			    let selectedDate = ""
+			    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
+			    	selectedDate = text
+			    })
+			    cy.wait(2000)
+			    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
+			    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
+			    	cy.contains(timeSlots[29]).click({force: true})
+			    })
+			    let selectedTimeSlot = ""
+			    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
+			    	selectedTimeSlot = text
+			    })
+				cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
+					cy.get("select").select("Assign to me")
+				})
+				cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
+				cy.get(CustomerCardElements.activity_appt_save_button).click()
+				//Delete all appointments if exists
+			    	let listOfAppointments = 0
+				cy.get(AppointmentCardElements.apt_list_delete).then(($list) => {
+					listOfAppointments = $list.length
+					cy.log(listOfAppointments)
+					if(listOfAppointments > 0){
+						
+						cy.get(AppointmentCardElements.apt_list_main_div).each(function() { 
+						cy.get(AppointmentCardElements.apt_list_delete).contains("Delete").click()
+					    cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
+					    cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
+					    cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
+						cy.wait(5000)
+						})
+	
+					}
+				})
+			})
 
 
 	    appointmentTypes.forEach((aptType) => {
@@ -145,7 +191,7 @@ context('Appointments', () => {
 			    cy.wait(2000)
 			    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
 			    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
-			    	cy.contains(timeSlots[22]).click({force: true})
+			    	cy.contains(timeSlots[29]).click({force: true})
 			    })
 			    let selectedTimeSlot = ""
 			    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
@@ -170,6 +216,7 @@ context('Appointments', () => {
 						})
 					})
 				})
+				
 			})
 
 
@@ -188,7 +235,7 @@ context('Appointments', () => {
 			    cy.wait(2000)
 			    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
 			    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
-			    	cy.contains(timeSlots[22]).click({force: true})
+			    	cy.contains(timeSlots[29]).click({force: true})
 			    })
 			    let selectedTimeSlot = ""
 			    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
