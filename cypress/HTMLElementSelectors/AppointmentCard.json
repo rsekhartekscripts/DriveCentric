@@ -2,6 +2,7 @@
 	"main_div": ".appointment-card .card-wrap",
 	"card_title": ".appointment-card .card-wrap .card-title",
 	"close_dialog": ".card-close",
+	//"close_dialog": ".appointment-card .card-wrap .card-title .card-close",
 	"department_select": ".appointment-card .card-wrap .card-content .appointment-department select",
 	"slot_time": ".appointment-card .card-wrap .card-content .time-input-searchable input",
 	"date_option": ".appointment-card .card-wrap .card-content .appointment-date .mydp",
