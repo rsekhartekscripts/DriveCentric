@@ -627,7 +627,7 @@ context('Appointments', () => {
 				})
 				//View appointment window header
 				cy.get(AppointmentCardElements.card_title).should('be.exist')
-				//Date field existance
+				//Time field existance
 				cy.get(AppointmentCardElements.apt_time_section).should('be.exist').contains('Time')
 				cy.get(AppointmentCardElements.apt_time_input_box).should('be.visible')
 			})
@@ -733,7 +733,7 @@ context('Appointments', () => {
 				})
 				//View appointment window header
 				cy.get(AppointmentCardElements.card_title).should('be.exist')
-				//Date field existance
+				//Notes field existance
 				cy.get(AppointmentCardElements.apt_notes_section).should('be.exist').contains('Notes')
 				cy.get(AppointmentCardElements.apt_notes_text_are).should('have.attr', 'disabled')
 			})

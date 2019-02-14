@@ -167,7 +167,113 @@ context('Appointments', () => {
 				cy.get(AppointmentCardElements.apt_search_user_input_box).clear({
 					force: true
 				}).type(AppointmentCardElements.appointment_reassign_user)
-				cy.get(AppointmentCardElements.apt_search_user_results).should('have.value', AppointmentCardElements.appointment_reassign_user).click()
+				cy.get(AppointmentCardElements.apt_search_user_results).first().click({force: true})
+				
+				cy.get(AppointmentCardElements.view_apt_window_save).click()
+				//cy.get("[ng-click='done\(\)'] span").click()
+				//Close view appointment window
+				cy.get(AppointmentCardElements.view_apt_window_close).click()
+				cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					force: true
+				})
+				//View appointment window header
+				cy.get(AppointmentCardElements.card_title).should('be.exist')
+				cy.get(AppointmentCardElements.apt_assigned_user_name).contains(AppointmentCardElements.appointment_reassign_user)
+			})
+			//Close view appointment window
+			cy.get(AppointmentCardElements.view_apt_window_close).click()
+			//navigate back to home screen
+			cy.get(UserManagementElemenets.dc_homelogo).click()
+
+		})
+		it(`Test 3 - Reschedule an Appointment with a User a Permission from view appointment window`, function () {
+			//Click on appointments icon at menubar
+			cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+				force: true
+			})
+			//click on next date button
+			cy.wait("@AppointmentGrid").then((xhr) => {
+				cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
+					// capture what num is right now
+					const num1 = text
+						//cy.log(num1)
+
+				})
+				cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
+					// const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+					// cy.log(todaysDate)
+					cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
+						force: true
+					})
+					cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
+					cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+				cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					force: true
+				})
+				//View appointment window header
+				cy.get(AppointmentCardElements.card_title).should('be.exist')
+				//cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).first().click({force: true})
+				cy.get(AppointmentCardElements.apt_time_input_box).clear().type("10:53 AM")
+				cy.get(AppointmentCardElements.view_apt_window_save).click()
+				//cy.get("[ng-click='done\(\)'] span").click()
+				//Close view appointment window
+				cy.get(AppointmentCardElements.view_apt_window_close).click()
+				cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					force: true
+				})
+				//View appointment window header
+				cy.get(AppointmentCardElements.card_title).should('be.exist')
+				cy.get(AppointmentCardElements.apt_time_input_box).contains("10:53 AM")
+				
+			})
+			//Close view appointment window
+			cy.get(AppointmentCardElements.view_apt_window_close).click()
+			//navigate back to home screen
+			cy.get(UserManagementElemenets.dc_homelogo).click()
+
+		})
+		it(`Test 4 - Confirm an Appointment without a User Confirm Appointment Permission from view appointment window`, function () {
+			//Click on appointments icon at menubar
+			cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+				force: true
+			})
+			//click on next date button
+			cy.wait("@AppointmentGrid").then((xhr) => {
+				cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
+					// capture what num is right now
+					const num1 = text
+						//cy.log(num1)
+
+				})
+				cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
+					// const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+					// cy.log(todaysDate)
+					cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
+						force: true
+					})
+					cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
+					cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+				cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					force: true
+				})
+				//View appointment window header
+				cy.get(AppointmentCardElements.card_title).should('be.exist')
+				cy.get(AppointmentCardElements.appointment_confirm_checkbox).click({force: true})
+				cy.get(AppointmentCardElements.view_apt_window_save).click()
+				//cy.get("[ng-click='done\(\)'] span").click()
+				//Close view appointment window
+				cy.get(AppointmentCardElements.view_apt_window_close).click()
+				cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+					force: true
+				})
+				//View appointment window header
+				cy.get(AppointmentCardElements.card_title).should('be.exist')
+				
+				cy.get(".confirmed").should('be.visible')
 			})
 			//Close view appointment window
 			cy.get(AppointmentCardElements.view_apt_window_close).click()
@@ -176,7 +282,7 @@ context('Appointments', () => {
 
 		})
 
-		it(`Test 3 - Delete appointment from view appointment screen with a user permission and confirmation "NO"`, function () {
+		it(`Test 5 - Delete appointment from view appointment screen with a user permission and confirmation "NO"`, function () {
 			//Click on appointments icon at menubar
 			cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
 				force: true
@@ -219,7 +325,7 @@ context('Appointments', () => {
 
 		})
 		
-		it(`Test 4 - Delete appointment from view appointment screen with a user permission and confirmation "Yes"`, function () {
+		it(`Test 6 - Delete appointment from view appointment screen with a user permission and confirmation "Yes"`, function () {
 			//Click on appointments icon at menubar
 			cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
 				force: true
@@ -262,81 +368,6 @@ context('Appointments', () => {
 
 		})
 
-		
-		// it(`Test 5 - Reschedule an Appointment without a User a Permission from view appointment window`, function () {
-			// //Click on appointments icon at menubar
-			// cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
-				// force: true
-			// })
-			// //click on next date button
-			// cy.wait("@AppointmentGrid").then((xhr) => {
-				// cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
-					// // capture what num is right now
-					// const num1 = text
-						// //cy.log(num1)
-
-				// })
-				// cy.get(AppointmentCardElements.apt_date_filter_button).click()
-					// cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
-					// cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
-					// // const todaysDate = Cypress.moment().format('MM/DD/YYYY')
-					// // cy.log(todaysDate)
-					// cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
-						// force: true
-					// })
-					// cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
-					// cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
-				// cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
-					// force: true
-				// })
-				// //View appointment window header
-				// cy.get(AppointmentCardElements.card_title).should('be.exist')
-				// cy.get(AppointmentCardElements.apt_date_input).should('have.attr', 'disabled')
-				// cy.get(AppointmentCardElements.apt_time_input_box).should('be.disabled')
-				
-			// })
-			// //Close view appointment window
-			// cy.get(AppointmentCardElements.view_apt_window_close).click()
-			// //navigate back to home screen
-			// cy.get(UserManagementElemenets.dc_homelogo).click()
-
-		// })
-		// it(`Test 6 - Delete Appointment After test`, function () {
-			// cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName + " " + customer.lastName)
-			// cy.wait('@QuickSearch').then((xhr) => {
-				// cy.get(TopNavigationHeader.displayed_result).then(($list) => {
-					// if ($list.length > 0) {
-						// cy.wrap($list).first().click()
-						// cy.wait("@CustomerSummary").then((xhr) => {
-							// cy.get(CustomerCardElements.main_div).should('be.visible')
-							// cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
-							// cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
-						// })
-					// }
-				// })
-			// })
-			// let listOfAppointments = 0
-				// cy.get(CustomerCardElements.activity_appts_list).then(($list) => {
-					// listOfAppointments = $list.length
-						// if (listOfAppointments > 0) {
-							// cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Delete").click()
-							// cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
-							// cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
-							// cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
-							// cy.wait("@DeleteAppointment").then((xhr) => {
-								// cy.get(CustomerCardElements.confirmation_dialog).should("not.be.visible")
-								// cy.wait("@Timeline").then((xhr) => {
-									// cy.wait(4000)
-									// cy.get(CustomerCardElements.activity_appts_list_parent).should("be.visible")
-									// cy.get(CustomerCardElements.activity_appts_list_parent).then(($ulElement) => {
-										// assert($ulElement.find("ul li.appointment").length < listOfAppointments)
-									// })
-								// })
-							// })
-						// }
-				// })
-		// })
-		
 		
 
 	})

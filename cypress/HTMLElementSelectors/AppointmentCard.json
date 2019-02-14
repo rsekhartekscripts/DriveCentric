@@ -37,6 +37,8 @@
 	"apt_datefilter_next_Button" : ".container .driveListBody .drivePipelineHeaderActions .filterblock .fltr-date-fltr-cnt-next",
 	"aptAll_count_in_header" : ".drivePipelineHeader .drivePipelineHeaderLabel span[data-test='filterbar-span-title'] > span[aria-hidden='false']",
 	"apt_data_list" : ".ag-body .ag-body-viewport",
+	"apt_customer_value_grid" : "[data-test] [data-test='list-row']:nth-of-type(1) [col='1'] [data-test] span:nth-child(2)",
+	"apt_customer_name_list" : ".ag-body .ag-body-viewport .ag-row [data-test='list-CustomerMiniSquare']",
 	"apt_customer_name" : ".appointment-customer .name",
 	"apt_assigned_user_name" : ".appointment-assigned .name",
 	"view_apt_window_close" : ".card-footer ul li .close",
@@ -57,7 +59,8 @@
 	"apt_user_msg_alert_window" : ".ngdialog .driveDialogContent .driveDialogAlert",
 	"apt_alert_window_done_button" : "[data-test='dialog-alert-button-done']",
 	"apt_search_user_input_box" : "[placeholder='Search for people to add']",
-	"apt_search_user_results" : ".act-block .result-box",
+	"apt_search_user_results" : ".result-boxList .ng-star-inserted .srContent .name",
 	//Give a user to reassign
-	"appointment_reassign_user" : "abc abc"
+	"appointment_reassign_user" : "abc abc",
+	"apt_past_date_range" : "Last Week"
 }
