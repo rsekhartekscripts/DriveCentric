@@ -530,72 +530,72 @@ context('Appointments', () => {
 			cy.get(UserManagementElemenets.dc_homelogo).click()
 
 		})
-		it(`Test 13 - Edit Date field in view appointment `, function () {
-			let selectedDate = ""
-				let selectedDate1 = ""
-				//Click on appointments icon at menubar
-				cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
-					force: true
-				})
-				//click on next date button
-				cy.wait("@AppointmentGrid").then((xhr) => {
-					cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
-						// capture what num is right now
-						const num1 = text
-							//cy.log(num1)
+		// it(`Test 13 - Edit Date field in view appointment `, function () {
+			// let selectedDate = ""
+				// let selectedDate1 = ""
+				// //Click on appointments icon at menubar
+				// cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click({
+					// force: true
+				// })
+				// //click on next date button
+				// cy.wait("@AppointmentGrid").then((xhr) => {
+					// cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible').invoke('text').then((text) => {
+						// // capture what num is right now
+						// const num1 = text
+							// //cy.log(num1)
 
-					})
-					//*** Select custom date range from filters and procced
-					//cy.get(AppointmentCardElements.apt_datefilter_next_Button).should('be.visible').click()
-					cy.get(AppointmentCardElements.apt_date_filter_button).click()
-					cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
-					cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
-					// const todaysDate = Cypress.moment().format('MM/DD/YYYY')
-					// cy.log(todaysDate)
-					cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
-						force: true
-					})
-					cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
-					cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
-					cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
-						force: true
-					})
-					//View appointment window header
-					cy.get(AppointmentCardElements.card_title).should('be.exist')
-					//Date field existance
-					cy.get(AppointmentCardElements.apt_date_section).should('be.exist').contains('Date')
-					//cy.get(AppointmentCardElements.apt_date_input).type("Feb 20", {force: true})
+					// })
+					// //*** Select custom date range from filters and procced
+					// //cy.get(AppointmentCardElements.apt_datefilter_next_Button).should('be.visible').click()
+					// cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					// cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_list).contains('Custom').click()
+					// // const todaysDate = Cypress.moment().format('MM/DD/YYYY')
+					// // cy.log(todaysDate)
+					// cy.get(AppointmentCardElements.apt_date_filter_enddate_grid).last().click({
+						// force: true
+					// })
+					// cy.get(AppointmentCardElements.apt_sate_custom_date_range).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+					// cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+						// force: true
+					// })
+					// //View appointment window header
+					// cy.get(AppointmentCardElements.card_title).should('be.exist')
+					// //Date field existance
+					// cy.get(AppointmentCardElements.apt_date_section).should('be.exist').contains('Date')
+					// //cy.get(AppointmentCardElements.apt_date_input).type("Feb 20", {force: true})
 
-					cy.get(AppointmentCardElements.apt_date_input).invoke("val").then(text => {
-						selectedDate1 = text
-							cy.log(selectedDate1)
-					})
-					cy.wait(1000)
-					cy.get(AppointmentCardElements.apt_date_icon).click()
-					cy.wait(1000)
-					cy.get(AppointmentCardElements.appt_view__date_not_disabled_cell).last().click({
-						force: true
-					})
-					cy.get(AppointmentCardElements.view_apt_window_save).click()
-					cy.get(AppointmentCardElements.apt_user_msg_alert_window).contains("Sorry, you don't have permission to edit appointments.")
-					cy.get(AppointmentCardElements.apt_alert_window_done_button).click()
-					//close the view appointment window and reopen to get the date value and compare with previous one
-					cy.get(AppointmentCardElements.view_apt_window_close).click()
-					cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
-						force: true
-					})
-					cy.get(AppointmentCardElements.apt_date_input).invoke("val").then(text => {
-						selectedDate = text
-							expect(selectedDate).to.equal(selectedDate1)
-							cy.log(selectedDate)
+					// cy.get(AppointmentCardElements.apt_date_input).invoke("val").then(text => {
+						// selectedDate1 = text
+							// cy.log(selectedDate1)
+					// })
+					// cy.wait(1000)
+					// cy.get(AppointmentCardElements.apt_date_icon).click()
+					// cy.wait(1000)
+					// cy.get(AppointmentCardElements.appt_view_date_not_disabled_cell).last().click({
+						// force: true
+					// })
+					// cy.get(AppointmentCardElements.view_apt_window_save).click()
+					// cy.get(AppointmentCardElements.apt_user_msg_alert_window).contains("Sorry, you don't have permission to edit appointments.")
+					// cy.get(AppointmentCardElements.apt_alert_window_done_button).click()
+					// //close the view appointment window and reopen to get the date value and compare with previous one
+					// cy.get(AppointmentCardElements.view_apt_window_close).click()
+					// cy.get(AppointmentCardElements.apt_data_list).contains(customer.firstName + " " + customer.lastName).click({
+						// force: true
+					// })
+					// cy.get(AppointmentCardElements.apt_date_input).invoke("val").then(text => {
+						// selectedDate = text
+							// expect(selectedDate).to.equal(selectedDate1)
+							// cy.log(selectedDate)
 
-					})
-				})
-				//Close view appointment window
-				cy.get(AppointmentCardElements.view_apt_window_close).click()
-				//navigate back to home screen
-				cy.get(UserManagementElemenets.dc_homelogo).click()
-		})
+					// })
+				// })
+				// //Close view appointment window
+				// cy.get(AppointmentCardElements.view_apt_window_close).click()
+				// //navigate back to home screen
+				// cy.get(UserManagementElemenets.dc_homelogo).click()
+		// })
 
 		it(`Test 14 - Verify Time in view appointment screen `, function () {
 			//Click on appointments icon at menubar
