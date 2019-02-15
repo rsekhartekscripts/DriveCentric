@@ -38,6 +38,8 @@
 	"aptAll_count_in_header" : ".drivePipelineHeader .drivePipelineHeaderLabel span[data-test='filterbar-span-title'] > span[aria-hidden='false']",
 	"apt_data_list" : ".ag-body .ag-body-viewport",
 	"apt_customer_value_grid" : "[data-test] [data-test='list-row']:nth-of-type(1) [col='1'] [data-test] span:nth-child(2)",
+	"apt_date_value_grid" : "[data-test] [data-test='list-row']:nth-of-type(1) [data-test='list-AppointmentDate']",
+	"apt_time_value_grid" : "[data-test] [data-test='list-row']:nth-of-type(1) [col='1'] [data-test] span:nth-child(2)",
 	"apt_customer_name_list" : ".ag-body .ag-body-viewport .ag-row [data-test='list-CustomerMiniSquare']",
 	"apt_customer_name" : ".appointment-customer .name",
 	"apt_assigned_user_name" : ".appointment-assigned .name",

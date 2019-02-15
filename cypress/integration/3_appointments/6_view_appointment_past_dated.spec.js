@@ -534,6 +534,48 @@ context('Appointments', () => {
 			cy.get(UserManagementElemenets.dc_homelogo).click()
 
 		})
+		// it(`Test 12 - Verify Date filed value of appointment list is equal to view appointmnet window Date field value `, function () {
+			// let customer_date_gird
+			// //Click on appointments icon at menubar
+			// cy.get(AppointmentCardElements.appointment_icon_button).should('be.visible').click()
+			// cy.wait(5000)
+			// //click on next date button
+			// //cy.get(AppointmentCardElements.apt_datefilter_next_Button).should('be.visible').click()
+				// cy.wait("@AppointmentGrid").then((xhr) => {
+				// //*** Select custom date range from filters and procced
+					// //cy.get(AppointmentCardElements.apt_datefilter_next_Button).should('be.visible').click()
+					// cy.wait(10000)
+					// cy.get(AppointmentCardElements.aptAll_count_in_header).should('be.visible')
+					// cy.get(AppointmentCardElements.apt_date_filter_button).click()
+					// cy.get(AppointmentCardElements.apt_date_button_in_filters_window).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_list).contains(AppointmentCardElements.apt_past_date_range).click()
+					// cy.get(AppointmentCardElements.apt_date_filter_window_close).click()
+					// //let customer_name_gird
+					// cy.get(AppointmentCardElements.apt_date_value_grid).should('be.visible').invoke('text').then((text) => {
+					// customer_date_gird = text
+						// cy.log(customer_date_gird)
+						// cy.get(AppointmentCardElements.apt_data_list).contains(customer_date_gird).click({
+					// force: true
+				// })
+				// //View appointment window header
+				// cy.get(AppointmentCardElements.card_title).should('be.exist')
+				// //verify Customer Name and navigate to customer card
+				// //verify Assigned user Name
+				// cy.get(AppointmentCardElements.apt_date_section).contains("Feb 05")
+				// // .invoke('text').then((text) => {
+					// // expect(text.trim()).contains(loginuser)
+				// // })
+			// })
+						
+				// })
+			
+
+			// //Close view appointment window
+			// cy.get(AppointmentCardElements.view_apt_window_close).click()
+			// //navigate back to home screen
+			// cy.get(UserManagementElemenets.dc_homelogo).click()
+
+		// })
 		
 		
 		
