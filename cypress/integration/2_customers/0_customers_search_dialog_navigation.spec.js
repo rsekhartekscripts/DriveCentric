@@ -4,7 +4,7 @@ import * as customersList from './../../fixtures/customers.json';
 const customer = customersList[0];
 
 
-context('Customer', () => {
+context('Customer Field Level Search', () => {
 
   describe('Enterprise User - Customer Search Dialog Navigation', () => {
 
@@ -76,137 +76,136 @@ context('Customer', () => {
 	
 	it('Test 7 - Customer First Name Search Results Verification With Valid Data ', () => {
 	//Enter First Name
-	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(searchData.firstname).should('have.value', searchData.firstname)
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName).should('have.value', customer.firstName)
 	cy.wait('@legacy').then((xhr) => {
        //Assert for First Name Result
-		cy.get(CustomerSearchDialogElements.firstName_result).invoke('text').then((text) => {
-		expect(searchData.firstname).equal(text.trim())
+		cy.get(CustomerSearchDialogElements.firstName_result).each(($el, index, $list) => {
+			cy.wrap($el).contains(customer.firstName)
 		})
     })
    })
   
     it('Test 8 - Customer Last Name Search Results Verification With Valid Data ', () => {
 	//Enter Last Name
-	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(searchData.lastname).should('have.value', searchData.lastname)
+	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(customer.lastName).should('have.value', customer.lastName)
 	cy.wait('@legacy').then((xhr) => {
        //Assert for Last Name Result
-		cy.get(CustomerSearchDialogElements.lastName_result).invoke('text').then((text) => {
-		expect(searchData.lastname).equal(text.trim())
+	   cy.get(CustomerSearchDialogElements.lastName_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.lastName)
 		})
     })
    })
   
     it('Test 9 - Customer Phone Number Search Results Verification With Valid Data', () => {
 	//Enter Phone
-	cy.get(CustomerSearchDialogElements.phone_input).clear().type(searchData.phone).should('have.value', searchData.phone)
+	cy.get(CustomerSearchDialogElements.phone_input).clear().type(customer.phone).should('have.value', customer.phone)
 	cy.wait('@legacy').then((xhr) => {
 		//Assert Phone Number Result
-		cy.get(CustomerSearchDialogElements.phone_result).invoke('text').then((text) => {
-		expect(searchData.phone).equal(text.trim())
+		cy.get(CustomerSearchDialogElements.phone_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.phone)
 		})
     })	
    })
   
    it('Test 10 - Customer Company Name Search Results Verification With Valid Data', () => {
 	//Enter Company Name
-	cy.get(CustomerSearchDialogElements.company_input).clear().type(searchData.company).should('have.value', searchData.company)
+	cy.get(CustomerSearchDialogElements.company_input).clear().type(customer.companyName).should('have.value', customer.companyName)
 	cy.wait('@legacy').then((xhr) => {
 		//Assert for Company Verification
 		cy.get(CustomerSearchDialogElements.company_result).invoke('text').then((text) => {
-		expect(searchData.company).equal(text.trim())
+		expect(customer.companyName).equal(text.trim())
 		})
     })	
    })
   
    it('Test 11 - Customer Email Search Results Verification With Valid Data', () => {
 	 //Enter Email
-	cy.get(CustomerSearchDialogElements.email_input).clear().type(searchData.email).should('have.value', searchData.email)
+	cy.get(CustomerSearchDialogElements.email_input).clear().type(customer.email).should('have.value', customer.email)
 	cy.wait('@legacy').then((xhr) => {
 		//Assert for Email Verification
-		cy.get(CustomerSearchDialogElements.email_result).invoke('text').then((text) => {
-		expect(searchData.email).equal(text.trim())
+		cy.get(CustomerSearchDialogElements.email_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.email)
 		})
     })	
    })
    
    it('Test 12 - Customer First & Last Name Search Results Verification With Valid Data ', () => {
 	//Enter First Name
-	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(searchData.firstname).should('have.value', searchData.firstname)
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName).should('have.value', customer.firstName)
 	
 	//Enter Last Name
-	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(searchData.lastname).should('have.value', searchData.lastname)
+	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(customer.lastName).should('have.value', customer.lastName)
 	
 	cy.wait('@legacy').then((xhr) => {
        //Assert for First Name Result
-		cy.get(CustomerSearchDialogElements.firstName_result).invoke('text').then((text) => {
-		expect(searchData.firstname).equal(text.trim())
-		})
+	   cy.get(CustomerSearchDialogElements.firstName_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.firstName)
+			})
 		//Assert for Last Name Result
-		cy.get(CustomerSearchDialogElements.lastName_result).invoke('text').then((text) => {
-		expect(searchData.lastname).equal(text.trim())
+	   cy.get(CustomerSearchDialogElements.lastName_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.lastName)
 		})
-    })
+	 })
    })
    
    it('Test 13 - Customer First,Last Name & Phone Number Search Results Verification With Valid Data ', () => {
 	//Enter First Name
-	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(searchData.firstname).should('have.value', searchData.firstname)
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName).should('have.value', customer.firstName)
 	
 	//Enter Last Name
-	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(searchData.lastname).should('have.value', searchData.lastname)
+	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(customer.lastName).should('have.value', customer.lastName)
 	
 	//Enter Phone
-	cy.get(CustomerSearchDialogElements.phone_input).clear().type(searchData.phone).should('have.value', searchData.phone)
+	cy.get(CustomerSearchDialogElements.phone_input).clear().type(customer.phone).should('have.value', customer.phone)
 	
 	cy.wait('@legacy').then((xhr) => {
        //Assert for First Name Result
-		cy.get(CustomerSearchDialogElements.firstName_result).invoke('text').then((text) => {
-		expect(searchData.firstname).equal(text.trim())
-		})
+	    cy.get(CustomerSearchDialogElements.firstName_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.firstName)
+			})
 		//Assert for Last Name Result
-		cy.get(CustomerSearchDialogElements.lastName_result).invoke('text').then((text) => {
-		expect(searchData.lastname).equal(text.trim())
+	    cy.get(CustomerSearchDialogElements.lastName_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.lastName)
 		})
 		//Assert Phone Number Result
-		cy.get(CustomerSearchDialogElements.phone_result).invoke('text').then((text) => {
-		expect(searchData.phone).equal(text.trim())
-		})        
+		cy.get(CustomerSearchDialogElements.phone_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.phone)
+		})       
     })
    })
    
-   it('Test 14 - Customer First,Last Name,Phone & Email Search Results Verification With Valid Data ', () => {
+   it.only('Test 14 - Customer First,Last Name,Phone & Email Search Results Verification With Valid Data ', () => {
 	//Enter First Name
-	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(searchData.firstname).should('have.value', searchData.firstname)
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName).should('have.value', customer.firstName)
 	
 	//Enter Last Name
-	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(searchData.lastname).should('have.value', searchData.lastname)
+	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(customer.lastName).should('have.value', customer.lastName)
 	
 	//Enter Phone
-	cy.get(CustomerSearchDialogElements.phone_input).clear().type(searchData.phone).should('have.value', searchData.phone)
+	cy.get(CustomerSearchDialogElements.phone_input).clear().type(customer.phone).should('have.value', customer.phone)
 	
-	 //Enter Email
-	cy.get(CustomerSearchDialogElements.email_input).clear().type(searchData.email).should('have.value', searchData.email)
+	//Enter Email
+	cy.get(CustomerSearchDialogElements.email_input).clear().type(customer.email).should('have.value', customer.email)
 	
 	cy.wait('@legacy').then((xhr) => {
-       //Assert for First Name Result
-		cy.get(CustomerSearchDialogElements.firstName_result).invoke('text').then((text) => {
-		expect(searchData.firstname).equal(text.trim())
+        //Assert for First Name Result
+	    cy.get(CustomerSearchDialogElements.firstName_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.firstName)
 		})
 		//Assert for Last Name Result
-		cy.get(CustomerSearchDialogElements.lastName_result).invoke('text').then((text) => {
-		expect(searchData.lastname).equal(text.trim())
+	    cy.get(CustomerSearchDialogElements.lastName_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.lastName)
 		})
 		//Assert Phone Number Result
-		cy.get(CustomerSearchDialogElements.phone_result).invoke('text').then((text) => {
-		expect(searchData.phone).equal(text.trim())
-		})     
+		cy.get(CustomerSearchDialogElements.phone_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.phone)
+		})  
 		//Assert for Email Verification
-		cy.get(CustomerSearchDialogElements.email_result).invoke('text').then((text) => {
-		expect(searchData.email).equal(text.trim())
+		cy.get(CustomerSearchDialogElements.email_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.email)
 		})		
-    })
+     })
    })
 
   })
-
 })
