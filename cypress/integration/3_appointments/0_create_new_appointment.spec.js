@@ -81,18 +81,18 @@ context('Appointments', () => {
 	      }).as('Timeline')
 	    })
 
-	    afterEach(() => {
-	    	cy.get(CustomerCardElements.activity_appt_textarea).clear()
-	    	// cy.get(CustomerCardElements.activity_appt_date_input).clear()
-	    	// cy.wait(1000)
-	    	// cy.get(CustomerCardElements.activity_appt_date_children).then(($list) => {
-	    	// 	if($list.length > 1){
-	    	// 		cy.get(CustomerCardElements.activity_appt_date).click()
-	    	// 	}
-	    	// })
-	    	cy.get(CustomerCardElements.activity_appt_time_slot).clear()
+	    // afterEach(() => {
+	    	// cy.get(CustomerCardElements.activity_appt_textarea).clear()
+	    	// // cy.get(CustomerCardElements.activity_appt_date_input).clear()
+	    	// // cy.wait(1000)
+	    	// // cy.get(CustomerCardElements.activity_appt_date_children).then(($list) => {
+	    	// // 	if($list.length > 1){
+	    	// // 		cy.get(CustomerCardElements.activity_appt_date).click()
+	    	// // 	}
+	    	// // })
+	    	// cy.get(CustomerCardElements.activity_appt_time_slot).clear()
 			
-	    })
+	    // })
 
 	    after(() => {
 	    	cy.logoutUI()

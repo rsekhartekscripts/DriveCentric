@@ -25,7 +25,7 @@ const outOfBusinessHoursErrortext = "Sorry, you can't schedule an appointment fo
 
 context('Appointments', () => {
 
-	describe('Appointment User - View Appointment', () => {
+	describe('Appointment User - View Appointment pastdated', () => {
 
 		let currentTestNum = 2;
 

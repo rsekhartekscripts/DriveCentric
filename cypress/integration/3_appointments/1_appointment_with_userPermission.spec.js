@@ -116,7 +116,7 @@ context('Appointments', () => {
 				cy.wait(2000)
 				cy.get(CustomerCardElements.activity_appt_time_slot).focus()
 				cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() => {
-					cy.contains(timeSlots[22]).click({
+					cy.contains(timeSlots[34]).click({
 						force: true
 					})
 				})
@@ -132,7 +132,8 @@ context('Appointments', () => {
 				cy.wait("@CreateAppointment").then((xhr) => {
 					// console.log(xhr)
 					cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
-					cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click()
+					cy.wait(5000)
+					cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click({force: true})
 					cy.get(AppointmentCardElements.main_div).should("be.visible")
 					cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
 					cy.get(AppointmentCardElements.appointment_confirm_checkbox).click()
@@ -142,6 +143,7 @@ context('Appointments', () => {
 					cy.get(AppointmentCardElements.main_div).should("be.visible")
 					cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
 					cy.get(AppointmentCardElements.appointment_confirmed).should('have.text', 'Confirmed')
+					cy.get(AppointmentCardElements.close_button).click()
 
 				})
 
@@ -188,7 +190,7 @@ context('Appointments', () => {
 				cy.wait(2000)
 				cy.get(CustomerCardElements.activity_appt_time_slot).focus()
 				cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() => {
-					cy.contains(timeSlots[22]).click({
+					cy.contains(timeSlots[34]).click({
 						force: true
 					})
 				})
