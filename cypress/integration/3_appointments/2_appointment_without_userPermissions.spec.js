@@ -1,11 +1,12 @@
 import * as TopNavigationHeader from './../../HTMLElementSelectors/TopNavigationHeader.json';
 import * as customersList from './../../fixtures/customers.json';
-
+import * as aptcustomersList from './../../fixtures/apppointmentwithpermissions.json';
 import * as SalesHomeElements from './../../HTMLElementSelectors/SalesHome.json';
 import * as CustomerCardElements from './../../HTMLElementSelectors/CustomerCard.json';
 import * as AppointmentCardElements from './../../HTMLElementSelectors/AppointmentCard.json';
 
 const customer = customersList[0];
+const aptcustomer = customersList[0];
 
 const timeSlots = [
 	"12:00 AM", "12:30 AM", "1:00 AM", "1:30 AM", "2:00 AM", "2:30 AM", "3:00 AM", "3:30 AM", "4:00 AM", "4:30 AM",
@@ -38,19 +39,19 @@ context('Appointments', () => {
 	        method: 'GET',
 	        url: '/api/customers/*/summary',
 	      }).as('CustomerSummary')
-	      cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName+" "+customer.lastName)
-			cy.wait('@QuickSearch').then((xhr) => {
-				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
-		          if($list.length > 0){
-		            cy.wrap($list).first().click()
-            		cy.wait("@CustomerSummary").then((xhr) => {
-            			cy.get(CustomerCardElements.main_div).should('be.visible')
-			            cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
-			            cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
-            		})
-		          }
-		        })
-		    })
+	      // cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName+" "+customer.lastName)
+			// cy.wait('@QuickSearch').then((xhr) => {
+				// cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+		          // if($list.length > 0){
+		            // cy.wrap($list).first().click()
+            		// cy.wait("@CustomerSummary").then((xhr) => {
+            			// cy.get(CustomerCardElements.main_div).should('be.visible')
+			            // cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+			            // cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+            		// })
+		          // }
+		        // })
+		    // })
 		})
 
 	    beforeEach(() => {
@@ -97,74 +98,22 @@ context('Appointments', () => {
 	    	cy.logoutUI()
 	    })
 
-
-		    it(`Test 1 - Confirm an Appointment WITHOUT a User Confirm Appointment Permission `, function() {
-				//Create appointment with the type as sales
-		    	let dataToType = "Test Text "+(new Date()).getTime()
-			    cy.get(CustomerCardElements.activity_appt_textarea).type(dataToType)
-			    cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
-			    	cy.get("select").select("Sales")
-			    })
-			    cy.get(CustomerCardElements.activity_appt_date).click()
-			    cy.wait(1000)
-			    cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click({force: true})
-			    let selectedDate = ""
-			    cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
-			    	selectedDate = text
-			    })
-			    cy.wait(2000)
-			    cy.get(CustomerCardElements.activity_appt_time_slot).focus()
-			    cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() =>{
-			    	cy.contains(timeSlots[22]).click({force: true})
-			    })
-			    let selectedTimeSlot = ""
-			    cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
-			    	selectedTimeSlot = text
-			    })
-				cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
-					cy.get("select").select("Assign to me")
-				})
-				cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
-				cy.get(CustomerCardElements.activity_appt_save_button).click()
-				cy.wait("@CreateAppointment").then((xhr) => {
-					// console.log(xhr)
-					cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
-					//click on edit appointment button.
-					cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click()
-					cy.get(AppointmentCardElements.main_div).should("be.visible")
-					//veify the edit appointment header
-					cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
-					//Make sure confirm appointment is desabled.
-					cy.get(AppointmentCardElements.appointment_confirm_checkbox).should('not.be.visible')
-					//click on close button
-					cy.get(AppointmentCardElements.close_button).click()
-
-				})
-				//Delete created appointment as to avoid the duplicates
-				let listOfAppointments = 0
-				cy.get(CustomerCardElements.activity_appts_list).then(($list) => {
-					listOfAppointments = $list.length
-					if(listOfAppointments > 0){
-						cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Delete").click()
-					    cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
-					    cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
-					    cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
-					    cy.wait("@DeleteAppointment").then((xhr) => {
-					    	cy.get(CustomerCardElements.confirmation_dialog).should("not.be.visible")
-					    	cy.wait("@Timeline").then((xhr) => {
-								cy.wait(4000)
-								cy.get(CustomerCardElements.activity_appts_list_parent).should("be.visible")
-								cy.get(CustomerCardElements.activity_appts_list_parent).then(($ulElement) => {
-									assert($ulElement.find("ul li.appointment").length < listOfAppointments)
-								})
-							})
-					    })
+			
+			it(`Test 1 - Confirm an Appointment WITHOUT a User Confirm Appointment Permission `, function () {
+			//Create appointment with the type as sales
+			cy.get(TopNavigationHeader.global_search_textbox).clear().type(aptcustomer.firstName + " " + aptcustomer.lastName)
+			cy.wait('@QuickSearch').then((xhr) => {
+				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+					if ($list.length > 0) {
+						cy.wrap($list).first().click()
+						cy.wait("@CustomerSummary").then((xhr) => {
+							cy.get(CustomerCardElements.main_div).should('be.visible')
+							cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+							cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+						})
 					}
 				})
 			})
-			
-			it(`Test 2 - Reassign an Appointment WITHOUT a User reassign Appointment Permission `, function () {
-			//Create appointment with the type as sales
 			let dataToType = "Test Text " + (new Date()).getTime()
 				cy.get(CustomerCardElements.activity_appt_textarea).type(dataToType)
 				cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
@@ -182,7 +131,94 @@ context('Appointments', () => {
 				cy.wait(2000)
 				cy.get(CustomerCardElements.activity_appt_time_slot).focus()
 				cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() => {
-					cy.contains(timeSlots[22]).click({
+					cy.contains(timeSlots[30]).click({
+						force: true
+					})
+				})
+				let selectedTimeSlot = ""
+				cy.get(CustomerCardElements.activity_appt_time_slot).invoke("val").then(text => {
+					selectedTimeSlot = text
+				})
+				cy.get(CustomerCardElements.activity_appt_extra_options).last().within(() => {
+					cy.get("select").select("Assign to me")
+				})
+				cy.get(CustomerCardElements.activity_appt_save_button).should('not.have.attr', 'disabled')
+				cy.get(CustomerCardElements.activity_appt_save_button).click()
+				cy.wait("@CreateAppointment").then((xhr) => {
+					// console.log(xhr)
+					cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
+					cy.wait(5000)
+					cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click({
+						force: true
+					})
+					cy.get(AppointmentCardElements.main_div).should("be.visible")
+					cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
+					//Make sure confirm appointment is desabled.
+					cy.get(AppointmentCardElements.appointment_confirm_checkbox).should('not.be.visible')
+					//click on close button
+					cy.get(AppointmentCardElements.close_button).click()
+
+				})
+
+				//Delete created appointment as to avoid the duplicates
+				let listOfAppointments = 0
+				cy.get(CustomerCardElements.activity_appts_list).then(($list) => {
+					listOfAppointments = $list.length
+						if (listOfAppointments > 0) {
+							cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Delete").click()
+							cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
+							cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
+							cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
+							cy.wait("@DeleteAppointment").then((xhr) => {
+								cy.get(CustomerCardElements.confirmation_dialog).should("not.be.visible")
+								cy.wait("@Timeline").then((xhr) => {
+									cy.wait(4000)
+									cy.get(CustomerCardElements.activity_appts_list_parent).should("be.visible")
+									cy.get(CustomerCardElements.activity_appts_list_parent).then(($ulElement) => {
+										assert($ulElement.find("ul li.appointment").length < listOfAppointments)
+									})
+								})
+							})
+						}
+						cy.get(CustomerCardElements.close_div).click()
+				})
+				
+		})
+		
+		
+		it(`Test 2 - Reassign an Appointment WITHOUT a User reassign Appointment Permission`, function () {
+			//Create appointment with the type as sales
+			cy.get(TopNavigationHeader.global_search_textbox).clear().type(aptcustomer.firstName + " " + aptcustomer.lastName)
+			cy.wait('@QuickSearch').then((xhr) => {
+				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+					if ($list.length > 0) {
+						cy.wrap($list).first().click()
+						cy.wait("@CustomerSummary").then((xhr) => {
+							cy.get(CustomerCardElements.main_div).should('be.visible')
+							cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+							cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+						})
+					}
+				})
+			})
+			let dataToType = "Test Text " + (new Date()).getTime()
+				cy.get(CustomerCardElements.activity_appt_textarea).type(dataToType)
+				cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
+					cy.get("select").select("Sales")
+				})
+				cy.get(CustomerCardElements.activity_appt_date).click()
+				cy.wait(1000)
+				cy.get(CustomerCardElements.activity_appt_date_not_disabled_cell).last().click({
+					force: true
+				})
+				let selectedDate = ""
+				cy.get(CustomerCardElements.activity_appt_date_input).invoke("val").then(text => {
+					selectedDate = text
+				})
+				cy.wait(2000)
+				cy.get(CustomerCardElements.activity_appt_time_slot).focus()
+				cy.get(CustomerCardElements.activity_appt_time_slot_options).within(() => {
+					cy.contains(timeSlots[29]).click({
 						force: true
 					})
 				})
@@ -212,7 +248,6 @@ context('Appointments', () => {
 
 				})
 
-			
 		})
 	  
 
