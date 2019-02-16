@@ -18,7 +18,7 @@
 	"activity_appts_list": "[data-test=customerCard-parent-div] .deal-info-content .timeline .planned ul li.appointment",
 	"alert_dialog": "[data-test=dialog-alert-div]",
 	"alert_dialog_actions": "[data-test=dialog-alert-div] .driveDialogActions",
-	"activity_appts_list_actions": "[data-test=customerCard-parent-div] .deal-info-content .timeline .planned ul li.appointment .srContent .cmp-tml-act ul",
+	"activity_appts_list_actions": "[data-test=customerCard-parent-div] .deal-info-content .timeline .planned ul li.appointment .srContent .cmp-tml-act",
 	"confirmation_dialog": ".driveDialogAlert .driveDialogContent",
 	"confirmation_dialog_content": ".driveDialogAlert .driveDialogContent .driveDialogMessage",
 	"confirmation_dialog_actions": ".driveDialogAlert .driveDialogContent .driveDialogMessage .driveDialogActions",

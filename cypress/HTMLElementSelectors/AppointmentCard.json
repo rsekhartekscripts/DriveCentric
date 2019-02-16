@@ -63,6 +63,6 @@
 	"apt_search_user_input_box" : "[placeholder='Search for people to add']",
 	"apt_search_user_results" : ".result-boxList .ng-star-inserted .srContent .name",
 	//Give a user to reassign
-	"appointment_reassign_user" : "abc abc",
-	"apt_past_date_range" : "Last Week"
+	"appointment_reassign_user" : "Abc Abc",
+	"apt_past_date_range" : "Last Month"
 }

@@ -1,11 +1,13 @@
 import * as TopNavigationHeader from './../../HTMLElementSelectors/TopNavigationHeader.json';
 import * as customersList from './../../fixtures/customers.json';
+import * as aptcustomersList from './../../fixtures/apppointmentwithpermissions.json';
 
 import * as SalesHomeElements from './../../HTMLElementSelectors/SalesHome.json';
 import * as CustomerCardElements from './../../HTMLElementSelectors/CustomerCard.json';
 import * as AppointmentCardElements from './../../HTMLElementSelectors/AppointmentCard.json';
 
 const customer = customersList[0];
+const aptcustomer = customersList[0];
 
 const timeSlots = [
 	"12:00 AM", "12:30 AM", "1:00 AM", "1:30 AM", "2:00 AM", "2:30 AM", "3:00 AM", "3:30 AM", "4:00 AM", "4:30 AM",
@@ -38,19 +40,19 @@ context('Appointments', () => {
 				method: 'GET',
 				url: '/api/customers/*/summary',
 			}).as('CustomerSummary')
-			cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName + " " + customer.lastName)
-			cy.wait('@QuickSearch').then((xhr) => {
-				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
-					if ($list.length > 0) {
-						cy.wrap($list).first().click()
-						cy.wait("@CustomerSummary").then((xhr) => {
-							cy.get(CustomerCardElements.main_div).should('be.visible')
-							cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
-							cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
-						})
-					}
-				})
-			})
+			// cy.get(TopNavigationHeader.global_search_textbox).clear().type(customer.firstName_wthusrpermission + " " + customer.lastName_wthusrpermission)
+			// cy.wait('@QuickSearch').then((xhr) => {
+				// cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+					// if ($list.length > 0) {
+						// cy.wrap($list).first().click()
+						// cy.wait("@CustomerSummary").then((xhr) => {
+							// cy.get(CustomerCardElements.main_div).should('be.visible')
+							// cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+							// cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+						// })
+					// }
+				// })
+			// })
 		})
 
 		beforeEach(() => {
@@ -99,6 +101,19 @@ context('Appointments', () => {
 
 		it(`Test 1 - Confirm an Appointment WITH a User Confirm Appointment Permission `, function () {
 			//Create appointment with the type as sales
+			cy.get(TopNavigationHeader.global_search_textbox).clear().type(aptcustomer.firstName + " " + aptcustomer.lastName)
+			cy.wait('@QuickSearch').then((xhr) => {
+				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+					if ($list.length > 0) {
+						cy.wrap($list).first().click()
+						cy.wait("@CustomerSummary").then((xhr) => {
+							cy.get(CustomerCardElements.main_div).should('be.visible')
+							cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+							cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+						})
+					}
+				})
+			})
 			let dataToType = "Test Text " + (new Date()).getTime()
 				cy.get(CustomerCardElements.activity_appt_textarea).type(dataToType)
 				cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
@@ -133,17 +148,33 @@ context('Appointments', () => {
 					// console.log(xhr)
 					cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
 					cy.wait(5000)
-					cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click({force: true})
+					cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click({
+						force: true
+					})
 					cy.get(AppointmentCardElements.main_div).should("be.visible")
 					cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
 					cy.get(AppointmentCardElements.appointment_confirm_checkbox).click()
 					cy.get(AppointmentCardElements.save_button).click()
-					cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
-					cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click()
-					cy.get(AppointmentCardElements.main_div).should("be.visible")
-					cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
-					cy.get(AppointmentCardElements.appointment_confirmed).should('have.text', 'Confirmed')
-					cy.get(AppointmentCardElements.close_button).click()
+					//cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
+					cy.get(CustomerCardElements.close_div).click()
+					cy.get(TopNavigationHeader.global_search_textbox).clear().type(aptcustomer.firstName + " " + aptcustomer.lastName)
+					cy.wait('@QuickSearch').then((xhr) => {
+						cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+							if ($list.length > 0) {
+								cy.wrap($list).first().click()
+								cy.wait("@CustomerSummary").then((xhr) => {
+									cy.get(CustomerCardElements.main_div).should('be.visible')
+									cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+									cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+									cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click()
+									cy.get(AppointmentCardElements.main_div).should("be.visible")
+									cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
+									cy.get(AppointmentCardElements.appointment_confirmed).should('have.text', 'Confirmed')
+									cy.get(AppointmentCardElements.close_button).click()
+								})
+							}
+						})
+					})
 
 				})
 
@@ -167,12 +198,26 @@ context('Appointments', () => {
 								})
 							})
 						}
+						cy.get(CustomerCardElements.close_div).click()
 				})
+				
 		})
-		
-		
-		it(`Test 2 - Reassign an Appointment WITH a User reassign Appointment Permission `, function () {
+			
+		it(`Test 2 - Reassign an Appointment WITH a User reassign Appointment Permission`, function () {
 			//Create appointment with the type as sales
+			cy.get(TopNavigationHeader.global_search_textbox).clear().type(aptcustomer.firstName + " " + aptcustomer.lastName)
+			cy.wait('@QuickSearch').then((xhr) => {
+				cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+					if ($list.length > 0) {
+						cy.wrap($list).first().click()
+						cy.wait("@CustomerSummary").then((xhr) => {
+							cy.get(CustomerCardElements.main_div).should('be.visible')
+							cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+							cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+						})
+					}
+				})
+			})
 			let dataToType = "Test Text " + (new Date()).getTime()
 				cy.get(CustomerCardElements.activity_appt_textarea).type(dataToType)
 				cy.get(CustomerCardElements.activity_appt_extra_options).first().within(() => {
@@ -205,15 +250,37 @@ context('Appointments', () => {
 				cy.get(CustomerCardElements.activity_appt_save_button).click()
 				cy.wait("@CreateAppointment").then((xhr) => {
 					// console.log(xhr)
-					cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
-					cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click()
+					//cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
+					cy.wait(5000)
+					cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click({
+						force: true
+					})
 					cy.get(AppointmentCardElements.main_div).should("be.visible")
 					cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
 					cy.get(AppointmentCardElements.appointment_assigned_to).click()
 					cy.get(AppointmentCardElements.appointment_serach_user_dialog).clear({force: true}).type(AppointmentCardElements.appointment_reassign_user,{force: true})
 					cy.get(AppointmentCardElements.appointment_assign_user_list).first().click()
 					cy.get(AppointmentCardElements.save_button).click()
-					
+					//cy.get(CustomerCardElements.activity_appt_save_button).should('have.attr', 'disabled')
+					cy.get(CustomerCardElements.close_div).click()
+					cy.get(TopNavigationHeader.global_search_textbox).clear().type(aptcustomer.firstName + " " + aptcustomer.lastName)
+					cy.wait('@QuickSearch').then((xhr) => {
+						cy.get(TopNavigationHeader.displayed_result).then(($list) => {
+							if ($list.length > 0) {
+								cy.wrap($list).first().click()
+								cy.wait("@CustomerSummary").then((xhr) => {
+									cy.get(CustomerCardElements.main_div).should('be.visible')
+									cy.get(CustomerCardElements.main_tabs).contains('Activity').click()
+									cy.get(CustomerCardElements.activity_tabs).contains('appt').click()
+									cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Edit").click()
+									cy.get(AppointmentCardElements.main_div).should("be.visible")
+									cy.get(AppointmentCardElements.card_title).contains("Edit Appointment")
+									cy.get(AppointmentCardElements.apt_assigned_user_name).should('have.text', AppointmentCardElements.appointment_reassign_user)
+									cy.get(AppointmentCardElements.close_button).click()
+								})
+							}
+						})
+					})
 
 				})
 
@@ -237,8 +304,10 @@ context('Appointments', () => {
 								})
 							})
 						}
+						cy.get(CustomerCardElements.close_div).click()
 				})
 		})
+		
 
 	})
 })

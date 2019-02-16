@@ -150,27 +150,6 @@ context('Appointments', () => {
 				cy.get(CustomerCardElements.activity_appt_save_button).click()
 				cy.get(".modal-close").click()
 
-				// //Not required at this movment can Delete created appointment as to avoid the duplicates
-				// let listOfAppointments = 0
-				// cy.get(CustomerCardElements.activity_appts_list).then(($list) => {
-					// listOfAppointments = $list.length
-						// if (listOfAppointments > 0) {
-							// cy.get(CustomerCardElements.activity_appts_list_actions).first().contains("Delete").click()
-							// cy.get(CustomerCardElements.confirmation_dialog).should("be.visible")
-							// cy.get(CustomerCardElements.confirmation_dialog_content).contains("Are you sure you want to delete this appointment")
-							// cy.get(CustomerCardElements.confirmation_dialog_actions).contains("Yes").click()
-							// cy.wait("@DeleteAppointment").then((xhr) => {
-								// cy.get(CustomerCardElements.confirmation_dialog).should("not.be.visible")
-								// cy.wait("@Timeline").then((xhr) => {
-									// cy.wait(4000)
-									// cy.get(CustomerCardElements.activity_appts_list_parent).should("be.visible")
-									// cy.get(CustomerCardElements.activity_appts_list_parent).then(($ulElement) => {
-										// assert($ulElement.find("ul li.appointment").length < listOfAppointments)
-									// })
-								// })
-							// })
-						// }
-				// })
 		})
 
 		it(`Test 2 - Navigate to Appointments list from menu bar `, function () {
