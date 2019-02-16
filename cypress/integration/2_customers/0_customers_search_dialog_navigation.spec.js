@@ -271,25 +271,27 @@ context('Customer Field Level Search', () => {
 	 })
    })
    
-   it('Test 19 - Search New customer with Valid First Name, invalid phone number', () => {
+   it('Test 19 - Search New customer with invalid First Name, Last Name, email,Company name and Valid phone number', () => {
 	//Enter First Name
 	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(invalidData).should('have.value', invalidData)
 	
 	//Enter Last Name
 	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(invalidData).should('have.value', invalidData)
 	
+	//Enter Company Name
+	cy.get(CustomerSearchDialogElements.company_input).clear().type(invalidData)
+	
 	//Enter Phone
-	cy.get(CustomerSearchDialogElements.phone_input).clear().type(invalidPhone).should('have.value', invalidPhone)
+	cy.get(CustomerSearchDialogElements.phone_input).clear().type(customer.phone).should('have.value', customer.phone)
 	
 	//Enter Email
 	cy.get(CustomerSearchDialogElements.email_input).clear().type(invalidData).should('have.value', invalidData)
 	
 	cy.wait('@legacy').then((xhr) => {
-	  //Assert No results message
-	  cy.get('div[aria-hidden=\'false\'][class=\'driveNewCustomerSplash show\']').within(()=>{
-       cy.get('h4').contains("No results")
-       cy.get('p').contains("You can continue by adding a new customer from scratch.")
-      })
+	  //Assert Phone Number Result
+		cy.get(CustomerSearchDialogElements.phone_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.phone)
+		}) 
 	  })
    })
 
