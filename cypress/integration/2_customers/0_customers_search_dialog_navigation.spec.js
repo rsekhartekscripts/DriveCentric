@@ -241,7 +241,7 @@ context('Customer Field Level Search', () => {
 	  })
    })
    
-   it.only('Test 17 - Search New customer with Valid First Name, invalid phone number', () => {
+   it('Test 17 - Search New customer with Valid First Name, invalid phone number', () => {
 	//Enter First Name
 	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName).should('have.value', customer.firstName)
 	
