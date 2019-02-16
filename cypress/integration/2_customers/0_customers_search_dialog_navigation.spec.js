@@ -3,6 +3,8 @@ import * as CustomerSearchDialogElements from './../../HTMLElementSelectors/Cust
 import * as customersList from './../../fixtures/customers.json';
 const customer = customersList[0];
 
+const invalidData = "invalid";
+const invalidPhone = "(000) 000-0000";
 
 context('Customer Field Level Search', () => {
 
@@ -174,7 +176,7 @@ context('Customer Field Level Search', () => {
     })
    })
    
-   it.only('Test 14 - Customer First,Last Name,Phone & Email Search Results Verification With Valid Data ', () => {
+   it('Test 14 - Customer First,Last Name,Phone & Email Search Results Verification With Valid Data ', () => {
 	//Enter First Name
 	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName).should('have.value', customer.firstName)
 	
@@ -205,6 +207,90 @@ context('Customer Field Level Search', () => {
 			    cy.wrap($el).contains(customer.email)
 		})		
      })
+   })
+   
+    it('Test 15 - Search New customer with Valid First Name, invalid Last Name ', () => {
+	//Enter First Name
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName).should('have.value', customer.firstName)
+	
+	//Enter Last Name
+	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	cy.wait('@legacy').then((xhr) => {
+	  //Assert No results message
+	  cy.get('div[aria-hidden=\'false\'][class=\'driveNewCustomerSplash show\']').within(()=>{
+       cy.get('h4').contains("No results")
+       cy.get('p').contains("You can continue by adding a new customer from scratch.")
+      })
+	  })
+   })
+   
+   it('Test 16 - Search New customer with invalid First Name, valid Last name', () => {
+	//Enter First Name
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	//Enter Last Name
+	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(customer.lastName).should('have.value', customer.lastName)
+	
+	cy.wait('@legacy').then((xhr) => {
+	  //Assert No results message
+	  cy.get('div[aria-hidden=\'false\'][class=\'driveNewCustomerSplash show\']').within(()=>{
+       cy.get('h4').contains("No results")
+       cy.get('p').contains("You can continue by adding a new customer from scratch.")
+      })
+	  })
+   })
+   
+   it.only('Test 17 - Search New customer with Valid First Name, invalid phone number', () => {
+	//Enter First Name
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName).should('have.value', customer.firstName)
+	
+	//Enter Phone Number
+	cy.get(CustomerSearchDialogElements.phone_input).clear().type(invalidPhone).should('have.value', invalidPhone)
+	
+	 cy.wait('@legacy').then((xhr) => {
+	  //Assert for First Name Result
+	    cy.get(CustomerSearchDialogElements.firstName_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.firstName)
+		})
+	 })
+   })
+   
+   it('Test 18 - Search New customer with Valid First Name, invalid email address', () => {
+	//Enter First Name
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(customer.firstName).should('have.value', customer.firstName)
+	
+	//Enter Email
+	cy.get(CustomerSearchDialogElements.email_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	 cy.wait('@legacy').then((xhr) => {
+	  //Assert for First Name Result
+	    cy.get(CustomerSearchDialogElements.firstName_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.firstName)
+		})
+	 })
+   })
+   
+   it('Test 19 - Search New customer with Valid First Name, invalid phone number', () => {
+	//Enter First Name
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	//Enter Last Name
+	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	//Enter Phone
+	cy.get(CustomerSearchDialogElements.phone_input).clear().type(invalidPhone).should('have.value', invalidPhone)
+	
+	//Enter Email
+	cy.get(CustomerSearchDialogElements.email_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	cy.wait('@legacy').then((xhr) => {
+	  //Assert No results message
+	  cy.get('div[aria-hidden=\'false\'][class=\'driveNewCustomerSplash show\']').within(()=>{
+       cy.get('h4').contains("No results")
+       cy.get('p').contains("You can continue by adding a new customer from scratch.")
+      })
+	  })
    })
 
   })

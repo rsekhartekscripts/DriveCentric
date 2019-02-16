@@ -12,4 +12,5 @@
 	"phone_result" : "[ng-class*='result.CellPhone']",
 	"company_result" : "[ng-if*='result.Company']",
 	"email_result" : "[ng-if*='result.Email']"
+	"noresults" : "div[aria-hidden=false][class=driveNewCustomerSplash show]"
 }
