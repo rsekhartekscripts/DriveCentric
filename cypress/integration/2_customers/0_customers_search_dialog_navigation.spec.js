@@ -1,5 +1,6 @@
 import * as SalesHomeElements from './../../HTMLElementSelectors/SalesHome.json';
 import * as CustomerSearchDialogElements from './../../HTMLElementSelectors/CustomerSearchDialog.json';
+import * as AddNewCustomerDialogElements from './../../HTMLElementSelectors/AddNewCustomerDialog.json';
 import * as customersList from './../../fixtures/customers.json';
 const customer = customersList[0];
 
@@ -294,6 +295,83 @@ context('Customer Field Level Search', () => {
 		}) 
 	  })
    })
+   
+   it('Test 20 - Search New customer with invalid First Name, Last Name, Company name, phone number and valid email', () => {
+	//Enter First Name
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	//Enter Last Name
+	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	//Enter Company Name
+	cy.get(CustomerSearchDialogElements.company_input).clear().type(invalidData)
+	
+	//Enter Phone
+	cy.get(CustomerSearchDialogElements.phone_input).clear().type(invalidPhone).should('have.value', invalidPhone)
+	
+	//Enter Email
+	cy.get(CustomerSearchDialogElements.email_input).clear().type(customer.email).should('have.value', customer.email)
+	
+	cy.wait('@legacy').then((xhr) => {
+	  //Assert for Email Verification
+		cy.get(CustomerSearchDialogElements.email_result).each(($el, index, $list) => {
+			    cy.wrap($el).contains(customer.email)
+		}) 
+	  })
+   })
+   
+   it('Test 21 - Search New customer without matching existing customers details (First Name,last name, phone number, Company, email)', () => {
+	//Enter First Name
+	cy.get(CustomerSearchDialogElements.first_name_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	//Enter Last Name
+	cy.get(CustomerSearchDialogElements.last_name_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	//Enter Company Name
+	cy.get(CustomerSearchDialogElements.company_input).clear().type(invalidData)
+	
+	//Enter Phone
+	cy.get(CustomerSearchDialogElements.phone_input).clear().type(invalidPhone).should('have.value', invalidPhone)
+	
+	//Enter Email
+	cy.get(CustomerSearchDialogElements.email_input).clear().type(invalidData).should('have.value', invalidData)
+	
+	cy.wait('@legacy').then((xhr) => {
+	  //Assert No results message
+	  cy.get('div[aria-hidden=\'false\'][class=\'driveNewCustomerSplash show\']').within(()=>{
+       cy.get('h4').contains("No results")
+       cy.get('p').contains("You can continue by adding a new customer from scratch.")
+      }) 
+	  })
+   })
+   
+   it('Test 21 - Validate ADD CUSTOMER button in drive New Customer Search window', () => {
+      cy.get(CustomerSearchDialogElements.first_name_input).clear()
+      cy.get(CustomerSearchDialogElements.first_name_input).type(invalidData)
+      cy.wait('@legacy').then((xhr) => {
+        cy.contains(CustomerSearchDialogElements.add_customer_button).click()
+        cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.customer_type_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.first_name_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.last_name_input).should('be.visible')
+       // cy.get(AddNewCustomerDialogElements.company_name_input).should('not.be.visible')
+        cy.get(AddNewCustomerDialogElements.email_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.phone_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.home_phone_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.address_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.city_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.state_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.zip_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.store_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.source_type_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.source_description_input).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.sales_people_div).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.bdc_div).should('be.visible')
+        cy.get(AddNewCustomerDialogElements.interested_vehicle_div).contains("Interested Vehicle")
+        cy.get(AddNewCustomerDialogElements.trade_in_div).contains("Trade-In")
+		cy.contains(AddNewCustomerDialogElements.cancel_button).click({force: true})
+      })
+    })
 
   })
 })
