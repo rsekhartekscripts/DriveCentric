@@ -399,7 +399,21 @@ context('Add New Customer Dialog', () => {
 	  
     })
 	
-	it('Test 21 - Verify Text Fields in Custom vehicle window ', () => {
+	it('Test 21 - Verify Dropdown fields in Custom vehicle window ', () => {
+      cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
+		cy.contains('Add Custom').click()		
+      })
+	  //Wait for the Add Custom dialog Options
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
+	  
+	  //Click on the New/Used dropdown and Check the Options
+	  cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(1).should('have.text', 'New')
+	  cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(2).should('have.text', 'Used')
+		
+    })
+	
+	it('Test 22 - Verify Text Fields in Custom vehicle window', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -424,18 +438,10 @@ context('Add New Customer Dialog', () => {
 		  expect($lis.eq(12)).to.contain('Exterior Color')
 		   expect($lis.eq(13)).to.contain('Comments')
 		  
-        })
-		//Click on the New/Used dropdown and Check the Options
-		cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(1).should('have.text', 'New')
-		cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(2).should('have.text', 'Used')
-		
-		//Verify Add and Cancel  button
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Add')		
-	  
+        })  
     })
 	
-	it('Test 22 - Verify Text Fields in Custom vehicle window ', () => {
+	it('Test 23 - Verify Buttons in Custom vehicle window ', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -443,17 +449,13 @@ context('Add New Customer Dialog', () => {
 	  //Wait for the Add Custom dialog Options
 	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 14)
 	  
-		//Click on the New/Used dropdown and Check the Options
-		cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(1).should('have.text', 'New')
-		cy.get(AddNewCustomerDialogElements.new_used_dropdown_options).eq(2).should('have.text', 'Used')
-		
-		//Verify Add and Cancel  button
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Add')
+	  //Verify Add and Cancel  button
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Add')		
 	  
-    })	
+    })
 	
-	it('Test 23 - Validate VIN # field with the value given ', () => {
+	it('Test 24 - Validate VIN # field with the value given ', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -473,7 +475,7 @@ context('Add New Customer Dialog', () => {
 		  
     })
 	
-	it('Test 24 - Validate CANCEL button in Add Vehicle window WITHOUT data ', () => {
+	it('Test 25 - Validate CANCEL button in Add Vehicle window WITHOUT data ', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -489,7 +491,7 @@ context('Add New Customer Dialog', () => {
 		
     })
 	
-	it('Test 25 - Validate CANCEL button in Add Vehicle window WITH data ', () => {
+	it('Test 26 - Validate CANCEL button in Add Vehicle window WITH data ', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -509,7 +511,7 @@ context('Add New Customer Dialog', () => {
 		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('You have unsaved changes, are you sure you wish to cancel those changes and close the dialog?')
     })
 	
-	it('Test 26 - Add Interested Vehicle by Custom type ', () => {
+	it('Test 27 - Add Interested Vehicle by Custom type ', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -548,7 +550,7 @@ context('Add New Customer Dialog', () => {
 	   cy.get(AddNewCustomerDialogElements.added_vehicle_under_inventary).should('be.visible')
     })
 	
-	it('Test 27 - Remove Interested Vehicle from the list ', () => {
+	it('Test 28 - Remove Interested Vehicle from the list ', () => {
       cy.get(AddNewCustomerDialogElements.interested_vehicle_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
 		cy.contains('Add Custom').click()		
@@ -578,7 +580,15 @@ context('Add New Customer Dialog', () => {
 	   
     })
 	
-	it('Test 28 - Verify Add Trade In window fields ', () => {
+	it('Test 29 - Navigate to "Add Trade In" window', () => {
+      cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()	
+      })
+	  //Wait for the Trade-in dialog Options
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 18)
+    })
+	
+	it('Test 30 - Verify "Add Trade In" window fields', () => {
       cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
         cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()	
       })
@@ -607,13 +617,21 @@ context('Add New Customer Dialog', () => {
 		  expect($lis.eq(16)).to.contain('Per Diem')
 		  expect($lis.eq(17)).to.contain('Comments')
         })	   
-		  
-		//Verify Add and Cancel  button
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
-		cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Add')
     })
 	
-	it('Test 29 - Validate VIN # field with the value given in Tarde-in ', () => {
+	it('Test 31 - Verify ADD and CANCEL buttons in "Add Trade In" window', () => {
+      cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
+        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()	
+      })
+	  //Wait for the Trade-in dialog Options
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 18)
+	  
+	  //Verify Add and Cancel  button
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel')
+	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Add')
+    })
+	
+	it('Test 32 - Validate VIN # field with the value given in Tarde-in ', () => {
       cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
       cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
       })
@@ -631,7 +649,7 @@ context('Add New Customer Dialog', () => {
 		cy.get(AddNewCustomerDialogElements.add_custom_dialog_trim_field).should('have.class', 'ng-modified')
     })
 	
-	it('Test 30 - Validate CANCEL button in "Add Trade In" window WITHOUT data provided in the fields', () => {
+	it('Test 33 - Validate CANCEL button in "Add Trade In" window WITHOUT data provided in the fields', () => {
        cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
        cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
       })
@@ -645,10 +663,10 @@ context('Add New Customer Dialog', () => {
 	    cy.get(AddNewCustomerDialogElements.add_custom_dialog).should('not.exist')
     })
 	
-	it('Test 31 - Validate CANCEL button in  "Add Trade In" window WITH data provided in the fields', () => {
-		  cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
+	it('Test 34 - Validate CANCEL button in  "Add Trade In" window WITH data provided in the fields', () => {
+		cy.get(AddNewCustomerDialogElements.trade_in_div).within(()=>{
 		   cy.get(AddNewCustomerDialogElements.new_vehicle_add_button).click()
-		  })
+		})
 		 //Wait for the Add Custom dialog Options
 		 cy.get(AddNewCustomerDialogElements.add_custom_dialog_fields).should('have.length', 18)
 	  
@@ -664,7 +682,7 @@ context('Add New Customer Dialog', () => {
 		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('You have unsaved changes, are you sure you wish to cancel those changes and close the dialog?')
     })
 	
-	it('Test 32 - Validate Add New Customer without <Source>, <Description> field values', () => {
+	it('Test 35 - Validate Add New Customer without <Source>, <Description> field values', () => {
 		//Click on Add Customer button
 		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Add Customer').click()
 		
@@ -675,7 +693,7 @@ context('Add New Customer Dialog', () => {
 		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('No').click()
     })
 	
-	it('Test 33 - Validate Add New Customer with <Source>, <Description> and Interested Vehicle NOT added', () => {
+	it('Test 36 - Validate Add New Customer with <Source>, <Description> and Interested Vehicle NOT added', () => {
 		//Select Source dropdown value
 		cy.get(AddNewCustomerDialogElements.add_new_customer_source).select(customer.source)
 		
@@ -693,7 +711,24 @@ context('Add New Customer Dialog', () => {
 		
     })
 	
-	it('Test 34 - Validate Add New Customer with <Source>, <Description> field alert YES confirmation', () => {
+	it('Test 37 - Add New Customer with <Source>, <Description> field values and Interested Vehicle NOT added  and with NO confirmation message', () => {
+		//Select Source dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_source).select(customer.source)
+		
+		//Select Description dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_description).select(customer.description)
+		
+		//Click on Add Customer button
+		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Add Customer').click()
+		
+		//Verify the confirm alert present
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_confirm_alert).contains('No interested vehicle has been selected.  Are you sure you wish to save?')
+		
+		//Click on Alert NO button
+		cy.get(AddNewCustomerDialogElements.alert_buttons).contains('No').click()
+		
+    })
+	it('Test 38 - Validate Add New Customer with <Source>, <Description> field alert YES confirmation', () => {
 		//Click on CANCEL Button
 		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Cancel').click()
 		
@@ -728,8 +763,7 @@ context('Add New Customer Dialog', () => {
 			})		
     })
 	
-	
-	it('Test 35 - Validate Add New Customer with <Source>, <Description> field for company check', () => {
+	it('Test 39 - Validate Add New Customer with <Source>, <Description> field for company check', () => {
 		//Click on CANCEL Button
 		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Cancel').click()
 		
@@ -767,7 +801,7 @@ context('Add New Customer Dialog', () => {
 			})		
     })
 	
-	it('Test 36 - Validate Add customer with Type as Individual', () => {
+	it('Test 40 - Validate Add customer with Type as Individual', () => {
 		//Click on CANCEL Button
 		cy.get(AddNewCustomerDialogElements.add_new_customer_page_buttons).contains('Cancel').click()
 		
@@ -829,7 +863,7 @@ context('Add New Customer Dialog', () => {
 		
     })
 	
-	it('Test 37 - Validate Add customer with Type as Company', () => {
+	it('Test 41 - Validate Add customer with Type as Company', () => {
 		
 		//Enter Home Phone
 		cy.get(AddNewCustomerDialogElements.add_new_customer_homephone).clear().type(customer.homephone).should('have.value', customer.homephone)
