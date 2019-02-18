@@ -513,7 +513,20 @@ context('Customer Contact Card', () => {
         })
     })
 	
-	it('Test 27 - Add vehicle from customer contact card under "Interested" section', () => {
+	it('Test 27 - Verify information of customer "Deal" section under the Open tab', () => {
+	  //Click on the open tab
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
+	  
+	  //Verify the herad in the open tab page
+      cy.get(CustomerContactCardElements.open_tab_headers).should('be.visible')
+	  
+	  //Verify the details are present
+	  cy.get(CustomerContactCardElements.open_tab_customer_sections).first().within(() => {
+          cy.get(CustomerContactCardElements.open_tab_customer_sections_details).contains('days')
+      })
+    })
+	
+	it('Test 28 - Add vehicle from customer contact card under "Interested" section', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
@@ -541,7 +554,7 @@ context('Customer Contact Card', () => {
       })
     })
 
-	it('Test 28 - Validate Edit vehicle Dropdown fields', () => {
+	it('Test 29 - Validate Edit vehicle Dropdown fields', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
@@ -560,7 +573,7 @@ context('Customer Contact Card', () => {
 	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel').click({force: true})
     })
 	
-	it('Test 29 - Validate Edit vehicle Text Fields ', () => {
+	it('Test 30 - Validate Edit vehicle Text Fields ', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
@@ -590,7 +603,7 @@ context('Customer Contact Card', () => {
 	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel').click({force: true})
     })
 	
-	it('Test 30 - Validate Edit vehicle Buttons ', () => {
+	it('Test 31 - Validate Edit vehicle Buttons ', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
@@ -606,7 +619,28 @@ context('Customer Contact Card', () => {
 	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(0).contains('Cancel').click({force: true})
     })
 	
-	it('Test 31 - Edit vehicle(custom vehicle) information from customer contact card under "Interested" section', () => {
+	it('Test 32 - Validate Year, Make, Model and Trim field values are auto populated ', () => {
+	  //Click on the open tab
+      cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
+	  
+	  //Verify the details are present
+	  cy.get(CustomerContactCardElements.open_tab_interested_section).first().within(() => {
+         cy.get(CustomerContactCardElements.add_interested_existing_vehicle).should('be.visible').click()
+      })
+	  
+	  //Verify VIN#
+	   cy.get(AddNewCustomerDialogElements.add_custom_dialog_mileage_field).clear()
+	   cy.get(AddNewCustomerDialogElements.add_custom_dialog_mileage_field).type(customer.vin_old)
+	   
+	  //Assert the displayed field values for Year, Mark, Model, Trim and VIN
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_vin_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_year_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_make_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_model_field).should('have.class', 'ng-modified')
+		cy.get(AddNewCustomerDialogElements.add_custom_dialog_trim_field).should('have.class', 'ng-modified') 
+    })
+	
+	it('Test 33 - Edit vehicle(custom vehicle) information from customer contact card under "Interested" section', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
@@ -630,7 +664,7 @@ context('Customer Contact Card', () => {
 	  cy.get(AddNewCustomerDialogElements.add_custom_dialog_buttons).eq(1).contains('Save').click()
     })
 	
-	it('Test 32 - Validate Edit Custom vehicle without Year ', () => {
+	it('Test 34 - Validate Edit Custom vehicle without Year ', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
@@ -651,7 +685,7 @@ context('Customer Contact Card', () => {
 	  cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Done').click()
     })
 	
-	it('Test 33 - Validate Edit Custom vehicle without Make field value', () => {
+	it('Test 35 - Validate Edit Custom vehicle without Make field value', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
@@ -672,7 +706,7 @@ context('Customer Contact Card', () => {
 	  cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Done').click()
     })
 	
-	it('Test 34 - Validate Edit Custom vehicle without Model field value', () => {
+	it('Test 36 - Validate Edit Custom vehicle without Model field value', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
@@ -693,7 +727,7 @@ context('Customer Contact Card', () => {
 	  cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Done').click()
     })
 
-	it('Test 35 - Validate Edit Custom vehicle without <Year>, <Make>, <Model> field values', () => {
+	it('Test 37 - Validate Edit Custom vehicle without <Year>, <Make>, <Model> field values', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
@@ -720,7 +754,7 @@ context('Customer Contact Card', () => {
 	  cy.get(AddNewCustomerDialogElements.alert_buttons).contains('Done').click()
     })
 	
-	it('Test 36 - Validate Edit Custom vehicle without Model field value', () => {
+	it('Test 38 - Verify the CANCEL button on Edit Vehicle window', () => {
 	  //Click on the open tab
       cy.get(CustomerContactCardElements.main_tabs_parent_div).contains("Open").click()
 	  
