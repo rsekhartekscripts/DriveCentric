@@ -45,7 +45,7 @@ context('Recent Customers Search', () => {
 		    })			 
 		})
 		
-		it.only('Test 3 - Validate customer card when user clicks on any of the recent customers list who has Open deals', function() {
+		it('Test 3 - Validate customer card when user clicks on any of the recent customers list who has Open deals', function() {
 			//Click on the Recent Customers Icon
 			cy.get(TopNavigationHeader.recent_customers_icon).click();
 			
