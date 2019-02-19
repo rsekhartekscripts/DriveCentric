@@ -10,6 +10,7 @@
 	"recent_customers_icon_afterclick": "div[class=\"listbox active recentcustomers\"]",
 	"recent_customers_heaer": "div[class=\"listbox active recentcustomers\"] > h4",
 	"recent_customers_displayed": "div[class=\"listbox active recentcustomers\"] .srContent > span[class=\"name\"]",
+	"recent_customers_displayed_value": "div[class=\"listbox active recentcustomers\"] .srContent > span[class*=\"value\"]",
 	"customer_card_name": ".deal-customer .cust-name",
 	"customer_card_tabs": ".selectorname",
 	"close_winodw": ".modal-close"
