@@ -909,9 +909,29 @@ context('Add New Customer Dialog', () => {
 		cy.wait('@legacy').then((xhr) => {
         cy.contains(CustomerSearchDialogElements.add_customer_button).click()
         cy.get(SalesHomeElements.add_new_customer_dialog).should('be.visible')
-      })
-		
+      })		
     })
+	
+	it('Test 42 - Validate Pre Populated field values in Add New Customer page', () => {
+		
+		//Select company dropdown value
+		cy.get(AddNewCustomerDialogElements.add_new_customer_type).select('Individual')
+		
+		//Verify First Name
+		cy.get(AddNewCustomerDialogElements.add_new_customer_firstname).should('have.class', 'ng-not-empty')
+		
+		//Verify Last Name
+		cy.get(AddNewCustomerDialogElements.add_new_customer_lastname).should('have.class', 'ng-not-empty')
+		
+		//Verify Email
+		cy.get(AddNewCustomerDialogElements.add_new_customer_email).should('have.class', 'ng-not-empty')
+		
+		//Verify Cell Phone Number
+		cy.get(AddNewCustomerDialogElements.add_new_customer_cellphone).should('have.class', 'ng-not-empty')
+		
+		//Verify Store
+		cy.get(AddNewCustomerDialogElements.add_new_customer_store).should('have.class', 'ng-not-empty')
+      })
 	
   });
 
